@@ -198,8 +198,11 @@ document.getElementById("loadCompareBtn").onclick = function(){
         return;
     }
     // 文件路径：后续你需要带上月份就改成 `${logiA}-${A.month}.html`
-    const fileA = `provides_report/${logiA}.html`;
-    const fileB = `provides_report/${logiB}.html`;
+    // monthVal 从下拉框获取："August" / "July"
+    const folderName = `provides_report_${monthVal}`;
+    const fileA = `${folderName}/${logiA}_${monthVal}.html`;
+    const fileB = `${folderName}/${logiB}_${monthVal}.html`;
+
     // 给iframe赋值，加载报表
     document.getElementById("iframeA").src = fileA;
     document.getElementById("iframeB").src = fileB;
