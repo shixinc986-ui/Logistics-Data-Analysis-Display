@@ -59,7 +59,7 @@ function exportAllTableToExcel(){
   const tables = document.querySelectorAll("table");
   const wb = XLSX.utils.book_new();
   let allData = [];
-  const logisticsName = "DHL";
+  const logisticsName = "DX";
     
   tables.forEach(function(table) {
     const ws = XLSX.utils.table_to_sheet(table);
