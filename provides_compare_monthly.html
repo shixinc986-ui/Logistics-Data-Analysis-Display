@@ -134,14 +134,14 @@ iframe{
             <h4>选择月份</h4>
             <div class="btn-group" id="groupB_month">
                 <button class="filter-btn" data-val="August">8月</button>
-                <button class="filter-btn" data-val="July">7月</button>
+            
             </div>
         </div>
     </div>
 </div>
 
 <div class="jump-area">
-    <p id="tipText">请在左右两边分别选好【物流商+月份】</p>
+    <p id="tipText">请分别在左右两侧选择【物流商+月份】</p>
     <button id="loadCompareBtn" disabled>🔍 加载双报表同屏对比</button>
 </div>
 
@@ -184,7 +184,7 @@ function refreshStatus(){
         tip.innerText = `A:${A.logi}-${A.month}｜B:${B.logi}-${B.month}`;
         loadBtn.disabled = false;
     }else{
-        tip.innerText = "请在左右两边分别选好【物流商+月份】";
+        tip.innerText = "请分别在左右两侧选择【物流商+月份】";
         loadBtn.disabled = true;
     }
 }
