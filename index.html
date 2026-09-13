@@ -15,7 +15,11 @@ body {
   max-width:620px;
   margin:0 auto;
 }
-
+@keyframes gradientMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
   
 .submenu a {display:block;text-align:center;padding:12px;margin:8px 0;background:#ffffff;color:#2563eb;border-radius:8px;text-decoration:none;border:1px solid #2563eb;font-size:16px;transition:0.2s;}
 .submenu a:hover {background:#eff6ff;}
