@@ -160,7 +160,6 @@ iframe{
 <script>
 let A = {logi:null, month:null};
 let B = {logi:null, month:null};
-
 function bindGroup(btnGroupId, targetObj, keyName){
     const btns = document.querySelectorAll(`#${btnGroupId} .filter-btn`);
     btns.forEach(btn=>{
@@ -176,7 +175,6 @@ bindGroup("groupA_logi", A, "logi");
 bindGroup("groupA_month", A, "month");
 bindGroup("groupB_logi", B, "logi");
 bindGroup("groupB_month", B, "month");
-
 function refreshStatus(){
     const tip = document.getElementById("tipText");
     const loadBtn = document.getElementById("loadCompareBtn");
@@ -188,7 +186,6 @@ function refreshStatus(){
         loadBtn.disabled = true;
     }
 }
-
 document.getElementById("loadCompareBtn").onclick = function(){
     const validList = ["dhl","evri","royalmail(菜鸟)","yodel(菜鸟)","sd","fedex","xdp","dx","extra_large_parcel_courier"];
     let logiA = A.logi.toLowerCase();
@@ -197,18 +194,18 @@ document.getElementById("loadCompareBtn").onclick = function(){
         alert("所选物流商没有对应的报表，请重新选择");
         return;
     }
-    // 文件路径：后续你需要带上月份就改成 `${logiA}-${A.month}.html`
-    // monthVal 从下拉框获取："August" / "July"
-    const folderName = `provides_report_${monthVal}`;
-    const fileA = `${folderName}/${logiA}_${monthVal}.html`;
-    const fileB = `${folderName}/${logiB}_${monthVal}.html`;
+    const folderA = `provides_report_${A.month}`;
+    const fileA = `${folderA}/${logiA}_${A.month}.html`;
 
-    // 给iframe赋值，加载报表
+    const folderB = `provides_report_${B.month}`;
+    const fileB = `${folderB}/${logiB}_${B.month}.html`;
+
     document.getElementById("iframeA").src = fileA;
     document.getElementById("iframeB").src = fileB;
     document.getElementById("titleA").innerText = `A：${A.logi} - ${A.month}`;
     document.getElementById("titleB").innerText = `B：${B.logi} - ${B.month}`;
 }
 </script>
+
 </body>
 </html>
