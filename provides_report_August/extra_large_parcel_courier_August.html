@@ -60,7 +60,7 @@ function exportAllTableToExcel(){
   const wb = XLSX.utils.book_new();
   let allData = [];
   const logisticsName = "extra_large_parcel_courier";
-  const monthname ="August"
+  const monthname ="August";
     
   tables.forEach(function(table) {
     const ws = XLSX.utils.table_to_sheet(table);
