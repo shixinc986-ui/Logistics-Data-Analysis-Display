@@ -31,9 +31,32 @@ tbody tr:nth-child(even) {
     background: #e8f1fb;
 }
 </style>
+
+</style>
+
+<script>
+function exportAllTableToExcel(){
+  const tables = document.querySelectorAll("table");
+  const wb = XLSX.utils.book_new();
+  let allData = [];
+  const logisticsName = "SD";
+  const monthname ="July";
+    
+  tables.forEach(function(table) {
+    const ws = XLSX.utils.table_to_sheet(table);
+    const rows = XLSX.utils.sheet_to_json(ws, {header:1});
+    allData = allData.concat(rows);
+  });
+  const finalWs = XLSX.utils.aoa_to_sheet(allData);
+  XLSX.utils.book_append_sheet(wb, finalWs, "物流看板");
+  XLSX.writeFile(wb, logisticsName +"_"+monthname+ "_物流看板数据.xlsx");
+}
+</script>
+
 </head>
 <body style="padding:20px; font-family:Microsoft YaHei, sans-serif;font-size:14px;">
-
+<button class="download-btn" onclick="exportAllTableToExcel()">📥 下载全部表格为Excel</button>
+    
 <h2 style="font-size:20px; font-weight:normal;">📋 一、各物流商物流时效判定参考表</h2>
 <style>
 .table th, .table td {
