@@ -31,9 +31,52 @@ tbody tr:nth-child(even) {
     background: #e8f1fb;
 }
 </style>
+
+<style>
+.download-btn {
+    position: absolute;
+    top:16px;
+    right:16px;
+    padding: 10px 18px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer;
+}
+.download-btn:hover {
+    background:#1d4ed8;
+}
+body {
+    position:relative;
+    padding-top:60px;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+function exportAllTableToExcel(){
+  const tables = document.querySelectorAll("table");
+  const wb = XLSX.utils.book_new();
+  let allData = [];
+  const logisticsName = "extra_large_parcel_courier";
+  const monthname = "July";
+    
+  tables.forEach(function(table) {
+    const ws = XLSX.utils.table_to_sheet(table);
+    const rows = XLSX.utils.sheet_to_json(ws, {header:1});
+    allData = allData.concat(rows);
+  });
+  const finalWs = XLSX.utils.aoa_to_sheet(allData);
+  XLSX.utils.book_append_sheet(wb, finalWs, "物流看板");
+  XLSX.writeFile(wb, logisticsName +" _"+monthname "_物流看板数据.xlsx");
+}
+</script>
+    
 </head>
 <body style="padding:20px; font-family:Microsoft YaHei, sans-serif;font-size:14px;">
-
+<button class="download-btn" onclick="exportAllTableToExcel()">📥 下载全部表格为Excel</button>
+    
 <h2 style="font-size:20px; font-weight:normal;">📋 一、各物流商物流时效判定参考表</h2>
 <style>
 .table th, .table td {
