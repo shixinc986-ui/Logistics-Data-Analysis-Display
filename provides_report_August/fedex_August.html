@@ -69,7 +69,7 @@ function exportAllTableToExcel(){
   });
   const finalWs = XLSX.utils.aoa_to_sheet(allData);
   XLSX.utils.book_append_sheet(wb, finalWs, "物流看板");
-  XLSX.writeFile(wb, logisticsName+"_"+ monthname+ "_物流看板数据.xlsx");
+  XLSX.writeFile(wb, logisticsName+"_"+ monthname +"_"+ monthname+ "_物流看板数据.xlsx");
 }
 </script>
 
