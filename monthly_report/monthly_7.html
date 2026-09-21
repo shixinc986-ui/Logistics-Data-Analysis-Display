@@ -8501,5 +8501,47 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=b13b08dd-6b9b-4b61-b818-450b76449231">
 </div>
 </main>
+<button class="download-btn" onclick="exportAllTableToExcel()">📥 下载全部表格为Excel</button>
+<style>
+.download-btn {
+    position: absolute;
+    top:16px;
+    right:16px;
+    padding: 10px 18px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer;
+}
+.download-btn:hover {
+    background:#1d4ed8;
+}
+body {
+    position:relative;
+    padding-top:60px;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+function exportAllTableToExcel(){
+  const tables = document.querySelectorAll("table");
+  const wb = XLSX.utils.book_new();
+  let allData = [];
+  const logisticsName = "DHL";
+  const monthname = "August";
+    
+  tables.forEach(function(table) {
+    const ws = XLSX.utils.table_to_sheet(table);
+    const rows = XLSX.utils.sheet_to_json(ws, {header:1});
+    allData = allData.concat(rows);
+  });
+  const finalWs = XLSX.utils.aoa_to_sheet(allData);
+  XLSX.utils.book_append_sheet(wb, finalWs, "物流看板");
+  XLSX.writeFile(wb, logisticsName + "_" + monthname + "_物流看板数据.xlsx");
+}
+</script>
 </body>
+    
 </html>
