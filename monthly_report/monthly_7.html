@@ -8526,10 +8526,13 @@ body {
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
 function exportAllTableToExcel(){
+    if(typeof XLSX === 'undefined'){
+    alert("表格组件还在加载，请等待几秒再点击！");
+    return;}
   const tables = document.querySelectorAll("table");
   const wb = XLSX.utils.book_new();
   let allData = [];
-  const logisticsName = "DHL";
+  const logisticsName = "7月";
   const monthname = "August";
     
   tables.forEach(function(table) {
