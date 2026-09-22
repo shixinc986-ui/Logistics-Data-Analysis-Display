@@ -1,0 +1,981 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DHL August weekly 横向对比看板</title>
+<style>
+table {
+    border-collapse: collapse;
+    width: auto;
+    margin: 8px 0;
+}
+th, td {
+    border: none;
+    padding:6px 10px;
+    text-align:left;
+    font-size:14px;
+}
+th {
+    background: transparent;
+    color: #000000;
+    font-weight:600;
+    border-bottom:1px solid #999999;
+}
+tbody tr:nth-child(even) {
+    background: #e8f1fb;
+}
+</style>
+</head>
+<body style="padding:20px; font-family:Microsoft YaHei, sans-serif;font-size:14px;">
+
+<h2 style="font-size:20px; font-weight:normal;">📋 一、各物流商物流时效判定参考表</h2>
+<style>
+.table th, .table td {
+    padding:6px 10px;
+    text-align:left;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+
+}
+</style>
+<table class="dataframe table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>物流服务</th>
+      <th>ASCAN参考值(天)</th>
+      <th>DSCAN参考值(天)</th>
+      <th>准时送达时效(天)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>YODEL</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>EVRI</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>RM</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>SD</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>FEDEX</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>DHL</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>XDP</td>
+      <td>1</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>DX</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>DPD</td>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+ <h2 style="font-size:20px; font-weight:normal;">📖 二、指标含义说明及判定规则</h2>
+
+
+<div style="width:100%;">
+<style>
+.table th, .table td {
+    padding:6px 10px;
+    text-align:left;
+}
+.table td:nth-child(1), .table th:nth-child(1) {
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    text-align:left;}
+.table td:nth-child(2), .table th:nth-child(2) {
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    text-align:left;}
+.table td:nth-child(3), .table th:nth-child(3) {
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    text-align:left;
+}
+</style>
+<table class="dataframe table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>计算方式</th>
+      <th>判定规则说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ASCAN（揽件时效）</td>
+      <td>实际揽件时长</td>
+      <td>Ascan > 1 天 → 揽件超时；≤ 1 天 → 达标</td>
+    </tr>
+    <tr>
+      <td>DSCAN（送达时效）</td>
+      <td>实际送达时长</td>
+      <td>XDP 服务商：Dscan > 4 天 → 送达超时；Dscan ≤ 4 天 → 达标；其他服务商：Dscan > 3 天 → 送达超时；Dscan ≤ 3 天 → 达标</td>
+    </tr>
+    <tr>
+      <td>Total（总时效）</td>
+      <td>Ascan+Dscan</td>
+      <td>XDP 服务商：Total > 5 天 → 总时效超时；Total ≤ 5 天 → 总时效达标；其他服务商：Total ＞ 4 天 → 总时效超时；Total ≤ 4 天 → 总时效达标</td>
+    </tr>
+    <tr>
+      <td>包裹时效状态</td>
+      <td>由ASCAN/DSCAN组合</td>
+      <td>常规 / 揽件超时 / 送达超时 / 揽件和送达均超时 / 揽件后停滞异常 / 揽件后停滞【全】异常/ 无轨迹异常</td>
+    </tr>
+    <tr>
+      <td>包裹类型</td>
+      <td>基于"包裹时效状态"进一步分类</td>
+      <td>常规 / 超时 / 异常 / 无轨迹异常</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<h2 style="font-size:20px; font-weight:normal;">📋 三、包裹时效状态及包裹类型判定表</h2>
+<style>
+.table th, .table td {
+    padding:6px 10px;
+    text-align:left;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+}
+</style>
+<table class="dataframe table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>揽件时效</th>
+      <th>送达时效</th>
+      <th>包裹时效状态</th>
+      <th>包裹类型</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>达标</td>
+      <td>达标</td>
+      <td>常规</td>
+      <td>常规</td>
+    </tr>
+    <tr>
+      <td>超时</td>
+      <td>达标</td>
+      <td>揽件时效超时</td>
+      <td>超时</td>
+    </tr>
+    <tr>
+      <td>达标</td>
+      <td>超时</td>
+      <td>送达时效超时</td>
+      <td>超时</td>
+    </tr>
+    <tr>
+      <td>超时</td>
+      <td>超时</td>
+      <td>揽件和送达均超时</td>
+      <td>超时</td>
+    </tr>
+    <tr>
+      <td>达标</td>
+      <td>空(Dscan没有数值)</td>
+      <td>揽件后停滞异常</td>
+      <td>异常</td>
+    </tr>
+    <tr>
+      <td>超时</td>
+      <td>空(Dscan没有数值)</td>
+      <td>揽件后停滞【全】异常</td>
+      <td>异常</td>
+    </tr>
+    <tr>
+      <td>空(Ascan没有数值)</td>
+      <td>空(Dscan没有数值)</td>
+      <td>无轨迹异常</td>
+      <td>无轨迹异常</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<p> 注：异常包裹量指的是包裹时效状态为“揽件后停滞异常”和“揽件后停滞【全】异常”这两类包裹的总数</p>
+<p> 注：准时签收率按包裹准时送达时效(Total)来计算,除XDP≤5天外其余物流均≤4天</p>
+<p>注：准时签收率（1，2）纳入计算的是常规和超时包裹；准时签收率（1，2，3，4）纳入计算的是常规、超时、异常、无轨迹异常包裹</p>
+<hr>
+<h2>🚚 物流服务商：DHL（9月多周横向对比看板）</h2><p style="color:#333;">注:报表中缺少某周,代表该物流商在对应周期无订单数据</p><h3 style='font-weight:normal;'>📊 基础指标汇总</h3>
+    <div style="display:flex; gap:20px; overflow-x:auto; align-items:flex-start; padding:10px 0;">
+    
+        <div style="min-width:320px; flex-shrink:0;">
+            <h4 style="margin:2px 0;">9月第1周(9.01-9.07)｜订单量：4273</h4>
+            <table class="dataframe table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>分类</th>
+      <th>数量</th>
+      <th>占比</th>
+      <th>指标</th>
+      <th>数值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.常规</td>
+      <td>1757</td>
+      <td>41.12%</td>
+      <td>发货包裹量</td>
+      <td>4273</td>
+    </tr>
+    <tr>
+      <td>2.常规+超时</td>
+      <td>4171</td>
+      <td>97.61%</td>
+      <td>异常包裹量</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <td>3.常规+超时+异常</td>
+      <td>4261</td>
+      <td>99.72%</td>
+      <td>异常包裹率</td>
+      <td>2.11%</td>
+    </tr>
+    <tr>
+      <td>4.常规+超时+异常+无轨迹异常</td>
+      <td>4273</td>
+      <td>100.0%</td>
+      <td>准时签收率(1,2)</td>
+      <td>90.46%</td>
+    </tr>
+    <tr>
+      <td>5.异常+无轨迹异常</td>
+      <td>102</td>
+      <td>2.39%</td>
+      <td>准时签收率(1,2,3,4)</td>
+      <td>88.30%</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        
+        <div style="min-width:320px; flex-shrink:0;">
+            <h4 style="margin:2px 0;">9月第2周(9.08-9.14)｜订单量：4283</h4>
+            <table class="dataframe table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>分类</th>
+      <th>数量</th>
+      <th>占比</th>
+      <th>指标</th>
+      <th>数值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.常规</td>
+      <td>2287</td>
+      <td>53.4%</td>
+      <td>发货包裹量</td>
+      <td>4283</td>
+    </tr>
+    <tr>
+      <td>2.常规+超时</td>
+      <td>4199</td>
+      <td>98.04%</td>
+      <td>异常包裹量</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <td>3.常规+超时+异常</td>
+      <td>4269</td>
+      <td>99.67%</td>
+      <td>异常包裹率</td>
+      <td>1.63%</td>
+    </tr>
+    <tr>
+      <td>4.常规+超时+异常+无轨迹异常</td>
+      <td>4283</td>
+      <td>100.0%</td>
+      <td>准时签收率(1,2)</td>
+      <td>96.67%</td>
+    </tr>
+    <tr>
+      <td>5.异常+无轨迹异常</td>
+      <td>84</td>
+      <td>1.96%</td>
+      <td>准时签收率(1,2,3,4)</td>
+      <td>94.77%</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        </div><h3 style='font-weight:normal;'>📊 A版 & B版</h3>
+    <div style="display:flex; gap:20px; overflow-x:auto; align-items:flex-start; padding:10px 0;">
+    
+        <div style="min-width:650px; flex-shrink:0;">
+            <h4 style="margin:2px 0;">9月第1周(9.01-9.07)</h4>
+            <div style="display:flex; gap:10px;">
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>A版(常规+超时)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>4.54</td>
+      <td>9.93</td>
+      <td>11.61</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>-1.54</td>
+      <td>0.04</td>
+      <td>-0.8</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>1.04</td>
+      <td>1.32</td>
+      <td>2.36</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>45.36%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>90.46%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>B版(常规+超时+异常+无轨迹异常)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>19.81</td>
+      <td>20.52</td>
+      <td>39.63</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>-1.54</td>
+      <td>0.04</td>
+      <td>-0.8</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>1.09</td>
+      <td>1.71</td>
+      <td>2.8</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>45.51%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>88.30%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+        </div>
+        
+        <div style="min-width:650px; flex-shrink:0;">
+            <h4 style="margin:2px 0;">9月第2周(9.08-9.14)</h4>
+            <div style="display:flex; gap:10px;">
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>A版(常规+超时)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>7.47</td>
+      <td>6.9</td>
+      <td>10.57</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>-0.11</td>
+      <td>0.04</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>0.8</td>
+      <td>1.05</td>
+      <td>1.85</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>57.04%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>96.67%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>B版(常规+超时+异常+无轨迹异常)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>14.72</td>
+      <td>14.72</td>
+      <td>29.44</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>-0.11</td>
+      <td>0.04</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>0.84</td>
+      <td>1.24</td>
+      <td>2.08</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>56.95%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>94.77%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+        </div>
+        </div><h3 style='font-weight:normal;'>📊 剔除负数｜A版(常规+超时) & B版(常规+超时+异常+无轨迹异常)</h3>
+    <div style="display:flex; gap:20px; overflow-x:auto; align-items:flex-start; padding:10px 0;">
+    
+        <div style="min-width:650px; flex-shrink:0;">
+            <h4 style="margin:2px 0;">9月第1周(9.01-9.07)</h4>
+            <div style="display:flex; gap:10px;">
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>A版(常规+超时)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>4.54</td>
+      <td>9.93</td>
+      <td>11.61</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>0.0</td>
+      <td>0.04</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>1.05</td>
+      <td>1.32</td>
+      <td>2.36</td>
+    </tr>
+    <tr>
+      <td>负数占比</td>
+      <td>1.22%</td>
+      <td>0.00%</td>
+      <td>0.02%</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>44.68%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>90.46%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>B版(常规+超时+异常+无轨迹异常)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>19.81</td>
+      <td>20.52</td>
+      <td>39.63</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>0.0</td>
+      <td>0.04</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>1.1</td>
+      <td>1.71</td>
+      <td>2.8</td>
+    </tr>
+    <tr>
+      <td>负数占比</td>
+      <td>1.24%</td>
+      <td>0.00%</td>
+      <td>0.02%</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>44.82%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>88.30%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+        </div>
+        
+        <div style="min-width:650px; flex-shrink:0;">
+            <h4 style="margin:2px 0;">9月第2周(9.08-9.14)</h4>
+            <div style="display:flex; gap:10px;">
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>A版(常规+超时)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>7.47</td>
+      <td>6.9</td>
+      <td>10.57</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>0.01</td>
+      <td>0.04</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>0.82</td>
+      <td>1.05</td>
+      <td>1.85</td>
+    </tr>
+    <tr>
+      <td>负数占比</td>
+      <td>1.69%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>56.30%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>96.67%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>B版(常规+超时+异常+无轨迹异常)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>14.72</td>
+      <td>14.72</td>
+      <td>29.44</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>0.01</td>
+      <td>0.04</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>0.86</td>
+      <td>1.24</td>
+      <td>2.08</td>
+    </tr>
+    <tr>
+      <td>负数占比</td>
+      <td>1.66%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>56.22%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>94.77%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+        </div>
+        </div><h3 style='font-weight:normal;'>📊 剔除负数、无轨迹异常｜A版(常规+超时) & B版(常规+超时+异常)</h3>
+    <div style="display:flex; gap:20px; overflow-x:auto; align-items:flex-start; padding:10px 0;">
+    
+        <div style="min-width:650px; flex-shrink:0;">
+            <h4 style="margin:2px 0;">9月第1周(9.01-9.07)</h4>
+            <div style="display:flex; gap:10px;">
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>A版(常规+超时)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>4.54</td>
+      <td>9.93</td>
+      <td>11.61</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>0.0</td>
+      <td>0.04</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>1.05</td>
+      <td>1.32</td>
+      <td>2.36</td>
+    </tr>
+    <tr>
+      <td>负数占比</td>
+      <td>1.22%</td>
+      <td>0.00%</td>
+      <td>0.02%</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>44.68%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>90.46%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>B版(常规+超时+异常)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>4.54</td>
+      <td>20.52</td>
+      <td>21.74</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>0.0</td>
+      <td>0.04</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>1.05</td>
+      <td>1.66</td>
+      <td>2.7</td>
+    </tr>
+    <tr>
+      <td>负数占比</td>
+      <td>1.24%</td>
+      <td>0.00%</td>
+      <td>0.02%</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>44.82%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>88.55%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+        </div>
+        
+        <div style="min-width:650px; flex-shrink:0;">
+            <h4 style="margin:2px 0;">9月第2周(9.08-9.14)</h4>
+            <div style="display:flex; gap:10px;">
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>A版(常规+超时)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>7.47</td>
+      <td>6.9</td>
+      <td>10.57</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>0.01</td>
+      <td>0.04</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>0.82</td>
+      <td>1.05</td>
+      <td>1.85</td>
+    </tr>
+    <tr>
+      <td>负数占比</td>
+      <td>1.69%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>56.30%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>96.67%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                <div style="min-width:320px; flex-shrink:0;">
+                    <p>B版(常规+超时+异常)</p>
+                    <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标</th>
+      <th>Ascan</th>
+      <th>Dscan</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>最大值</td>
+      <td>7.47</td>
+      <td>14.45</td>
+      <td>14.74</td>
+    </tr>
+    <tr>
+      <td>最小值</td>
+      <td>0.01</td>
+      <td>0.04</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <td>平均值</td>
+      <td>0.82</td>
+      <td>1.21</td>
+      <td>2.01</td>
+    </tr>
+    <tr>
+      <td>负数占比</td>
+      <td>1.66%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+    </tr>
+    <tr>
+      <td>24小时揽收率</td>
+      <td>56.22%</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>准时签收率</td>
+      <td>95.08%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+        </div>
+        </div>
+</body>
+</html>
