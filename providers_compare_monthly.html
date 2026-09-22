@@ -195,10 +195,10 @@ document.getElementById("loadCompareBtn").onclick = function(){
         alert("所选物流商没有对应的报表，请重新选择");
         return;
     }
-    const folderA = `provides_report_${A.month}`;
+    const folderA = `prov_report_${A.month}`;
     const fileA = `${folderA}/${logiA}_${A.month}.html`;
 
-    const folderB = `provides_report_${B.month}`;
+    const folderB = `prov_report_${B.month}`;
     const fileB = `${folderB}/${logiB}_${B.month}.html`;
 
     document.getElementById("iframeA").src = fileA;
