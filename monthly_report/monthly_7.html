@@ -8501,7 +8501,11 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=b13b08dd-6b9b-4b61-b818-450b76449231">
 </div>
 </main>
-<button class="download-btn" onclick="exportAllTableToExcel()">📥 下载全部表格为Excel</button>
+
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" <!-- 1.先加载SheetJS库 -->
+
+<button class="download-btn" onclick="exportAllTableToExcel()">📥 下载全部表格为Excel</button> <!-- 2.下载按钮【必须放在JS前面！】 -->
 <style>
 .download-btn {
     position: absolute;
@@ -8523,20 +8527,27 @@ body {
     padding-top:60px;
 }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"
+    
 onload="document.getElementById('downloadBtn').disabled = false;">
 </script>
 <script>
+let XLSXReady = false;
+// 库加载完成后启用按钮
+document.querySelector("script[src*='xlsx.full.min.js']").onload = function(){
+  XLSXReady = true;
+  document.getElementById("excelBtn").disabled = false;
+}
+
 function exportAllTableToExcel(){
-    if(typeof XLSX === 'undefined'){
-    alert("表格组件还在加载，请等待几秒再点击！");
+  if(!XLSXReady){
+    alert("表格组件正在加载，请稍等几秒再点击！");
     return;
-    }
+  }
   const tables = document.querySelectorAll("table");
   const wb = XLSX.utils.book_new();
   let allData = [];
-  const logisticsName = "7月";
-  const monthname = "August";
+  const logisticsName = "DHL";
+  const monthname = "July";
     
   tables.forEach(function(table) {
     const ws = XLSX.utils.table_to_sheet(table);
@@ -8545,7 +8556,7 @@ function exportAllTableToExcel(){
   });
   const finalWs = XLSX.utils.aoa_to_sheet(allData);
   XLSX.utils.book_append_sheet(wb, finalWs, "物流看板");
-  XLSX.writeFile(wb, logisticsName + "_" + monthname + "_物流看板数据.xlsx");
+  XLSX.writeFile(wb, logisticsName +"_"+monthname+ "_物流看板数据.xlsx");
 }
 </script>
 </body>
