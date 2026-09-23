@@ -8503,9 +8503,13 @@ a.anchor-link {
 </main>
 
 
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" <!-- 1.先加载SheetJS库 -->
+<!-- 1.加载SheetJS库，script标签立刻闭合，不要在里面塞其他东西 -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
-<button class="download-btn" onclick="exportAllTableToExcel()">📥 下载全部表格为Excel</button> <!-- 2.下载按钮【必须放在JS前面！】 -->
+<!-- 2.按钮，id命名excelBtn，加上disabled初始灰色 -->
+<button id="excelBtn" class="download-btn" onclick="exportAllTableToExcel()" disabled>📥 下载全部表格为Excel</button>
+
+<!-- 3.按钮样式 -->
 <style>
 .download-btn {
     position: absolute;
@@ -8527,12 +8531,11 @@ body {
     padding-top:60px;
 }
 </style>
-    
-onload="document.getElementById('downloadBtn').disabled = false;">
-</script>
+
+<!-- 4.业务JS逻辑 -->
 <script>
 let XLSXReady = false;
-// 库加载完成后启用按钮
+// SheetJS加载完成后，开启按钮
 document.querySelector("script[src*='xlsx.full.min.js']").onload = function(){
   XLSXReady = true;
   document.getElementById("excelBtn").disabled = false;
