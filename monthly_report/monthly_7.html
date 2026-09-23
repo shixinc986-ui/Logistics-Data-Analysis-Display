@@ -8506,9 +8506,8 @@ a.anchor-link {
   <!-- 1.加载SheetJS库，script标签立刻闭合，不要在里面塞其他东西 -->  
 <script src="https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <!-- 2.按钮，id命名excelBtn，加上disabled初始灰色 -->
-<button id="excelBtn" class="download-btn" onclick="exportAllTableToExcel()" disabled>📥 下载全部表格为Excel</button>
+<button id="excelBtn" class="download-btn">📥 下载全部表格为Excel</button>
 
-<!-- 3.按钮样式 -->
 <style>
 .download-btn {
     position: absolute;
@@ -8521,6 +8520,8 @@ a.anchor-link {
     border-radius:8px;
     font-size:14px;
     cursor:pointer;
+    z-index:99999 !important;
+    pointer-events:auto !important;
 }
 .download-btn:hover {
     background:#1d4ed8;
@@ -8531,18 +8532,11 @@ body {
 }
 </style>
 
-<!-- 4.业务JS逻辑 -->
 <script>
-let XLSXReady = false;
-// SheetJS加载完成后，开启按钮
-document.querySelector("script[src*='xlsx.full.min.js']").onload = function(){
-  XLSXReady = true;
-  document.getElementById("excelBtn").disabled = false;
-}
-
 function exportAllTableToExcel(){
-  if(!XLSXReady){
-    alert("表格组件正在加载，请稍等几秒再点击！");
+  // 直接检测XLSX对象是否存在，不再依赖XLSXReady标记
+  if (typeof XLSX === "undefined"){
+    alert("❌ 表格组件加载失败，请刷新页面重试");
     return;
   }
   const tables = document.querySelectorAll("table");
@@ -8560,6 +8554,12 @@ function exportAllTableToExcel(){
   XLSX.utils.book_append_sheet(wb, finalWs, "物流看板");
   XLSX.writeFile(wb, logisticsName +"_"+monthname+ "_物流看板数据.xlsx");
 }
+
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById("excelBtn").addEventListener("click", function(){
+    exportAllTableToExcel();
+  })
+})
 </script>
 </body>
     
