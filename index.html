@@ -83,7 +83,6 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 </div>
    
 
-// ========== 英仓报表菜单 ==========
 <div id="warehouseMenuRoot"></div>
 <script>
 // ========== 英仓报表菜单（全部为周报表） ==========
@@ -123,7 +122,7 @@ function renderWarehouseMenu(){
 
     monthList.forEach(m=>{
       const monthMenuId = `menu_${ware.id}_${m.folder}`;
-      html += `<div class="item" onclick="toggleMenu('${monthMenuId}')">📅 ${m.name}</div>`;
+      html += `<div class="item-sub" onclick="toggleMenu('${monthMenuId}')">📅 ${m.name}</div>`;
       html += `<div class="submenu" id="${monthMenuId}">`;
 
       logisticsList.forEach(logi=>{
