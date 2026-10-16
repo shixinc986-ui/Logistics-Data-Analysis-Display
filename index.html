@@ -86,6 +86,9 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 <div id="warehouseMenuRoot"></div>
 <script>
 // ========== 英仓报表菜单 ==========
+<div id="warehouseMenuRoot"></div>
+<script>
+// ========== 英仓报表菜单（全部为周报表） ==========
 const warehouseList = [
   {id:"ware-A", displayName:"A总仓"},
   {id:"ware-M", displayName:"M总仓"},
@@ -103,15 +106,16 @@ const logisticsList = [
   {id:"sd", name:"SD"},
   {id:"yodel", name:"Yodel"},
 ];
+// 顺序：10月周报表 →9月周报表 →8月周报表
 const monthList = [
-  {name:"8月", folder:"warehouse_report_august", suffix:"_August"},
-  {name:"9月", folder:"warehouse_report_september", suffix:"_September"},
-  {name:"10月", folder:"warehouse_report_october", suffix:"_October"},
+  {name:"10月周报表", folder:"warehouses_October_weekly", suffix:"_October_weekly"},
+  {name:"9月周报表", folder:"warehouses_October_weekly", suffix:"_September_weekly"},
+  {name:"8月周报表", folder:"warehouses_October_weekly", suffix:"_August_weekly"},
 ];
 
 function renderWarehouseMenu(){
   let html = "";
-  html += `<div class="item" onclick="toggleMenu('menuwarehouse')">🏬 各英仓报表</div>`;
+  html += `<div class="item" onclick="toggleMenu('menuwarehouse')">🏭 各英仓报表 British_warehouses_report</div>`;
   html += `<div class="submenu" id="menuwarehouse">`;
 
   warehouseList.forEach(ware=>{
@@ -121,7 +125,7 @@ function renderWarehouseMenu(){
 
     monthList.forEach(m=>{
       const monthMenuId = `menu_${ware.id}_${m.folder}`;
-      html += `<div class="item" onclick="toggleMenu('${monthMenuId}')">🗓️ ${m.name}</div>`;
+      html += `<div class="item" onclick="toggleMenu('${monthMenuId}')">📅 ${m.name}</div>`;
       html += `<div class="submenu" id="${monthMenuId}">`;
 
       logisticsList.forEach(logi=>{
@@ -141,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function(){
   renderWarehouseMenu();
 })
 </script>
+
 
 
 
