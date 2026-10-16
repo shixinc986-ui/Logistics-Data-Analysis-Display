@@ -238,7 +238,8 @@ document.addEventListener('DOMContentLoaded', function(){
   .then(html => {
     // 把读取到的菜单html放进占位容器
 
-document.getElementById("warehouseMenuRoot").innerHTML = html;
+document.getElementById("warehouseMenuContainer").innerHTML = html;
+
   })
   .catch(err=>{
     console.error("加载仓库菜单失败：", err)
