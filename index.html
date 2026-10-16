@@ -83,7 +83,65 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 </div>
    
 
-<div id="warehouseMenuContainer"></div>
+<div id="warehouseMenuRoot"></div>
+<script>
+// ========== 英仓报表菜单 ==========
+const warehouseList = [
+  {id:"ware-A", displayName:"A总仓"},
+  {id:"ware-M", displayName:"M总仓"},
+  {id:"ware-B", displayName:"B总仓"},
+  {id:"ware-O", displayName:"O总仓"},
+  {id:"ware-F", displayName:"F总仓"},
+];
+const logisticsList = [
+  {id:"dhl", name:"DHL"},
+  {id:"dx", name:"DX"},
+  {id:"evri", name:"Evri"},
+  {id:"extra", name:"Extra"},
+  {id:"fedex", name:"Fedex"},
+  {id:"royalmail", name:"Royal Mail(菜鸟)"},
+  {id:"sd", name:"SD"},
+  {id:"yodel", name:"Yodel"},
+];
+const monthList = [
+  {name:"8月", folder:"warehouse_report_august", suffix:"_August"},
+  {name:"9月", folder:"warehouse_report_september", suffix:"_September"},
+  {name:"10月", folder:"warehouse_report_october", suffix:"_October"},
+];
+
+function renderWarehouseMenu(){
+  let html = "";
+  html += `<div class="item" onclick="toggleMenu('menuwarehouse')">🏬 各英仓报表</div>`;
+  html += `<div class="submenu" id="menuwarehouse">`;
+
+  warehouseList.forEach(ware=>{
+    const wareMenuId = `menu_${ware.id}`;
+    html += `<div class="item" onclick="toggleMenu('${wareMenuId}')">🏬 ${ware.displayName}</div>`;
+    html += `<div class="submenu" id="${wareMenuId}">`;
+
+    monthList.forEach(m=>{
+      const monthMenuId = `menu_${ware.id}_${m.folder}`;
+      html += `<div class="item" onclick="toggleMenu('${monthMenuId}')">🗓️ ${m.name}</div>`;
+      html += `<div class="submenu" id="${monthMenuId}">`;
+
+      logisticsList.forEach(logi=>{
+        const fileName = `${ware.displayName}-${logi.id}${m.suffix}.html`;
+        const url = `${m.folder}/${ware.id}/${fileName}`;
+        html += `<a class="sub-item" href="${url}" target="_blank">${logi.name}</a>`;
+      })
+      html += `</div>`;
+    })
+    html += `</div>`;
+  })
+  html += `</div>`;
+  document.getElementById("warehouseMenuRoot").innerHTML = html;
+}
+// 页面加载完成渲染
+document.addEventListener('DOMContentLoaded', function(){
+  renderWarehouseMenu();
+})
+</script>
+
 
 
 <div class="item" onclick="toggleMenu('menuproviders')">🚚 各物流商报表 All_providers_report</div>
@@ -231,18 +289,6 @@ function toggleMenu(menuId){
   }
 }
 
-// 新增：加载外部【各英仓报表】菜单
-document.addEventListener('DOMContentLoaded', function(){
-  // 这里替换成你浏览器打开menu_warehouse.html那一条完整地址
-  fetch("https://xxx.github.io/仓库名/menu_warehouse.html")
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("warehouseMenuContainer").innerHTML = html;
-  })
-  .catch(err=>{
-    console.error("加载仓库菜单失败：", err)
-  })
-})
 
   
 </script>
