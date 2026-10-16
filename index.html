@@ -126,8 +126,8 @@ function renderWarehouseMenu(){
       html += `<div class="submenu" id="${monthMenuId}">`;
 
       logisticsList.forEach(logi=>{
-        const fileName = `${ware.displayName}-${logi.id}${m.suffix}.html`;
-        const url = `${m.folder}/${ware.id}/${fileName}`;
+        const fileName = `${ware.displayName}_${logi.id}_${m.suffix}.html`;
+        const url = `${m.folder}/ware-${ware.id}/${fileName}`;
         html += `<a class="sub-item" href="${url}" target="_blank">${logi.name}</a>`;
       })
       html += `</div>`;
