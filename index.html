@@ -87,11 +87,11 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 <script>
 // ========== 英仓报表菜单（全部为周报表） ==========
 const warehouseList = [
-  {id:"ware-A", displayName:"A总仓"},
-  {id:"ware-M", displayName:"M总仓"},
-  {id:"ware-B", displayName:"B总仓"},
-  {id:"ware-O", displayName:"O总仓"},
-  {id:"ware-F", displayName:"F总仓"},
+  {id:"A", displayName:"A总仓"},
+  {id:"M", displayName:"M总仓"},
+  {id:"B", displayName:"B总仓"},
+  {id:"O", displayName:"O总仓"},
+  {id:"F", displayName:"F总仓"},
 ];
 const logisticsList = [
   {id:"dhl", name:"DHL"},
@@ -126,7 +126,7 @@ function renderWarehouseMenu(){
       html += `<div class="submenu" id="${monthMenuId}">`;
 
       logisticsList.forEach(logi=>{
-        const fileName = `${ware.displayName}_${logi.id}_${m.suffix}.html`;
+        const fileName = `${ware.displayName}_${logi.id}${m.suffix}.html`;
         const url = `${m.folder}/ware-${ware.id}/${fileName}`;
         html += `<a class="sub-item" href="${url}" target="_blank">${logi.name}</a>`;
       })
