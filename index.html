@@ -128,7 +128,7 @@ function renderWarehouseMenu(){
       logisticsList.forEach(logi=>{
         const fileName = `${ware.displayName}_${logi.id}${m.suffix}.html`;
         const url = `${m.folder}/ware-${ware.id}/${fileName}`;
-        html += `<a class="sub-item" href="${url}" target="_blank">${logi.name}</a>`;
+        html += `<a class="sub-item" href="${url}">${logi.name}</a>`;
       })
       html += `</div>`;
     })
