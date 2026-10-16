@@ -118,7 +118,7 @@ function renderWarehouseMenu(){
 
   warehouseList.forEach(ware=>{
     const wareMenuId = `menu_${ware.id}`;
-    html += `<div class="item" onclick="toggleMenu('${wareMenuId}')">🏬 ${ware.displayName}</div>`;
+    html += `<div class="item-sub" onclick="toggleMenu('${wareMenuId}')">🏬 ${ware.displayName}</div>`;
     html += `<div class="submenu" id="${wareMenuId}">`;
 
     monthList.forEach(m=>{
