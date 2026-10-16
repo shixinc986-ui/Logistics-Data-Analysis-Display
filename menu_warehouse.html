@@ -1,49 +1,60 @@
 <div id="warehouseMenuRoot"></div>
 <script>
-// ==========【这里是唯一需要你维护的配置，新增月份只改这里！】==========
-// 1. 仓库清单
+// 仓库清单
 const warehouseList = [
-  {id:"wareA", name:"A仓"},
-  {id:"wareM", name:"M仓"},
-  {id:"wareB", name:"B仓"},
-  {id:"wareO", name:"O仓"},
-  {id:"wareF", name:"F仓"},
+  {id:"ware-A", displayName:"A总仓"},
+  {id:"ware-M", displayName:"M总仓"},
+  {id:"ware-B", displayName:"B总仓"},
+  {id:"ware-O", displayName:"O总仓"},
+  {id:"ware-F", displayName:"F总仓"},
 ];
-// 2. 月份清单【👉新增月份，在这里加一行就够！】
+// 物流商清单
+const logisticsList = [
+  {id:"dhl", name:"DHL"},
+  {id:"dx", name:"DX"},
+  {id:"evri", name:"Evri"},
+  {id:"extra", name:"Extra"},
+  {id:"fedex", name:"Fedex"},
+  {id:"royalmail(菜鸟)", name:"Royal Mail"},
+  {id:"sd", name:"SD"},
+  {id:"yodel", name:"Yodel"},
+];
+// 月份清单
 const monthList = [
-  {name:"7月", folder:"warehouse_report_july"},
-  {name:"8月", folder:"warehouse_report_august"},
-  {name:"9月", folder:"warehouse_report_september"},
-  {name:"10月", folder:"warehouse_report_october"},
+  {name:"8月", folder:"warehouse_report_august", suffix:"_August"},
+  {name:"9月", folder:"warehouse_report_september", suffix:"_September"},
+  {name:"10月", folder:"warehouse_report_october", suffix:"_October"},
 ];
-// =================================================================
 
-// 自动渲染函数
 function renderWarehouseMenu(){
   let html = "";
-  // 外层总菜单入口
-  html += `<div class="item" onclick="toggleMenu('menuwarehouse')">🏬 各英仓报表 British warehouses_report</div>`;
+  html += `<div class="item" onclick="toggleMenu('menuwarehouse')">🏬 各英仓报表</div>`;
   html += `<div class="submenu" id="menuwarehouse">`;
 
-  // 循环遍历每一个仓库
   warehouseList.forEach(ware=>{
     const wareMenuId = `menu_${ware.id}`;
-    html += `<div class="item" onclick="toggleMenu('${wareMenuId}')">📦 ${ware.name}</div>`;
+    html += `<div class="item" onclick="toggleMenu('${wareMenuId}')">📦 ${ware.displayName}</div>`;
     html += `<div class="submenu" id="${wareMenuId}">`;
-    // 循环遍历所有月份，自动生成a链接
+
+    // 遍历月份
     monthList.forEach(m=>{
-      // 链接路径，按你实际文件路径修改
-      const linkUrl = `${m.folder}/${ware.id}_${m.folder}.html`;
-      html += `<a class="sub-item" href="${linkUrl}" target="_blank">${m.name}</a>`;
+      const monthMenuId = `menu_${ware.id}_${m.folder}`;
+      html += `<div class="item" onclick="toggleMenu('${monthMenuId}')">🗓️ ${m.name}</div>`;
+      html += `<div class="submenu" id="${monthMenuId}">`;
+
+      // 遍历物流商，自动生成链接
+      logisticsList.forEach(logi=>{
+        // 文件名：A总仓-dhl_October_weekly.html
+        const fileName = `${ware.displayName}-${logi.id}${m.suffix}.html`;
+        const url = `${m.folder}/${ware.id}/${fileName}`;
+        html += `<a class="sub-item" href="${url}" target="_blank">${logi.name}</a>`;
+      })
+      html += `</div>`;
     })
     html += `</div>`;
   })
   html += `</div>`;
-
-  // 输出到页面容器
   document.getElementById("warehouseMenuRoot").innerHTML = html;
 }
-
-// 加载完立刻渲染菜单
 renderWarehouseMenu();
 </script>
