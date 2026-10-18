@@ -209,6 +209,33 @@ document.getElementById("loadCompareBtn").onclick = function(){
     document.getElementById("titleB").innerText = `B：${B.logi} - ${B.month}`;
 }
 </script>
-
+<style>
+html,body{
+  height:auto;
+  overflow:auto;
+}
+body{
+  margin:0;
+}
+.iframe-container{
+  display:flex;
+  gap:16px;
+  margin-top:20px;
+}
+.iframe-wrap{
+  flex:1;
+  height:70vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  border:1px solid #e2e8f0;
+  border-radius:8px;
+}
+.iframe-wrap iframe{
+  flex:1;
+  width:100%;
+  border:none;
+}
+</style>
 </body>
 </html>
