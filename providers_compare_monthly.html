@@ -80,19 +80,14 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     height: calc(100vh - 20px);
     overflow: hidden;
     display: flex;
-    flex-direction: column;
+    /* 直接让iframe填满整个wrap，不再预留标题高度 */
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     background: #fff;
 }
-.iframe-wrap h4 {
-    text-align: center;
-    margin: 8px 0;
-    flex: 0 0 auto;
-}
 .iframe-wrap iframe {
-    flex: 1;
     width: 100%;
+    height:100%;
     border: none;
     overflow: auto;
 }
@@ -171,14 +166,12 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     <button id="loadCompareBtn" disabled>🔍 加载双报表同屏对比</button>
 </div>
 
-<!-- 双报表容器 -->
+<!-- ✅【重点】已经删掉外层h4标题，iframe直接填满整个盒子！ -->
 <div class="iframe-container">
     <div class="iframe-wrap">
-        <h4 id="titleA">报表A</h4>
         <iframe id="iframeA"></iframe>
     </div>
     <div class="iframe-wrap">
-        <h4 id="titleB">报表B</h4>
         <iframe id="iframeB"></iframe>
     </div>
 </div>
@@ -240,9 +233,7 @@ document.getElementById("loadCompareBtn").onclick = function(){
     }
 
     iframeA.src = fileA;
-    document.getElementById("titleA").innerText = `A：${A.logi} - ${A.month}`;
     iframeB.src = fileB;
-    document.getElementById("titleB").innerText = `B：${B.logi} - ${B.month}`;
 }
 </script>
 </body>
