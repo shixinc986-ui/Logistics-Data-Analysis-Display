@@ -82,25 +82,19 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     background: #fff;
+    padding-top: 70px;
 }
 .iframe-wrap iframe {
     width: 100%;
-    height: calc(100% + 60px);
+    height: 100%;
     border: none;
     overflow: auto;
-    margin-top: -60px;
 }
-
-
 @media(max-width:1024px){
-    .wrap{flex-direction:column;}
-    .iframe-container{flex-direction:column;
-        top:5px;
-    }
-    .iframe-wrap{
-        height:calc(100vh - 10px);
-    }
+    .iframe-container{flex-direction:column;top:5px;}
+    .iframe-wrap{height:calc(100vh - 10px);}
 }
+
 </style>
 </head>
 <body>
