@@ -38,7 +38,7 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     border:#2563eb;
     box-shadow:0 2px 6px #2563eb40;
 }
-.jump-area{margin-bottom:24px;text-align:center;}
+.jump-area{text-align:center;}  <!-- 删除margin-bottom:24px -->
 #tipText{
     font-size:17px;
     color:#334155;
@@ -63,7 +63,7 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     cursor:not-allowed;
     box-shadow:none;
 }
-/* 双报表iframe容器 保留你原版定义 */
+/* 双报表iframe容器 */
 .iframe-container{
     display:flex;
     gap:20px;
@@ -82,10 +82,6 @@ iframe{
     border-radius:10px;
     background:#fff;
 }
-/* 滚动锁定新增样式，仅此一行，不影响原有任何颜色 */
-body.lock-scroll{
-  overflow-y:hidden;
-}
 @media(max-width:1024px){
     .wrap{flex-direction:column;}
     .iframe-container{flex-direction:column;}
@@ -93,8 +89,11 @@ body.lock-scroll{
 </style>
 </head>
 <body>
-<a href="index.html" style="display:inline-block;padding:10px 20px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;margin-bottom:24px;">← 返回首页</a>
-<h1>📊 物流商月份双对比看板</h1>
+<div class="header-row">
+  <a href="index.html" style="display:inline-block;padding:10px 20px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;">← 返回首页</a>
+  <h1>📊 物流商月份双对比看板</h1>
+</div>
+
 <!-- 选择区域 -->
 <div class="wrap">
     <div class="left-panel">
@@ -146,21 +145,24 @@ body.lock-scroll{
         </div>
     </div>
 </div>
+
 <div class="jump-area">
     <p id="tipText">请分别在左右两侧选择【物流商+月份】</p>
     <button id="loadCompareBtn" disabled>🔍 加载双报表同屏对比</button>
 </div>
-<!-- id="lockPoint" 只增加ID，HTML结构原样不动 -->
-<div id="lockPoint" class="iframe-container">
-  <div class="iframe-wrap">
-      <h4 id="titleA">报表A</h4>
-      <iframe id="iframeA"></iframe>
-  </div>
-  <div class="iframe-wrap">
-      <h4 id="titleB">报表B</h4>
-      <iframe id="iframeB"></iframe>
-  </div>
+
+<!-- 左右并排iframe容器，报表在这里展示 -->
+<div class="iframe-container">
+    <div class="iframe-wrap">
+        <h4 id="titleA">报表A</h4>
+        <iframe id="iframeA"></iframe>
+    </div>
+    <div class="iframe-wrap">
+        <h4 id="titleB">报表B</h4>
+        <iframe id="iframeB"></iframe>
+    </div>
 </div>
+
 <script>
 let A = {logi:null, month:null};
 let B = {logi:null, month:null};
@@ -200,46 +202,43 @@ document.getElementById("loadCompareBtn").onclick = function(){
     }
     const folderA = `prov_report_${A.month}`;
     const fileA = `${folderA}/${logiA}_${A.month}.html`;
+
     const folderB = `prov_report_${B.month}`;
     const fileB = `${folderB}/${logiB}_${B.month}.html`;
+
     document.getElementById("iframeA").src = fileA;
     document.getElementById("iframeB").src = fileB;
     document.getElementById("titleA").innerText = `A：${A.logi} - ${A.month}`;
     document.getElementById("titleB").innerText = `B：${B.logi} - ${B.month}`;
 }
-
-// 【仅新增这段滚动锁定JS，其余JS完全不动】
-// 滚动监听：红框A/B标题 sticky置顶，页面不锁死，保留横向滚动条
-const lockPoint = document.getElementById('lockPoint');
-const titleA = document.getElementById("titleA");
-const titleB = document.getElementById("titleB");
-let isSticky = false;
-const observer = new IntersectionObserver((entries)=>{
-  const entry = entries[0];
-  // 容器顶部碰到视口顶部，开启sticky
-  if(entry.boundingClientRect.top <= 0 && !isSticky){
-    titleA.classList.add("sticky-top");
-    titleB.classList.add("sticky-top");
-    isSticky = true;
-  }
-  // 向上滚动，容器离开顶部，取消sticky
-  if(entry.boundingClientRect.top > 10 && isSticky){
-    titleA.classList.remove("sticky-top");
-    titleB.classList.remove("sticky-top");
-    isSticky = false;
-  }
-},{threshold:0})
-observer.observe(lockPoint);
-
 </script>
-/* 新增：标题触顶固定样式 */
-.iframe-wrap h4.sticky-top{
-  position:sticky;
-  top:0;
-  background:#fff;
-  z-index:99;
-  padding:8px 0;
+<style>
+html,body{
+  height:auto;
+  overflow:auto;
 }
-
+body{
+  margin:0;
+}
+.iframe-container{
+  display:flex;
+  gap:16px;
+  margin-top:20px;
+}
+.iframe-wrap{
+  flex:1;
+  height:70vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  border:1px solid #e2e8f0;
+  border-radius:8px;
+}
+.iframe-wrap iframe{
+  flex:1;
+  width:100%;
+  border:none;
+}
+</style>
 </body>
 </html>
