@@ -67,7 +67,7 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     box-shadow:none;
 }
 
-/* ========== 核心sticky样式，无额外标题，保留iframe内部自带的A/B文字 ========== */
+/* ========== 核心sticky样式 ========== */
 .iframe-container {
     display: flex;
     gap: 20px;
@@ -171,7 +171,7 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     <button id="loadCompareBtn" disabled>🔍 加载双报表同屏对比</button>
 </div>
 
-<!-- 双报表容器，iframe内部自带A:xxx / B:xxx标题，不新增外层标题 -->
+<!-- 双报表容器 -->
 <div class="iframe-container">
     <div class="iframe-wrap">
         <h4 id="titleA">报表A</h4>
@@ -228,9 +228,20 @@ document.getElementById("loadCompareBtn").onclick = function(){
     const folderB = `prov_report_${B.month}`;
     const fileB = `${folderB}/${logiB}_${B.month}.html`;
 
-    document.getElementById("iframeA").src = fileA;
+    const iframeA = document.getElementById("iframeA");
+    const iframeB = document.getElementById("iframeB");
+
+    // 加载完成自动滚动到iframe页面顶部
+    iframeA.onload = function(){
+        iframeA.contentWindow.scrollTo(0,0);
+    }
+    iframeB.onload = function(){
+        iframeB.contentWindow.scrollTo(0,0);
+    }
+
+    iframeA.src = fileA;
     document.getElementById("titleA").innerText = `A：${A.logi} - ${A.month}`;
-    document.getElementById("iframeB").src = fileB;
+    iframeB.src = fileB;
     document.getElementById("titleB").innerText = `B：${B.logi} - ${B.month}`;
 }
 </script>
