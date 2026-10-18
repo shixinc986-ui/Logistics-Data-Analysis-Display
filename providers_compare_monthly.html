@@ -63,31 +63,26 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     cursor:not-allowed;
     box-shadow:none;
 }
-/* ========== 双报表iframe容器【只保留这一组，删除重复CSS】 ========== */
+/* 双报表iframe容器 保留你原版定义 */
 .iframe-container{
     display:flex;
-    gap:16px;
-    margin-top:20px;
+    gap:20px;
     width:100%;
 }
 .iframe-wrap{
     flex:1;
-    height:70vh;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    border:1px solid #e2e8f0;
-    border-radius:8px;
 }
 .iframe-wrap h4{
     text-align:center;margin-bottom:8px;
 }
-.iframe-wrap iframe{
-    flex:1;
+iframe{
     width:100%;
-    border:none;
+    height:900px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    background:#fff;
 }
-/* 页面锁定时禁止body滚动 */
+/* 滚动锁定新增样式，仅此一行，不影响原有任何颜色 */
 body.lock-scroll{
   overflow:hidden;
 }
@@ -155,7 +150,7 @@ body.lock-scroll{
     <p id="tipText">请分别在左右两侧选择【物流商+月份】</p>
     <button id="loadCompareBtn" disabled>🔍 加载双报表同屏对比</button>
 </div>
-<!-- 左右并排iframe容器，报表在这里展示，id="lockPoint"作为滚动锁定锚点 -->
+<!-- id="lockPoint" 只增加ID，HTML结构原样不动 -->
 <div id="lockPoint" class="iframe-container">
   <div class="iframe-wrap">
       <h4 id="titleA">报表A</h4>
@@ -213,17 +208,15 @@ document.getElementById("loadCompareBtn").onclick = function(){
     document.getElementById("titleB").innerText = `B：${B.logi} - ${B.month}`;
 }
 
-// ==========【新增：滚动锁定JS】==========
+// 【仅新增这段滚动锁定JS，其余JS完全不动】
 const lockPoint = document.getElementById('lockPoint');
 let isLocked = false;
 const observer = new IntersectionObserver((entries) => {
   const entry = entries[0];
-  // 容器顶部碰到屏幕顶部，锁定页面滚动
   if(entry.boundingClientRect.top <= 0 && !isLocked){
     document.body.classList.add('lock-scroll');
     isLocked = true;
   }
-  // 向上滚动，容器离开顶部，解锁
   if(entry.boundingClientRect.top > 10 && isLocked){
     document.body.classList.remove('lock-scroll');
     isLocked = false;
