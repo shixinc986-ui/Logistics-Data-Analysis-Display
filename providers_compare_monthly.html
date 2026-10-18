@@ -209,20 +209,37 @@ document.getElementById("loadCompareBtn").onclick = function(){
 }
 
 // 【仅新增这段滚动锁定JS，其余JS完全不动】
+// 滚动监听：红框A/B标题 sticky置顶，页面不锁死，保留横向滚动条
 const lockPoint = document.getElementById('lockPoint');
-let isLocked = false;
-const observer = new IntersectionObserver((entries) => {
+const titleA = document.getElementById("titleA");
+const titleB = document.getElementById("titleB");
+let isSticky = false;
+const observer = new IntersectionObserver((entries)=>{
   const entry = entries[0];
-  if(entry.boundingClientRect.top <= 0 && !isLocked){
-    document.body.classList.add('lock-scroll');
-    isLocked = true;
+  // 容器顶部碰到视口顶部，开启sticky
+  if(entry.boundingClientRect.top <= 0 && !isSticky){
+    titleA.classList.add("sticky-top");
+    titleB.classList.add("sticky-top");
+    isSticky = true;
   }
-  if(entry.boundingClientRect.top > 10 && isLocked){
-    document.body.classList.remove('lock-scroll');
-    isLocked = false;
+  // 向上滚动，容器离开顶部，取消sticky
+  if(entry.boundingClientRect.top > 10 && isSticky){
+    titleA.classList.remove("sticky-top");
+    titleB.classList.remove("sticky-top");
+    isSticky = false;
   }
 },{threshold:0})
 observer.observe(lockPoint);
+
 </script>
+/* 新增：标题触顶固定样式 */
+.iframe-wrap h4.sticky-top{
+  position:sticky;
+  top:0;
+  background:#fff;
+  z-index:99;
+  padding:8px 0;
+}
+
 </body>
 </html>
