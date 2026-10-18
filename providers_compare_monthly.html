@@ -40,7 +40,7 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
 }
 .jump-area{
     text-align:center;
-    margin-bottom:32px; /* 拉开间距，解决文字拥挤 */
+    margin-bottom:32px;
 }
 #tipText{
     font-size:17px;
@@ -66,38 +66,44 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     cursor:not-allowed;
     box-shadow:none;
 }
-/* ========== 双报表iframe容器 【使用sticky，无闪烁】 ========== */
-.iframe-container{
-    display:flex;
-    gap:20px;
-    width:100%;
-    /* sticky 核心 */
+
+/* ========== 核心sticky样式，无额外标题，保留iframe内部自带的A/B文字 ========== */
+.iframe-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
     position: sticky;
-    top:10px;
+    top: 10px;
 }
-.iframe-wrap{
-    flex:1;
-    height:calc(100vh - 20px);
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    border:1px solid #e2e8f0;
-    border-radius:8px;
+.iframe-wrap {
+    flex: 1;
+    height: calc(100vh - 20px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
 }
-.iframe-wrap h4{
-    text-align:center;margin-bottom:8px;
+.iframe-wrap h4 {
+    text-align: center;
+    margin: 8px 0;
+    flex: 0 0 auto;
 }
-iframe{
-    flex:1;
-    width:100%;
-    border:1px solid #cbd5e1;
-    border-radius:10px;
-    background:#fff;
+.iframe-wrap iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    overflow: auto;
 }
+
 @media(max-width:1024px){
     .wrap{flex-direction:column;}
     .iframe-container{flex-direction:column;
         top:5px;
+    }
+    .iframe-wrap{
+        height:calc(100vh - 10px);
     }
 }
 </style>
@@ -108,7 +114,7 @@ iframe{
   <h1>📊 物流商月份双对比看板</h1>
 </div>
 
-<!-- 选择区域 -->
+<!-- 左右选择面板 -->
 <div class="wrap">
     <div class="left-panel">
         <h3>对比项 A</h3>
@@ -165,6 +171,7 @@ iframe{
     <button id="loadCompareBtn" disabled>🔍 加载双报表同屏对比</button>
 </div>
 
+<!-- 双报表容器，iframe内部自带A:xxx / B:xxx标题，不新增外层标题 -->
 <div class="iframe-container">
     <div class="iframe-wrap">
         <h4 id="titleA">报表A</h4>
@@ -194,11 +201,13 @@ bindGroup("groupA_logi", A, "logi");
 bindGroup("groupA_month", A, "month");
 bindGroup("groupB_logi", B, "logi");
 bindGroup("groupB_month", B, "month");
+
 function refreshStatus(){
     const tip = document.getElementById("tipText");
     const loadBtn = document.getElementById("loadCompareBtn");
     if(A.logi && A.month && B.logi && B.month){
-        tip.innerText = `A:${A.logi}-${A.month}｜B:${B.logi}-${B.month}`;
+        const text = `A:${A.logi}-${A.month}｜B:${B.logi}-${B.month}`;
+        tip.innerText = text;
         loadBtn.disabled = false;
     }else{
         tip.innerText = "请分别在左右两侧选择【物流商+月份】";
