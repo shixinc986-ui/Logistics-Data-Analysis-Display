@@ -38,7 +38,7 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     border:#2563eb;
     box-shadow:0 2px 6px #2563eb40;
 }
-.jump-area{text-align:center;}  <!-- 删除margin-bottom:24px -->
+.jump-area{margin-bottom:24px;text-align:center;}  <!-- 删除margin-bottom:24px -->
 #tipText{
     font-size:17px;
     color:#334155;
@@ -89,10 +89,8 @@ iframe{
 </style>
 </head>
 <body>
-<div class="header-row">
-  <a href="index.html" style="display:inline-block;padding:10px 20px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;">← 返回首页</a>
-  <h1>📊 物流商月份双对比看板</h1>
-</div>
+<a href="index.html" style="display:inline-block;padding:10px 20px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;margin-bottom:24px;">← 返回首页</a>
+<h1>📊 物流商月份双对比看板</h1>
 
 <!-- 选择区域 -->
 <div class="wrap">
@@ -152,7 +150,9 @@ iframe{
 </div>
 
 <!-- 左右并排iframe容器，报表在这里展示 -->
-<div class="iframe-container">
+<!-- 双报表顶部A/B标题栏，滚动到这里就锁定页面 -->
+<div id="lockPoint" class="iframe-top-header">
+    <div class="iframe-container">
     <div class="iframe-wrap">
         <h4 id="titleA">报表A</h4>
         <iframe id="iframeA"></iframe>
@@ -162,6 +162,7 @@ iframe{
         <iframe id="iframeB"></iframe>
     </div>
 </div>
+
 
 <script>
 let A = {logi:null, month:null};
@@ -239,18 +240,20 @@ body{
   width:100%;
   border:none;
 }
-
-.header-row{
+/* A、B标题并排栏，锁定触发锚点 */
+.iframe-top-header{
   display:flex;
-  align-items:center; /* 垂直居中，文字和按钮齐平 */
   justify-content:space-between;
-  flex-wrap:wrap;
-  margin-bottom:24px;
+  padding:10px 20px;
+  background:#f1f5f9;
+  border-radius:8px 8px 0 0;
+  margin-bottom:8px;
+  font-size:18px;
+  color:#334155;
 }
-.header-row h1{
-  margin:0; /* 清除h1默认自带上下边距，消除多余空隙 */
-  font-size:26px;
-  color:#1e293b;
+/* 页面锁定状态 */
+body.lock-scroll{
+  overflow:hidden;
 }
 
 </style>
