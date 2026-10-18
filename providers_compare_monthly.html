@@ -38,7 +38,7 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     border:#2563eb;
     box-shadow:0 2px 6px #2563eb40;
 }
-.jump-area{margin-bottom:24px;text-align:center;}  <!-- 删除margin-bottom:24px -->
+.jump-area{margin-bottom:24px;text-align:center;}
 #tipText{
     font-size:17px;
     color:#334155;
@@ -63,24 +63,33 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     cursor:not-allowed;
     box-shadow:none;
 }
-/* 双报表iframe容器 */
+/* ========== 双报表iframe容器【只保留这一组，删除重复CSS】 ========== */
 .iframe-container{
     display:flex;
-    gap:20px;
+    gap:16px;
+    margin-top:20px;
     width:100%;
 }
 .iframe-wrap{
     flex:1;
+    height:70vh;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    border:1px solid #e2e8f0;
+    border-radius:8px;
 }
 .iframe-wrap h4{
     text-align:center;margin-bottom:8px;
 }
-iframe{
+.iframe-wrap iframe{
+    flex:1;
     width:100%;
-    height:900px;
-    border:1px solid #cbd5e1;
-    border-radius:10px;
-    background:#fff;
+    border:none;
+}
+/* 页面锁定时禁止body滚动 */
+body.lock-scroll{
+  overflow:hidden;
 }
 @media(max-width:1024px){
     .wrap{flex-direction:column;}
@@ -91,7 +100,6 @@ iframe{
 <body>
 <a href="index.html" style="display:inline-block;padding:10px 20px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;margin-bottom:24px;">← 返回首页</a>
 <h1>📊 物流商月份双对比看板</h1>
-
 <!-- 选择区域 -->
 <div class="wrap">
     <div class="left-panel">
@@ -143,14 +151,11 @@ iframe{
         </div>
     </div>
 </div>
-
 <div class="jump-area">
     <p id="tipText">请分别在左右两侧选择【物流商+月份】</p>
     <button id="loadCompareBtn" disabled>🔍 加载双报表同屏对比</button>
 </div>
-
-<!-- 左右并排iframe容器，报表在这里展示 -->
-<!-- 双报表顶部A/B标题栏，滚动到这里就锁定页面 -->
+<!-- 左右并排iframe容器，报表在这里展示，id="lockPoint"作为滚动锁定锚点 -->
 <div id="lockPoint" class="iframe-container">
   <div class="iframe-wrap">
       <h4 id="titleA">报表A</h4>
@@ -161,7 +166,6 @@ iframe{
       <iframe id="iframeB"></iframe>
   </div>
 </div>
-
 <script>
 let A = {logi:null, month:null};
 let B = {logi:null, month:null};
@@ -201,49 +205,31 @@ document.getElementById("loadCompareBtn").onclick = function(){
     }
     const folderA = `prov_report_${A.month}`;
     const fileA = `${folderA}/${logiA}_${A.month}.html`;
-
     const folderB = `prov_report_${B.month}`;
     const fileB = `${folderB}/${logiB}_${B.month}.html`;
-
     document.getElementById("iframeA").src = fileA;
     document.getElementById("iframeB").src = fileB;
     document.getElementById("titleA").innerText = `A：${A.logi} - ${A.month}`;
     document.getElementById("titleB").innerText = `B：${B.logi} - ${B.month}`;
 }
-</script>
-<style>
-html,body{
-  height:auto;
-  overflow:auto;
-}
-body{
-  margin:0;
-}
-.iframe-container{
-  display:flex;
-  gap:16px;
-  margin-top:20px;
-}
-.iframe-wrap{
-  flex:1;
-  height:70vh;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  border:1px solid #e2e8f0;
-  border-radius:8px;
-}
-.iframe-wrap iframe{
-  flex:1;
-  width:100%;
-  border:none;
-}
-/* A、B标题并排栏，锁定触发锚点 */
-/* 页面锁定时禁止body滚动 */
-body.lock-scroll{
-  overflow:hidden;
-}
 
-</style>
+// ==========【新增：滚动锁定JS】==========
+const lockPoint = document.getElementById('lockPoint');
+let isLocked = false;
+const observer = new IntersectionObserver((entries) => {
+  const entry = entries[0];
+  // 容器顶部碰到屏幕顶部，锁定页面滚动
+  if(entry.boundingClientRect.top <= 0 && !isLocked){
+    document.body.classList.add('lock-scroll');
+    isLocked = true;
+  }
+  // 向上滚动，容器离开顶部，解锁
+  if(entry.boundingClientRect.top > 10 && isLocked){
+    document.body.classList.remove('lock-scroll');
+    isLocked = false;
+  }
+},{threshold:0})
+observer.observe(lockPoint);
+</script>
 </body>
 </html>
