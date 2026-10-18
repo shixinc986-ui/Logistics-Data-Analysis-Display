@@ -79,11 +79,11 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     flex: 1;
     height: calc(100vh - 20px);
     overflow: hidden;
-    display: flex;
-    /* 直接让iframe填满整个wrap，不再预留标题高度 */
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     background: #fff;
+    /* 增加顶部内边距，给报表顶部标题预留空间 */
+    padding-top:10px;
 }
 .iframe-wrap iframe {
     width: 100%;
@@ -166,7 +166,6 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     <button id="loadCompareBtn" disabled>🔍 加载双报表同屏对比</button>
 </div>
 
-<!-- ✅【重点】已经删掉外层h4标题，iframe直接填满整个盒子！ -->
 <div class="iframe-container">
     <div class="iframe-wrap">
         <iframe id="iframeA"></iframe>
@@ -223,14 +222,6 @@ document.getElementById("loadCompareBtn").onclick = function(){
 
     const iframeA = document.getElementById("iframeA");
     const iframeB = document.getElementById("iframeB");
-
-    // 加载完成自动滚动到iframe页面顶部
-    iframeA.onload = function(){
-        iframeA.contentWindow.scrollTo(0,0);
-    }
-    iframeB.onload = function(){
-        iframeB.contentWindow.scrollTo(0,0);
-    }
 
     iframeA.src = fileA;
     iframeB.src = fileB;
