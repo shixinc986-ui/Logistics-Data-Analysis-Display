@@ -40,7 +40,7 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
 }
 .jump-area{
     text-align:center;
-    margin-bottom:32px; /* 👉 新增，拉开按钮与报表区域间距，解决文字拥挤 */
+    margin-bottom:32px; /* 拉开间距，解决文字拥挤 */
 }
 #tipText{
     font-size:17px;
@@ -66,47 +66,38 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     cursor:not-allowed;
     box-shadow:none;
 }
-/* 双报表iframe容器 */
+/* ========== 双报表iframe容器 【使用sticky，无闪烁】 ========== */
 .iframe-container{
     display:flex;
     gap:20px;
     width:100%;
-    transition:0.2s;
+    /* sticky 核心 */
+    position: sticky;
+    top:10px;
 }
 .iframe-wrap{
     flex:1;
+    height:calc(100vh - 20px);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    border:1px solid #e2e8f0;
+    border-radius:8px;
 }
 .iframe-wrap h4{
     text-align:center;margin-bottom:8px;
 }
 iframe{
+    flex:1;
     width:100%;
-    height:900px;
     border:1px solid #cbd5e1;
     border-radius:10px;
     background:#fff;
 }
-/* ==========【新增固定报表区域CSS，不改动原有任何颜色外框】========== */
-.iframe-container.fixed-report{
-    position:fixed;
-    top:10px;
-    left:20px;
-    right:20px;
-    width:calc(100% - 40px);
-    z-index:99;
-}
-.iframe-container.fixed-report .iframe-wrap{
-    height:calc(100vh - 20px);
-}
 @media(max-width:1024px){
     .wrap{flex-direction:column;}
-    .iframe-container{flex-direction:column;}
-    .iframe-container.fixed-report{
-        position:fixed;
-        top:10px;
-        left:10px;
-        right:10px;
-        width:calc(100% - 20px);
+    .iframe-container{flex-direction:column;
+        top:5px;
     }
 }
 </style>
@@ -174,8 +165,7 @@ iframe{
     <button id="loadCompareBtn" disabled>🔍 加载双报表同屏对比</button>
 </div>
 
-<!-- 给容器增加ID：stickyReportContainer -->
-<div id="stickyReportContainer" class="iframe-container">
+<div class="iframe-container">
     <div class="iframe-wrap">
         <h4 id="titleA">报表A</h4>
         <iframe id="iframeA"></iframe>
@@ -234,20 +224,6 @@ document.getElementById("loadCompareBtn").onclick = function(){
     document.getElementById("iframeB").src = fileB;
     document.getElementById("titleB").innerText = `B：${B.logi} - ${B.month}`;
 }
-
-// ==========【新增滚动监听JS，实现需求效果】==========
-const jumpArea = document.querySelector(".jump-area");
-const reportContainer = document.getElementById("stickyReportContainer");
-const observer = new IntersectionObserver((entries)=>{
-    const entry = entries[0];
-    // jump-area（按钮区域）离开屏幕顶部，就固定报表容器
-    if(entry.boundingClientRect.top < 0){
-        reportContainer.classList.add("fixed-report");
-    }else{
-        reportContainer.classList.remove("fixed-report");
-    }
-},{threshold:0})
-observer.observe(jumpArea);
 </script>
 </body>
 </html>
