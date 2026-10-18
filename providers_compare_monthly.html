@@ -68,12 +68,13 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
 }
 
 /* ========== 核心sticky样式 ========== */
+/* ========== 核心sticky样式 ========== */
 .iframe-container {
     display: flex;
     gap: 20px;
     width: 100%;
     position: sticky;
-    top: 10px;
+    top: calc(10px + 70px); /* ← 把整个双iframe面板整体向下挪70px！ */
 }
 .iframe-wrap {
     flex: 1;
@@ -82,7 +83,7 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     background: #fff;
-    padding-top: 70px;
+    /* 删除 padding-top:70px !!!!!!!!! */
 }
 .iframe-wrap iframe {
     width: 100%;
@@ -91,9 +92,10 @@ h4{margin-bottom:12px;color:#475569;font-size:16px;font-weight:500;}
     overflow: auto;
 }
 @media(max-width:1024px){
-    .iframe-container{flex-direction:column;top:5px;}
+    .iframe-container{flex-direction:column;top:calc(5px +70px);}
     .iframe-wrap{height:calc(100vh - 10px);}
 }
+
 
 </style>
 </head>
