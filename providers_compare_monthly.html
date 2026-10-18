@@ -151,18 +151,16 @@ iframe{
 
 <!-- 左右并排iframe容器，报表在这里展示 -->
 <!-- 双报表顶部A/B标题栏，滚动到这里就锁定页面 -->
-<div id="lockPoint" class="iframe-top-header">
-    <div class="iframe-container">
-    <div class="iframe-wrap">
-        <h4 id="titleA">报表A</h4>
-        <iframe id="iframeA"></iframe>
-    </div>
-    <div class="iframe-wrap">
-        <h4 id="titleB">报表B</h4>
-        <iframe id="iframeB"></iframe>
-    </div>
+<div id="lockPoint" class="iframe-container">
+  <div class="iframe-wrap">
+      <h4 id="titleA">报表A</h4>
+      <iframe id="iframeA"></iframe>
+  </div>
+  <div class="iframe-wrap">
+      <h4 id="titleB">报表B</h4>
+      <iframe id="iframeB"></iframe>
+  </div>
 </div>
-
 
 <script>
 let A = {logi:null, month:null};
@@ -241,17 +239,7 @@ body{
   border:none;
 }
 /* A、B标题并排栏，锁定触发锚点 */
-.iframe-top-header{
-  display:flex;
-  justify-content:space-between;
-  padding:10px 20px;
-  background:#f1f5f9;
-  border-radius:8px 8px 0 0;
-  margin-bottom:8px;
-  font-size:18px;
-  color:#334155;
-}
-/* 页面锁定状态 */
+/* 页面锁定时禁止body滚动 */
 body.lock-scroll{
   overflow:hidden;
 }
