@@ -69,6 +69,13 @@ h4{margin-bottom:0;color:#0f172a;font-size:18px;font-weight:600;padding:10px 0;t
     cursor:not-allowed;
     box-shadow:none;
 }
+#tipText{
+    font-size:17px;
+    color:#334155;
+    margin-bottom:16px;
+    line-height:1.6;
+}
+
 /* ========== iframe容器sticky ========== */
 .iframe-container {
     display: flex;
@@ -228,7 +235,7 @@ document.getElementById("loadCompareBtn").onclick = function(){
     const tip = document.getElementById("tipText");
     // 在原有内容上方插入提示
     const originalText = tip.innerText;
-    tip.innerHTML = `<span style="font-size:14px;color:#64748b;">如选择物流商和月份后显示404，则代表当月该物流并无数据，可查看原始按月导出的物流数据。</span><br>${originalText}`;
+    tip.innerHTML = `<span style="font-size:14px;color:#64748b;">如选择物流商和月份后显示404，代表当月该物流并无数据（可前往按月导出的物流数据进行核查）。</span><br>${originalText}`;
     const validList = ["dhl","evri","royalmail(菜鸟)","yodel(菜鸟)","sd","fedex","xdp","dx","extra_large_parcel_courier","eda_dpd"];
     let logiA = A.logi.toLowerCase();
     let logiB = B.logi.toLowerCase();
