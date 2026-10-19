@@ -225,6 +225,10 @@ function refreshStatus(){
     }
 }
 document.getElementById("loadCompareBtn").onclick = function(){
+    const tip = document.getElementById("tipText");
+    // 在原有内容上方插入提示
+    const originalText = tip.innerText;
+    tip.innerHTML = `<span style="font-size:14px;color:#64748b;">如选择物流商和月份后显示404，则代表当月该物流并无数据，可查看原始按月导出的物流数据。</span><br>${originalText}`;
     const validList = ["dhl","evri","royalmail(菜鸟)","yodel(菜鸟)","sd","fedex","xdp","dx","extra_large_parcel_courier","eda_dpd"];
     let logiA = A.logi.toLowerCase();
     let logiB = B.logi.toLowerCase();
