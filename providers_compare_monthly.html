@@ -28,9 +28,12 @@ h4{margin-bottom:0;color:#0f172a;font-size:18px;font-weight:600;padding:10px 0;t
     cursor:pointer;
     font-size:14px;
     transition:0.2s all ease;
+    flex-wrap:nowrap; /* 禁止自动换行！核心 */
 }
-.filter-btn:hover{
-    border-color:#60a5fa;
+.filter-btn {
+  white-space: nowrap; /* 按钮文字不折行 */
+  flex-shrink: 0;      /* 按钮不会被压缩变小 */
+  padding: 8px 12px;
 }
 .filter-btn.active{
     background:#2563eb;
@@ -136,7 +139,7 @@ h4{margin-bottom:0;color:#0f172a;font-size:18px;font-weight:600;padding:10px 0;t
                 <button class="filter-btn" data-val="FEDEX">FEDEX</button>
                 <button class="filter-btn" data-val="DX">DX</button>
                 <button class="filter-btn" data-val="extra_large_parcel_courier">Extra_large_parcel_courier</button>
-                <button class="filter-btn" data-val="EDA DPD</button>
+                <button class="filter-btn" data-val="EDA_DPD</button>
             </div>
         </div>
         <div class="section">
@@ -161,12 +164,12 @@ h4{margin-bottom:0;color:#0f172a;font-size:18px;font-weight:600;padding:10px 0;t
                 <button class="filter-btn" data-val="FEDEX">FEDEX</button>
                 <button class="filter-btn" data-val="DX">DX</button>
                 <button class="filter-btn" data-val="extra_large_parcel_courier">Extra_large_parcel_courier</button>
-                <button class="filter-btn" data-val="EDA DPD</button>
+                <button class="filter-btn" data-val="EDA_DPD</button>
             </div>
         </div>
         <div class="section">
             <h4>选择月份</h4>
-            <div class="btn-group" id="groupB_month">
+            <div class="" id="groupB_month">
                 <button class="filter-btn" data-val="September">9月</button>
                 <button class="filter-btn" data-val="August">8月</button>
                 <button class="filter-btn" data-val="July">7月</button>
