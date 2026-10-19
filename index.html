@@ -102,6 +102,7 @@ const logisticsList = [
   {id:"royalmail(菜鸟)", name:"Royalmail(菜鸟)"},
   {id:"sd", name:"SD"},
   {id:"yodel(菜鸟)", name:"yodel(菜鸟)"},
+  {id:"eda_dpd", name:"EDA DPD"}
 ];
 // 顺序：10月周报表 →9月周报表 →8月周报表
 const monthList = [
@@ -278,6 +279,13 @@ document.addEventListener('DOMContentLoaded', function(){
     <a href="prov_report_July/extra_large_parcel_courier_July.html">7月报表</a>
   </div>  
  </div>   
+
+<div class="item-sub" onclick="toggleMenu('menueda_dpd')">EDA DPD物流商看板 ▾</div>
+  <div class="submenu level3" id="menueda_dpd">
+    <div class="item-sub" onclick="toggleMenu('menueda_dpdWeekly')">📅 周报表 ▾</div>
+    <div class="submenu level4" id="menueda_dpdWeekly">
+    <a href="prov_report_week/prov_report_August_weekly/eda_dpd_August_weekly.html">8月周报表</a>
+  </div>   
   
 </div>  <!-- 在这里才关闭menuproviders！！ -->
   
