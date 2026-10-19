@@ -64,6 +64,18 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
   cursor:pointer;
 }
   
+/* 仓库行：横向排列 */
+.warehouse-row {
+  display: flex;
+  gap:16px;
+  flex-wrap: wrap; /* 屏幕不够宽自动换行 */
+}
+/* 每一列仓库，5列均分 */
+.warehouse-col {
+  flex: 1;
+  min-width:160px; /* 最小宽度，防止挤压太窄 */
+}
+  
 </style>
 </head>
 <body>
@@ -115,17 +127,18 @@ function renderWarehouseMenu(){
   let html = "";
   html += `<div class="item" onclick="toggleMenu('menuwarehouse')">🏭 各英仓报表 British_warehouses_report</div>`;
   html += `<div class="submenu" id="menuwarehouse">`;
+  // 新增外层容器，用来横向摆放5个仓库
+  html += `<div class="warehouse-row">`;
 
   warehouseList.forEach(ware=>{
     const wareMenuId = `menu_${ware.id}`;
+    html += `<div class="warehouse-col">`;
     html += `<div class="item-sub" onclick="toggleMenu('${wareMenuId}')">🏬 ${ware.displayName}</div>`;
     html += `<div class="submenu" id="${wareMenuId}">`;
-
     monthList.forEach(m=>{
       const monthMenuId = `menu_${ware.id}_${m.folder}`;
       html += `<div class="item-sub" onclick="toggleMenu('${monthMenuId}')">📅 ${m.name}</div>`;
       html += `<div class="submenu" id="${monthMenuId}">`;
-
       logisticsList.forEach(logi=>{
         const fileName = `${ware.displayName}_${logi.id}${m.suffix}.html`;
         const url = `${m.folder}/ware-${ware.id}/${fileName}`;
@@ -134,10 +147,14 @@ function renderWarehouseMenu(){
       html += `</div>`;
     })
     html += `</div>`;
+    html += `</div>`;
   })
-  html += `</div>`;
+
+  html += `</div>`; // 闭合 warehouse-row
+  html += `</div>`; // 闭合 menuwarehouse
   document.getElementById("warehouseMenuRoot").innerHTML = html;
 }
+
 // 页面加载完成渲染
 document.addEventListener('DOMContentLoaded', function(){
   renderWarehouseMenu();
