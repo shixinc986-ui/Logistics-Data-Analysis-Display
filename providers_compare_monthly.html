@@ -167,7 +167,7 @@ h4{margin-bottom:0;color:#0f172a;font-size:18px;font-weight:600;padding:10px 0;t
         </div>
         <div class="section">
             <h4>选择月份</h4>
-            <div class="" id="groupB_month">
+            <div class="btn-group" id="groupB_month">
                 <button class="filter-btn" data-val="September">9月</button>
                 <button class="filter-btn" data-val="August">8月</button>
                 <button class="filter-btn" data-val="July">7月</button>
@@ -225,7 +225,7 @@ function refreshStatus(){
     }
 }
 document.getElementById("loadCompareBtn").onclick = function(){
-    const validList = ["dhl","evri","royalmail(菜鸟)","yodel(菜鸟)","sd","fedex","xdp","dx","extra_large_parcel_courier"];
+    const validList = ["dhl","evri","royalmail(菜鸟)","yodel(菜鸟)","sd","fedex","xdp","dx","extra_large_parcel_courier","eda_dpd"];
     let logiA = A.logi.toLowerCase();
     let logiB = B.logi.toLowerCase();
     if(!validList.includes(logiA) || !validList.includes(logiB)){
