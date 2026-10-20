@@ -45,52 +45,49 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
 .filter-btn.active{background:#2563eb;color:#fff;border-color:#2563eb;}
 .filter-btn:hover{border-color:#2563eb;}
 #tip{margin-bottom:16px;color:#333;font-size:15px;}
-.iframe-container{
-    display:flex;
-    gap:20px;
-    width:100%;
-    /* 核心：粘性定位，滚动到这个容器时贴在顶部 */
+.iframe-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
     position: sticky;
-    top:10px;
+    top: 10px;
 }
-.iframe-wrap{
-    flex:1;
-    height:calc(100vh - 20px);
-    overflow:hidden;
-    border:1px solid #e2e8f0;
-    border-radius:8px;
-    background:#fff;
-    display:flex;
-    flex-direction:column;
+.iframe-wrap {
+    flex: 1;
+    height: calc(100vh - 20px);
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+    /* 新增：纵向弹性盒子，自动分配空间 */
+    display: flex;
+    flex-direction: column;
 }
-.iframe-title{
-    padding:10px 16px;
-    background:#ffffff;
-    color:#1e293b;
+.iframe-title {
+    padding: 12px;
+    text-align: center;
     font-weight:500;
-    text-align:center;
     border-bottom:1px solid #e2e8f0;
-    width:100%;
-    /* 标题栏高度固定 */
-    flex-shrink:0;
+    /* 标题不压缩，保持自身高度 */
+    flex-shrink: 0;
 }
-.iframe-wrap iframe{
-    width:100%;
-    /* 剩余高度全部给iframe */
-    flex-grow:1;
-    border:none;
-    overflow:auto;
-}
-@media(max-width:1024px){
-    .wrap{flex-direction:column;}
-    .iframe-container{flex-direction:column;top:5px;}
-    .iframe-wrap{height:calc(80vh - 10px);}
+.iframe-wrap iframe {
+    width: 100%;
+    /* 剩余所有高度全部给iframe，不用手动减像素！ */
+    flex-grow: 1;
+    border: none;
+    overflow: auto;
 }
 @media(max-width:1024px){
-    .wrap{flex-direction:column;}
-    .iframe-container{flex-direction:column;top:5px;}
-    .iframe-wrap{height:calc(80vh - 10px);}
+    .iframe-container{
+        flex-direction:column;
+        top:5px;
+    }
+    .iframe-wrap{
+        height:calc(100vh - 10px);
+    }
 }
+
 </style>
 </head>
 <body>
