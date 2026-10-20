@@ -45,27 +45,49 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
 .filter-btn.active{background:#2563eb;color:#fff;border-color:#2563eb;}
 .filter-btn:hover{border-color:#2563eb;}
 #tip{margin-bottom:16px;color:#333;font-size:15px;}
-.iframe-container{
-    display:flex;gap:20px;width:100%;position:sticky;top:10px;
+.iframe-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    position: sticky;
+    top: 10px;
 }
-.iframe-wrap{
-    flex:1;height:calc(100vh - 20px);overflow:hidden;border:1px solid #e2e8f0;border-radius:8px;background:#fff;
+.iframe-wrap {
+    flex: 1;
+    height: calc(100vh - 20px);
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+    /* 新增：纵向弹性盒子，自动分配空间 */
+    display: flex;
+    flex-direction: column;
 }
-.iframe-title{
-    padding:10px 16px;
-    background:#ffffff;
-    color:#1e293b;
+.iframe-title {
+    padding: 12px;
+    text-align: center;
     font-weight:500;
-    text-align:center;
     border-bottom:1px solid #e2e8f0;
-    width:100%;
+    /* 标题不压缩，保持自身高度 */
+    flex-shrink: 0;
 }
-.iframe-wrap iframe{width:100%;height:calc(100% - 44px);border:none;overflow:auto;}
+.iframe-wrap iframe {
+    width: 100%;
+    /* 剩余所有高度全部给iframe，不用手动减像素！ */
+    flex-grow: 1;
+    border: none;
+    overflow: auto;
+}
 @media(max-width:1024px){
-    .wrap{flex-direction:column;}
-    .iframe-container{flex-direction:column;top:5px;}
-    .iframe-wrap{height:calc(80vh - 10px);}
+    .iframe-container{
+        flex-direction:column;
+        top:5px;
+    }
+    .iframe-wrap{
+        height:calc(100vh - 10px);
+    }
 }
+
 </style>
 </head>
 <body>
@@ -170,8 +192,8 @@ const wareFolderMap = {
 };
 
 // 存储A、B两组选中项
-let A = {ware:null, logi:null, week:null, Suffix:null};
-let B = {ware:null, logi:null, week:null, Suffix:null};
+let A = {ware:null, logi:null, week:null, suffix:null};
+let B = {ware:null, logi:null, week:null, suffix:null};
 
 // 通用绑定函数
 function bindGroup(btnGroupId, targetObj, keyName, extraKey=null){
@@ -190,12 +212,13 @@ function bindGroup(btnGroupId, targetObj, keyName, extraKey=null){
 }
 
 // 绑定所有按钮组
+bindGroup("groupA_week", A, "week", "suffix");
 bindGroup("groupA_ware", A, "ware");
 bindGroup("groupA_logi", A, "logi");
-bindGroup("groupA_week", A, "week", "Suffix");
+
 bindGroup("groupB_ware", B, "ware");
 bindGroup("groupB_logi", B, "logi");
-bindGroup("groupB_week", B, "week", "Suffix");
+bindGroup("groupB_week", B, "week", "suffix");
 
 function refreshStatus(){
     const tip = document.getElementById("tip");
@@ -208,10 +231,10 @@ function refreshStatus(){
     if(A.ware && A.logi && A.week){
         const textA = `${A.ware}｜${A.logi}｜${A.week}`;<!-- 拼接页面上显示的标题文字（iframe上方标题栏） -->
         titleA.innerText = textA;
-        const monthFolderA = `warehouses${A.Suffix}`;   <!-- 给别人看的展示文字 -->
+        const monthFolderA = `warehouses${A.suffix}`;   <!-- 给别人看的展示文字 -->
         const wareSubFolderA = wareFolderMap[A.ware];
         const logiLowA = A.logi.toLowerCase();    <!--  物流商转小写，匹配你文件小写命名 dhl，不是DHL -->
-        const urlA = `warehouses_week/${monthFolderA}/${wareSubFolderA}/${A.ware}_${logiLowA}${A.Suffix}.html`;  <!-- 1.monthFolderA = `warehouses_August_weekly`2.wareSubFolderA = `ware-A`3.A.ware = `A总仓`4.logiLowA = `dhl`5.A.weekSuffix = `_August_weekly` -->
+        const urlA = `warehouses_week/${monthFolderA}/${wareSubFolderA}/${A.ware}_${logiLowA}${A.suffix}.html`;  <!-- 1.monthFolderA = `warehouses_August_weekly`2.wareSubFolderA = `ware-A`3.A.ware = `A总仓`4.logiLowA = `dhl`5.A.weeksuffix = `_August_weekly` -->
         iframeA.src = urlA;
     }else{
         const textA = "待选择仓库+物流+周";
@@ -223,10 +246,10 @@ function refreshStatus(){
     if(B.ware && B.logi && B.week){
         const textB = `${B.ware}｜${B.logi}｜${B.week}`;
         titleB.innerText = textB;
-        const monthFolderB = `warehouses${B.Suffix}`;
+        const monthFolderB = `warehouses${B.suffix}`;
         const wareSubFolderB = wareFolderMap[B.ware];
         const logiLowB = B.logi.toLowerCase();
-        const urlB = `warehouses_week/${monthFolderB}/${wareSubFolderB}/${B.ware}_${logiLowB}${B.Suffix}.html`;
+        const urlB = `warehouses_week/${monthFolderB}/${wareSubFolderB}/${B.ware}_${logiLowB}${B.suffix}.html`;
         iframeB.src = urlB;
     }else{
         const textB = "待选择仓库+物流+周";
