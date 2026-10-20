@@ -46,6 +46,7 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
 .filter-btn:hover{border-color:#2563eb;}
 #tip{margin-bottom:16px;color:#333;font-size:15px;}
 /* ========== iframe容器sticky ========== */
+/* ========== iframe容器sticky ========== */
 .iframe-container {
     display: flex;
     gap: 20px;
@@ -53,6 +54,7 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
     position: sticky;
     top: 10px;
 }
+
 .iframe-wrap {
     flex: 1;
     height: calc(100vh - 50px);
@@ -63,6 +65,7 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
     border-radius: 8px;
     background: #fff;
 }
+
 .iframe-wrap .title-bar{
     flex: 0 0 auto;
     padding: 10px;
@@ -73,23 +76,26 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
     font-weight:bold;
     color:#1e293b;
 }
+
 .iframe-wrap iframe {
     flex: 1;
     width: 100%;
     border: none;
     overflow: auto;
 }
+
 @media(max-width:1024px){
     .iframe-container{
         flex-direction:column;
         top:5px;
-        gap:12px; /* 上下两个iframe之间间距，避免贴在一起 */
+        gap:12px;
     }
-    /* 重点：小屏上下两个，每个都扣更多高度，给顶部选择区、提示文字预留空间 */
+
     .iframe-wrap{
         height:calc(100vh - 130px);
     }
 }
+
 
 
 </style>
