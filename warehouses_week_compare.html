@@ -170,8 +170,8 @@ const wareFolderMap = {
 };
 
 // 存储A、B两组选中项
-let A = {ware:null, logi:null, week:null, weekSuffix:null};
-let B = {ware:null, logi:null, week:null, weekSuffix:null};
+let A = {ware:null, logi:null, week:null, Suffix:null};
+let B = {ware:null, logi:null, week:null, Suffix:null};
 
 // 通用绑定函数
 function bindGroup(btnGroupId, targetObj, keyName, extraKey=null){
@@ -192,10 +192,10 @@ function bindGroup(btnGroupId, targetObj, keyName, extraKey=null){
 // 绑定所有按钮组
 bindGroup("groupA_ware", A, "ware");
 bindGroup("groupA_logi", A, "logi");
-bindGroup("groupA_week", A, "week", "weekSuffix");
+bindGroup("groupA_week", A, "week", "Suffix");
 bindGroup("groupB_ware", B, "ware");
 bindGroup("groupB_logi", B, "logi");
-bindGroup("groupB_week", B, "week", "weekSuffix");
+bindGroup("groupB_week", B, "week", "Suffix");
 
 function refreshStatus(){
     const tip = document.getElementById("tip");
@@ -208,10 +208,10 @@ function refreshStatus(){
     if(A.ware && A.logi && A.week){
         const textA = `${A.ware}｜${A.logi}｜${A.week}`;<!-- 拼接页面上显示的标题文字（iframe上方标题栏） -->
         titleA.innerText = textA;
-        const monthFolderA = `warehouses${A.weekSuffix}`;   <!-- 给别人看的展示文字 -->
+        const monthFolderA = `warehouses${A.Suffix}`;   <!-- 给别人看的展示文字 -->
         const wareSubFolderA = wareFolderMap[A.ware];
         const logiLowA = A.logi.toLowerCase();    <!--  物流商转小写，匹配你文件小写命名 dhl，不是DHL -->
-        const urlA = `warehouses_week/${monthFolderA}/${wareSubFolderA}/${A.ware}_${logiLowA}${A.weekSuffix}.html`;  <!-- 1.monthFolderA = `warehouses_August_weekly`2.wareSubFolderA = `ware-A`3.A.ware = `A总仓`4.logiLowA = `dhl`5.A.weekSuffix = `_August_weekly` -->
+        const urlA = `warehouses_week/${monthFolderA}/${wareSubFolderA}/${A.ware}_${logiLowA}${A.Suffix}.html`;  <!-- 1.monthFolderA = `warehouses_August_weekly`2.wareSubFolderA = `ware-A`3.A.ware = `A总仓`4.logiLowA = `dhl`5.A.weekSuffix = `_August_weekly` -->
         iframeA.src = urlA;
     }else{
         const textA = "待选择仓库+物流+周";
@@ -223,10 +223,10 @@ function refreshStatus(){
     if(B.ware && B.logi && B.week){
         const textB = `${B.ware}｜${B.logi}｜${B.week}`;
         titleB.innerText = textB;
-        const monthFolderB = `warehouses${B.weekSuffix}`;
+        const monthFolderB = `warehouses${B.Suffix}`;
         const wareSubFolderB = wareFolderMap[B.ware];
         const logiLowB = B.logi.toLowerCase();
-        const urlB = `warehouses_week/${monthFolderB}/${wareSubFolderB}/${B.ware}_${logiLowB}${B.weekSuffix}.html`;
+        const urlB = `warehouses_week/${monthFolderB}/${wareSubFolderB}/${B.ware}_${logiLowB}${B.Suffix}.html`;
         iframeB.src = urlB;
     }else{
         const textB = "待选择仓库+物流+周";
