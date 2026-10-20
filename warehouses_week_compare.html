@@ -21,14 +21,11 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:28px;font-weight
     flex:1;
     text-align:center;
 }
-/* 加一个空占位盒子，用来平衡右侧，让标题真正居中 */
 .header-row::after{
     content:"";
     width:120px;
 }
-
 a.back-home{display:inline-block;padding:10px 20px;background:#2563eb;color:#fff;text-decoration:none;border-radius:8px;white-space:nowrap;}
-
 .wrap{display:flex;gap:32px;align-items:flex-start;margin-bottom:30px;}
 .left-panel, .right-panel{
     flex:1;
@@ -47,7 +44,6 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
 }
 .filter-btn.active{background:#2563eb;color:#fff;border-color:#2563eb;}
 .filter-btn:hover{border-color:#2563eb;}
-
 #tip{margin-bottom:16px;color:#333;font-size:15px;}
 .iframe-container{
     display:flex;gap:20px;width:100%;position:sticky;top:10px;
@@ -62,11 +58,9 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
     font-weight:500;
     text-align:center;
     border-bottom:1px solid #e2e8f0;
+    width:100%;
 }
-
 .iframe-wrap iframe{width:100%;height:calc(100% - 44px);border:none;overflow:auto;}
-
-
 @media(max-width:1024px){
     .wrap{flex-direction:column;}
     .iframe-container{flex-direction:column;top:5px;}
@@ -79,7 +73,6 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
   <a href="index.html" class="back-home">← 返回首页</a>
   <h1>📊 仓库+物流商+周 多条件横向对比</h1>
 </div>
-
 <!-- 左右选择面板 -->
 <div class="wrap">
     <div class="left-panel">
@@ -87,44 +80,45 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
         <div class="section">
             <h4>选择仓库</h4>
             <div class="btn-group" id="groupA_ware">
-                <button class="filter-btn" data-val="A总仓" data-folder="warehouses_all_weekly">A总仓</button>
-                <button class="filter-btn" data-val="M总仓" data-folder="warehouses_all_weekly">M总仓</button>
-                <button class="filter-btn" data-val="B总仓" data-folder="warehouses_all_weekly">B总仓</button>
-                <button class="filter-btn" data-val="O总仓" data-folder="warehouses_all_weekly">O总仓</button>
-                <button class="filter-btn" data-val="F总仓" data-folder="warehouses_all_weekly">F总仓</button>
+                <button class="filter-btn" data-val="A总仓">A总仓</button>
+                <button class="filter-btn" data-val="M总仓">M总仓</button>
+                <button class="filter-btn" data-val="B总仓">B总仓</button>
+                <button class="filter-btn" data-val="O总仓">O总仓</button>
+                <button class="filter-btn" data-val="F总仓">F总仓</button>
             </div>
         </div>
         <div class="section">
             <h4>选择物流商</h4>
             <div class="btn-group" id="groupA_logi">
-                <button class="filter-btn" data-val="DHL">DHL</button>
+          <button class="filter-btn" data-val="DHL">DHL</button>
                 <button class="filter-btn" data-val="EVRI">EVRI</button>
                 <button class="filter-btn" data-val="royalmail(菜鸟)">royalmail(菜鸟)</button>
-                <button class="filter-btn" data-val="yodel(菜鸟)">yodel(菜鸟)</button>
                 <button class="filter-btn" data-val="SD">SD</button>
-                <button class="filter-btn" data-val="FEDEX">FEDEX</button>
+                <button class="filter-btn" data-val="FEDEX">FEDEX</button> 
+                <button class="filter-btn" data-val="DX">DX</button>
+                <button class="filter-btn" data-val="extra_large_parcel_courier">Extra Large Parcel Courier</button>
+                <button class="filter-btn" data-val="eda_dpd">EDA_DPD</button>
             </div>
         </div>
         <div class="section">
             <h4>选择周报表</h4>
             <div class="btn-group" id="groupA_week">
-                <button class="filter-btn" data-val="10月周报表" data-suffix="_October_weekly">10月周报表</button>
-                <button class="filter-btn" data-val="9月周报表" data-suffix="_September_weekly">9月周报表</button>
-                <button class="filter-btn" data-val="8月周报表" data-suffix="_August_weekly">8月周报表</button>
+                <button class="filter-btn" data-val="10月周" data-suffix="_October_weekly">10月周报表</button>
+                <button class="filter-btn" data-val="9月周" data-suffix="_September_weekly">9月周报表</button>
+                <button class="filter-btn" data-val="8月周" data-suffix="_August_weekly">8月周报表</button>
             </div>
         </div>
     </div>
-
     <div class="right-panel">
         <h3>对比项 B</h3>
         <div class="section">
             <h4>选择仓库</h4>
             <div class="btn-group" id="groupB_ware">
-                <button class="filter-btn" data-val="A总仓" data-folder="warehouses_all_weekly">A总仓</button>
-                <button class="filter-btn" data-val="M总仓" data-folder="warehouses_all_weekly">M总仓</button>
-                <button class="filter-btn" data-val="B总仓" data-folder="warehouses_all_weekly">B总仓</button>
-                <button class="filter-btn" data-val="O总仓" data-folder="warehouses_all_weekly">O总仓</button>
-                <button class="filter-btn" data-val="F总仓" data-folder="warehouses_all_weekly">F总仓</button>
+                <button class="filter-btn" data-val="A总仓">A总仓</button>
+                <button class="filter-btn" data-val="M总仓">M总仓</button>
+                <button class="filter-btn" data-val="B总仓">B总仓</button>
+                <button class="filter-btn" data-val="O总仓">O总仓</button>
+                <button class="filter-btn" data-val="F总仓">F总仓</button>
             </div>
         </div>
         <div class="section">
@@ -133,28 +127,27 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
                 <button class="filter-btn" data-val="DHL">DHL</button>
                 <button class="filter-btn" data-val="EVRI">EVRI</button>
                 <button class="filter-btn" data-val="royalmail(菜鸟)">royalmail(菜鸟)</button>
-                <button class="filter-btn" data-val="yodel(菜鸟)">yodel(菜鸟)</button>
                 <button class="filter-btn" data-val="SD">SD</button>
-                <button class="filter-btn" data-val="FEDEX">FEDEX</button>
+                <button class="filter-btn" data-val="FEDEX">FEDEX</button> 
+                <button class="filter-btn" data-val="DX">DX</button>
+                <button class="filter-btn" data-val="extra_large_parcel_courier">Extra Large Parcel Courier</button>
+                <button class="filter-btn" data-val="eda_dpd">EDA_DPD</button>
             </div>
         </div>
         <div class="section">
             <h4>选择周报表</h4>
             <div class="btn-group" id="groupB_week">
-                <button class="filter-btn" data-val="10月周报表" data-suffix="_October_weekly">10月周报表</button>
-                <button class="filter-btn" data-val="9月周报表" data-suffix="_September_weekly">9月周报表</button>
-                <button class="filter-btn" data-val="8月周报表" data-suffix="_August_weekly">8月周报表</button>
+                <button class="filter-btn" data-val="10月周" data-suffix="_October_weekly">10月周报表</button>
+                <button class="filter-btn" data-val="9月周" data-suffix="_September_weekly">9月周报表</button>
+                <button class="filter-btn" data-val="8月周" data-suffix="_August_weekly">8月周报表</button>
             </div>
         </div>
     </div>
 </div>
-
 <div id="tip" style="text-align:center;margin-bottom:8px;"></div>
 <div style="color:#64748b;font-size:14px;margin-bottom:16px;text-align:center;">
-如选择后页面出现404，代表该仓库+物流商+当周无对应数据（可查看原始按月导出的物流数据核查）
+如选择后页面出现404，代表该仓库+物流商+当周无对应数据（可查看原始按月导出的物流数据进行核查）
 </div>
-
-
 <!-- iframe容器，带标题栏 -->
 <div class="iframe-container">
     <div class="iframe-wrap">
@@ -166,11 +159,19 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
         <iframe id="iframeB"></iframe>
     </div>
 </div>
-
 <script>
+//仓库名称映射：页面显示名称 → 子文件夹名称
+const wareFolderMap = {
+  "A总仓": "ware-A",
+  "M总仓": "ware-M",
+  "B总仓": "ware-B",
+  "O总仓": "ware-O",
+  "F总仓": "ware-F"
+};
+
 // 存储A、B两组选中项
-let A = {ware:null, wareFolder:null, logi:null, week:null, weekSuffix:null};
-let B = {ware:null, wareFolder:null, logi:null, week:null, weekSuffix:null};
+let A = {ware:null, logi:null, week:null, weekSuffix:null};
+let B = {ware:null, logi:null, week:null, weekSuffix:null};
 
 // 通用绑定函数
 function bindGroup(btnGroupId, targetObj, keyName, extraKey=null){
@@ -189,11 +190,10 @@ function bindGroup(btnGroupId, targetObj, keyName, extraKey=null){
 }
 
 // 绑定所有按钮组
-bindGroup("groupA_ware", A, "ware", "wareFolder");
+bindGroup("groupA_ware", A, "ware");
 bindGroup("groupA_logi", A, "logi");
 bindGroup("groupA_week", A, "week", "weekSuffix");
-
-bindGroup("groupB_ware", B, "ware", "wareFolder");
+bindGroup("groupB_ware", B, "ware");
 bindGroup("groupB_logi", B, "logi");
 bindGroup("groupB_week", B, "week", "weekSuffix");
 
@@ -204,35 +204,39 @@ function refreshStatus(){
     const iframeA = document.getElementById("iframeA");
     const iframeB = document.getElementById("iframeB");
 
-    // A组
-    let textA = "";
+    // A组拼接路径
     if(A.ware && A.logi && A.week){
-        textA = `${A.ware}｜${A.logi}｜${A.week}`;
+        const textA = `${A.ware}｜${A.logi}｜${A.week}`;<!-- 拼接页面上显示的标题文字（iframe上方标题栏） -->
         titleA.innerText = textA;
-        const urlA = `${A.wareFolder}/${A.logi}${A.weekSuffix}.html`;
+        const monthFolderA = `warehouses${A.weekSuffix}`;   <!-- 给别人看的展示文字 -->
+        const wareSubFolderA = wareFolderMap[A.ware];
+        const logiLowA = A.logi.toLowerCase();    <!--  物流商转小写，匹配你文件小写命名 dhl，不是DHL -->
+        const urlA = `warehouses_week/${monthFolderA}/${wareSubFolderA}/${A.ware}_${logiLowA}${A.weekSuffix}.html`;  <!-- 1.monthFolderA = `warehouses_August_weekly`2.wareSubFolderA = `ware-A`3.A.ware = `A总仓`4.logiLowA = `dhl`5.A.weekSuffix = `_August_weekly` -->
         iframeA.src = urlA;
     }else{
-        textA = "待选择仓库+物流+周";
-        titleA.innerText = "";
+        const textA = "待选择仓库+物流+周";
+        titleA.innerText = textA;
         iframeA.src = "";
     }
 
-    // B组
-    let textB = "";
+    // B组拼接路径
     if(B.ware && B.logi && B.week){
-        textB = `${B.ware}｜${B.logi}｜${B.week}`;
+        const textB = `${B.ware}｜${B.logi}｜${B.week}`;
         titleB.innerText = textB;
-        const urlB = `${B.wareFolder}/${B.logi}${B.weekSuffix}.html`;
+        const monthFolderB = `warehouses${B.weekSuffix}`;
+        const wareSubFolderB = wareFolderMap[B.ware];
+        const logiLowB = B.logi.toLowerCase();
+        const urlB = `warehouses_week/${monthFolderB}/${wareSubFolderB}/${B.ware}_${logiLowB}${B.weekSuffix}.html`;
         iframeB.src = urlB;
     }else{
-        textB = "待选择仓库+物流+周";
-        titleB.innerText = "";
+        const textB = "待选择仓库+物流+周";
+        titleB.innerText = textB;
         iframeB.src = "";
     }
 
-    // 保留你原来这行
-    const text = `A:${textA}｜B:${textB}`;
-    tip.innerText = text;
+    //顶部提示文字
+    const textTip = `A:${A.ware?""+A.ware+"｜"+A.logi+"｜"+A.week:"未选择"}｜B:${B.ware?""+B.ware+"｜"+B.logi+"｜"+B.week:"未选择"}`;
+    tip.innerText = textTip;
 }
 </script>
 </body>
