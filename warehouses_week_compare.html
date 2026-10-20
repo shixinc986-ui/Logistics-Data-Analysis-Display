@@ -87,14 +87,19 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
     .iframe-container{
         flex-direction:column;
         top:0;
-        height: 100vh; /* 外层容器占满屏幕 */
+        height: 100vh;
         gap: 6px;
     }
     .iframe-wrap{
-        flex: 1; /* 两个iframe自动平分剩下高度 */
+        flex: 1;
         width: 100%;
     }
+    /* 核心新增：iframe内部溢出自动滚动 */
+    .iframe-wrap iframe{
+        overflow:auto;
+    }
 }
+
 
 
 </style>
