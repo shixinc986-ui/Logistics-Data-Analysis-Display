@@ -117,7 +117,7 @@ function renderWarehouseMenu(){
   html += `<div class="submenu" id="menuwarehouse">`;
 
   // ========== 新增：【仓库-物流-周对比看板】放在最上方，和5个仓库平齐 ==========
-  html += `<div class="item-sub" onclick="location.href='warehouses_week_compare.html'">📊 仓库+物流+周 多条件横向对比</div>`;
+  html += `<div class="item-sub" style="text-align:center;" onclick="location.href='warehouses_week_compare.html'">📊 仓库+物流+周 多条件横向对比</div>`;
 
   // 原有5个仓库循环不变
   warehouseList.forEach(ware=>{
