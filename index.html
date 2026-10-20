@@ -116,6 +116,10 @@ function renderWarehouseMenu(){
   html += `<div class="item" onclick="toggleMenu('menuwarehouse')">🏭 各英仓报表 British_warehouses_report</div>`;
   html += `<div class="submenu" id="menuwarehouse">`;
 
+  // ========== 新增：【仓库-物流-周对比看板】放在最上方，和5个仓库平齐 ==========
+  html += `<a class="item-sub" href="warehouses_week_compare.html">📊 仓库+物流+周 多条件横向对比</a>`;
+
+  // 原有5个仓库循环不变
   warehouseList.forEach(ware=>{
     const wareMenuId = `menu_${ware.id}`;
     html += `<div class="item-sub" onclick="toggleMenu('${wareMenuId}')">🏬 ${ware.displayName}</div>`;
