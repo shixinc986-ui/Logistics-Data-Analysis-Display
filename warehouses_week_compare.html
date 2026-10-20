@@ -45,6 +45,7 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
 .filter-btn.active{background:#2563eb;color:#fff;border-color:#2563eb;}
 .filter-btn:hover{border-color:#2563eb;}
 #tip{margin-bottom:16px;color:#333;font-size:15px;}
+/* ========== iframe容器sticky ========== */
 .iframe-container {
     display: flex;
     gap: 20px;
@@ -54,57 +55,44 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
 }
 .iframe-wrap {
     flex: 1;
-    height: calc(100vh - 20px);
+    height: calc(100vh - 50px);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     background: #fff;
-    /* 新增：纵向弹性盒子，自动分配空间 */
-    display: flex;
-    flex-direction: column;
 }
-.iframe-title {
-    padding: 12px;
-    text-align: center;
-    font-weight:500;
+.iframe-wrap .iframe-title{
+    flex: 0 0 auto;
+    padding: 10px;
+    background:#f8fafc;
     border-bottom:1px solid #e2e8f0;
-    /* 标题不压缩，保持自身高度 */
-    flex-shrink: 0;
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    color:#1e293b;
 }
 .iframe-wrap iframe {
+    flex: 1;
     width: 100%;
-    /* 剩余所有高度全部给iframe，不用手动减像素！ */
-    flex-grow: 1;
     border: none;
     overflow: auto;
 }
 @media(max-width:1024px){
-    body{
-        margin:0;
-        padding:0;
-        overflow-x:hidden;
-    }
     .iframe-container{
         flex-direction:column;
-        top:0;
-        height: 100vh;
-        gap: 6px;
+        top:5px;
+        gap:12px;
     }
     .iframe-wrap{
-        flex: 1;
-        width: 100%;
-    }
-    /* 核心新增：iframe内部溢出自动滚动 */
-    .iframe-wrap iframe{
-        overflow:auto;
+        height:calc(100vh - 130px);
     }
 }
-
-
-
 </style>
 </head>
 <body>
+    
 <div class="header-row">
   <a href="index.html" class="back-home">← 返回首页</a>
   <h1>📊 仓库+物流商+周 多条件横向对比</h1>
@@ -187,11 +175,11 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
 <!-- iframe容器，带标题栏 -->
 <div class="iframe-container">
     <div class="iframe-wrap">
-        <div class="iframe-title" id="titleA"></div>
+        <div class="iframe-title" id="titleA">待选择仓库+物流+周</div>
         <iframe id="iframeA"></iframe>
     </div>
     <div class="iframe-wrap">
-        <div class="iframe-title" id="titleB"></div>
+        <div class="iframe-title" id="titleB">待选择仓库+物流+周</div>
         <iframe id="iframeB"></iframe>
     </div>
 </div>
@@ -204,11 +192,9 @@ const wareFolderMap = {
   "O总仓": "ware-O",
   "F总仓": "ware-F"
 };
-
 // 存储A、B两组选中项
 let A = {ware:null, logi:null, week:null, suffix:null};
 let B = {ware:null, logi:null, week:null, suffix:null};
-
 // 通用绑定函数
 function bindGroup(btnGroupId, targetObj, keyName, extraKey=null){
     const btns = document.querySelectorAll(`#${btnGroupId} .filter-btn`);
@@ -224,12 +210,10 @@ function bindGroup(btnGroupId, targetObj, keyName, extraKey=null){
         }
     })
 }
-
 // 绑定所有按钮组
 bindGroup("groupA_week", A, "week", "suffix");
 bindGroup("groupA_ware", A, "ware");
 bindGroup("groupA_logi", A, "logi");
-
 bindGroup("groupB_ware", B, "ware");
 bindGroup("groupB_logi", B, "logi");
 bindGroup("groupB_week", B, "week", "suffix");
@@ -243,19 +227,17 @@ function refreshStatus(){
 
     // A组拼接路径
     if(A.ware && A.logi && A.week){
-        const textA = `${A.ware}｜${A.logi}｜${A.week}`;<!-- 拼接页面上显示的标题文字（iframe上方标题栏） -->
+        const textA = `${A.ware}｜${A.logi}｜${A.week}`;
         titleA.innerText = textA;
-        const monthFolderA = `warehouses${A.suffix}`;   <!-- 给别人看的展示文字 -->
+        const monthFolderA = `warehouses${A.suffix}`;
         const wareSubFolderA = wareFolderMap[A.ware];
-        const logiLowA = A.logi.toLowerCase();    <!--  物流商转小写，匹配你文件小写命名 dhl，不是DHL -->
-        const urlA = `warehouses_week/${monthFolderA}/${wareSubFolderA}/${A.ware}_${logiLowA}${A.suffix}.html`;  <!-- 1.monthFolderA = `warehouses_August_weekly`2.wareSubFolderA = `ware-A`3.A.ware = `A总仓`4.logiLowA = `dhl`5.A.weeksuffix = `_August_weekly` -->
+        const logiLowA = A.logi.toLowerCase();
+        const urlA = `warehouses_week/${monthFolderA}/${wareSubFolderA}/${A.ware}_${logiLowA}${A.suffix}.html`;
         iframeA.src = urlA;
     }else{
-        const textA = "待选择仓库+物流+周";
-        titleA.innerText = textA;
+        titleA.innerText = "待选择仓库+物流+周";
         iframeA.src = "";
     }
-
     // B组拼接路径
     if(B.ware && B.logi && B.week){
         const textB = `${B.ware}｜${B.logi}｜${B.week}`;
@@ -266,13 +248,11 @@ function refreshStatus(){
         const urlB = `warehouses_week/${monthFolderB}/${wareSubFolderB}/${B.ware}_${logiLowB}${B.suffix}.html`;
         iframeB.src = urlB;
     }else{
-        const textB = "待选择仓库+物流+周";
-        titleB.innerText = textB;
+        titleB.innerText = "待选择仓库+物流+周";
         iframeB.src = "";
     }
-
     //顶部提示文字
-    const textTip = `A:${A.ware?""+A.ware+"｜"+A.logi+"｜"+A.week:"未选择"}｜B:${B.ware?""+B.ware+"｜"+B.logi+"｜"+B.week:"未选择"}`;
+    const textTip = `A:${A.ware ? `${A.ware}｜${A.logi}｜${A.week}` : "未选择"} ｜ B:${B.ware ? `${B.ware}｜${B.logi}｜${B.week}` : "未选择"}`;
     tip.innerText = textTip;
 }
 </script>
