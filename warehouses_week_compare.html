@@ -79,14 +79,28 @@ h4{font-size:16px;color:#475569;margin:10px 0 12px;}
     overflow: auto;
 }
 @media(max-width:1024px){
+    body{
+        margin:0;
+        padding:0;
+        overflow-x:hidden;
+    }
     .iframe-container{
         flex-direction:column;
-        top:5px;
+        top:0;
+        height: 100vh;
+        gap: 6px;
     }
     .iframe-wrap{
-        height:calc(100vh - 80px);
+        flex: 1;
+        width: 100%;
+    }
+    /* 核心新增：iframe内部溢出自动滚动 */
+    .iframe-wrap iframe{
+        overflow:auto;
     }
 }
+
+
 
 </style>
 </head>
