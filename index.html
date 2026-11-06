@@ -69,13 +69,14 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 <body>
 <h1>📦 物流数据看板入口</h1>
 <div style="display:flex;gap:16px;justify-content:center;margin-bottom:24px;">
-  <a href="?year=2026" style="width:360px;padding:14px;background:#2563eb;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
+  <a class="year-btn" href="?year=2026" data-year="2026" style="width:360px;padding:14px;background:#3b82f6;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
     📅 2026 年度看板
   </a>
-  <a href="?year=2027" style="width:360px;padding:14px;background:#2563eb;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
+  <a class="year-btn" href="?year=2027" data-year="2027" style="width:360px;padding:14px;background:#3b82f6;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
     📅 2027 年度看板
   </a>
 </div>
+
 
 <div class="item" onclick="toggleMenu('menuWeek')">📅 周报表 report_weekly</div>
 <div class="submenu" id="menuWeek">
@@ -319,6 +320,13 @@ document.querySelectorAll("a").forEach(a => {
   if (href.includes(".html")) {
     const sep = href.includes("?") ? "&" : "?";
     a.setAttribute("href", href + sep + "year=" + currentYear);
+  }
+});
+// 年份按钮高亮
+document.querySelectorAll(".year-btn").forEach(btn => {
+  if (btn.dataset.year === currentYear) {
+    btn.style.background = "#6b7280";
+    btn.style.color = "#ffffff";
   }
 });
 
