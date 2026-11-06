@@ -355,15 +355,7 @@ if (currentYear !== "2026") {
   }
 }
   
-// 给所有跳转报表的链接自动追加 ?year=xxxx
-document.querySelectorAll("a").forEach(a => {
-  const href = a.getAttribute("href");
-  if (!href || href.startsWith("?")) return;
-  if (href.includes(".html")) {
-    const sep = href.includes("?") ? "&" : "?";
-    a.setAttribute("href", href + sep + "year=" + currentYear);
-  }
-});
+
 // 年份按钮高亮：选中项变蓝色
 document.querySelectorAll(".year-btn").forEach(btn => {
   if (btn.dataset.year === currentYear) {
