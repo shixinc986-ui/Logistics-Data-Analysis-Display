@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物流数据看板入口</title>
+<link rel="icon" href="favicon-32×32.png" type="image/x-icon">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Microsoft YaHei,sans-serif;}
+
+body{background:#f5f7fa;padding:40px 20px;max-width:620px;margin:0 auto;}
+h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight:600;}
+  
+.item {display:block;text-align:center;text-decoration:none;padding:16px 24px;margin:14px 0;background:#2563eb;color:#fff;border-radius:10px;font-size:17px;transition:0.25s;cursor:pointer;box-shadow:0 2px 6px #00000018;}
+.item:hover {background:#1d4ed8;transform:translateY (-2px);box-shadow:0 4px 10px #00000022;}
+
+.submenu {
+  display:none; 
+  margin:8px 0 8px 20px;
+  padding:0 12px 12px 12px;
+}
+  
+.submenu a {display:block;text-align:center;padding:12px;margin:8px 0;background:#ffffff;color:#2563eb;border-radius:8px;text-decoration:none;border:1px solid #2563eb;font-size:16px;transition:0.2s;}
+.submenu a:hover {background:#eff6ff;}
+  
+.item-sub {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  margin: 8px 0;
+  background: #dbeafe;
+  color: #1e3a8a;
+  border: 1px solid #d9e6ff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+.item-sub:hover {
+  background: #dbeafe;
+  border-color: #bfdbfe;
+}
+/* 三级子菜单（每个物流商点开后的周/月报表链接） */
+.submenu.level3 a{
+  display:block;
+  text-align:center;
+  padding:10px;
+  margin:6px 0;
+  background:#ffffff;
+  color:#2563eb;
+  border-radius:8px;
+  text-decoration:none;
+  border:1px solid #2563eb;
+  font-size:15px;
+  transition:0.2s;
+}
+.submenu.level3 a:hover{
+  background:#eff6ff;
+}
+.submenu.level3{
+  margin-left:40px;
+}
+.item-sub{
+  cursor:pointer;
+}
+  
+</style>
+</head>
+<body>
+<h1>📦 物流数据看板入口</h1>
+<div style="display:flex;gap:16px;justify-content:center;margin-bottom:24px;">
+  <a class="year-btn" href="./" data-year="2026" style="width:360px;padding:14px;background:#6b7280;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
+    📅 2026 年度看板
+  </a>
+  <a class="year-btn" href="2027/index.html" data-year="2027" style="width:360px;padding:14px;background:#6b7280;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
+    📅 2027 年度看板
+  </a>
+</div>
+
+
+<div class="item" onclick="toggleMenu('menuWeek')">📅 周报表 report_weekly</div>
+<div class="submenu" id="menuWeek">
+  <a href="weekly_report/October_report_weekly.html">10月周报表</a>
+  <a href="weekly_report/Septemper_report_weekly.html">9月周报表</a>
+  <a href="weekly_report/August_report_weekly.html">8月周报表</a>  
+</div>
+<div class="item" onclick="toggleMenu('menuMonth')">📊 月报表 report_monthly</div>
+<div class="submenu" id="menuMonth">
+  <a href="cross_month_comparison.html">跨月横向对比</a>
+  <a href="monthly_report/monthly_9.html">9.1-9.30月报表</a>
+  <a href="monthly_report/monthly_8.html">8.1-8.31月报表</a>
+  <a href="monthly_report/monthly_7.html">7.1-7.31月报表</a>
+</div>
+   
+
+<div id="warehouseMenuRoot"></div>
+<script>
+// ========== 英仓报表菜单（全部为周报表） ==========
+const warehouseList = [
+  {id:"A", displayName:"A总仓"},
+  {id:"M", displayName:"M总仓"},
+  {id:"B", displayName:"B总仓"},
+  {id:"O", displayName:"O总仓"},
+  {id:"F", displayName:"F总仓"},
+];
+const logisticsList = [
+  {id:"dhl", name:"DHL"},
+  {id:"dx", name:"DX"},
+  {id:"evri", name:"Evri"},
+  {id:"extra_large_parcel_courier", name:"Extra Large Parcel Courier"},
+  {id:"fedex", name:"Fedex"},
+  {id:"royalmail(菜鸟)", name:"Royalmail(菜鸟)"},
+  {id:"sd", name:"SD"},
+  {id:"yodel(菜鸟)", name:"yodel(菜鸟)"},
+  {id:"eda_dpd", name:"EDA DPD"}
+];
+// 顺序：10月周报表 →9月周报表 →8月周报表
+const monthList = [
+  {name:"10月周报表", folder:"warehouses_week/warehouses_October_weekly", suffix:"_October_weekly"},
+  {name:"9月周报表", folder:"warehouses_week/warehouses_September_weekly", suffix:"_September_weekly"},
+  {name:"8月周报表", folder:"warehouses_week/warehouses_August_weekly", suffix:"_August_weekly"},
+];
+
+function renderWarehouseMenu(){
+  let html = "";
+  html += `<div class="item" onclick="toggleMenu('menuwarehouse')">🏭 各英仓报表 British_warehouses_report</div>`;
+  html += `<div class="submenu" id="menuwarehouse">`;
+
+  // ========== 新增：【仓库-物流-周对比看板】放在最上方，和5个仓库平齐 ==========
+  html += `<div class="item-sub" style="text-align:center;" onclick="location.href='warehouses_week_compare.html'">📊 仓库+物流+周 多条件横向对比</div>`;
+
+  // 原有5个仓库循环不变
+  warehouseList.forEach(ware=>{
+    const wareMenuId = `menu_${ware.id}`;
+    html += `<div class="item-sub" onclick="toggleMenu('${wareMenuId}')">🏬 ${ware.displayName}</div>`;
+    html += `<div class="submenu" id="${wareMenuId}">`;
+
+    monthList.forEach(m=>{
+      const monthMenuId = `menu_${ware.id}_${m.folder}`;
+      html += `<div class="item-sub" onclick="toggleMenu('${monthMenuId}')">📅 ${m.name}</div>`;
+      html += `<div class="submenu" id="${monthMenuId}">`;
+
+      logisticsList.forEach(logi=>{
+        const fileName = `${ware.displayName}_${logi.id}${m.suffix}.html`;
+        const url = `${m.folder}/ware-${ware.id}/${fileName}`;
+        html += `<a class="sub-item" href="${url}">${logi.name}</a>`;
+      })
+      html += `</div>`;
+    })
+    html += `</div>`;
+  })
+  html += `</div>`;
+  document.getElementById("warehouseMenuRoot").innerHTML = html;
+}
+// 页面加载完成渲染
+document.addEventListener('DOMContentLoaded', function(){
+  renderWarehouseMenu();
+})
+</script>
+
+
+
+
+<div class="item" onclick="toggleMenu('menuproviders')">🚚 各物流商报表 All_providers_report</div>
+<!-- ========== 所有物流商全部放在这个menuproviders容器里面 ========== -->
+<div class="submenu" id="menuproviders">
+  <div class="item-sub" onclick="location.href='providers_compare_monthly.html'">📊 物流商+月份 双条件横向对比</div>
+  <div class="item-sub" onclick="location.href='Weekly_Pickup&Delivery_Anomaly_Trend_Monitoring.html'">周度揽件 & 签收异常趋势监控</div>
+  <div class="item-sub" onclick="toggleMenu('menuDHL')">DHL物流商看板 ▾</div>
+  <div class="submenu level3" id="menuDHL">
+    <div class="item-sub" onclick="toggleMenu('menuDHLWeekly')">📅 周报表 ▾</div>
+    <div class="submenu level4" id="menuDHLWeekly">
+    <a href="prov_report_week/prov_report_October_weekly/dhl_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/dhl_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/dhl_August_weekly.html">8月周报表</a>
+  </div>      
+  <div class="item-sub" onclick="toggleMenu('menuDHLMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <div class="submenu level4" id="menuDHLMonthly">
+    <a href="prov_report_month/prov_report_September/dhl_September.html">9月报表</a>
+    <a href="prov_report_month/prov_report_August/dhl_August.html">8月报表</a>
+    <a href="prov_report_month/prov_report_July/dhl_July.html">7月报表</a>
+  </div>  
+</div>
+
+  <div class="item-sub" onclick="toggleMenu('menuDX')">DX物流商看板 ▾</div>
+  <div class="submenu level3" id="menuDX">
+    <div class="item-sub" onclick="toggleMenu('menuDXWeekly')">📅 周报表 ▾</div>
+    <div class="submenu level4" id="menuDXWeekly">
+    <a href="prov_report_week/prov_report_October_weekly/dx_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/dx_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/dx_August_weekly.html">8月周报表</a>
+  </div>  
+  <div class="item-sub" onclick="toggleMenu('menuDXMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <div class="submenu level4" id="menuDXMonthly">
+    <a href="prov_report_month/prov_report_September/dx_September.html">9月报表</a>
+    <a href="prov_report_month/prov_report_August/dx_August.html">8月报表</a>
+    <a href="prov_report_month/prov_report_July/dx_July.html">7月报表</a>
+  </div>  
+</div>
+  
+  <div class="item-sub" onclick="toggleMenu('menuSD')">SD物流商看板 ▾</div>
+  <div class="submenu level3" id="menuSD">
+    <div class="item-sub" onclick="toggleMenu('menuSDWeekly')">📅 周报表 ▾</div>
+    <div class="submenu level4" id="menuSDWeekly">
+    <a href="prov_report_week/prov_report_October_weekly/sd_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/sd_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/sd_August_weekly.html">8月周报表</a> 
+ </div>  
+  <div class="item-sub" onclick="toggleMenu('menuSDMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <div class="submenu level4" id="menuSDMonthly">
+    <a href="prov_report_month/prov_report_September/sd_September.html">9月报表</a>
+    <a href="prov_report_month/prov_report_August/sd_August.html">8月报表</a>
+    <a href="prov_report_month/prov_report_July/sd_July.html">7月报表</a>
+  </div>  
+ </div>
+
+  <div class="item-sub" onclick="toggleMenu('menuEvri')">Evri物流商看板 ▾</div>
+  <div class="submenu level3" id="menuEvri">
+    <div class="item-sub" onclick="toggleMenu('menuEvriWeekly')">📅 周报表 ▾</div>
+    <div class="submenu level4" id="menuEvriWeekly">
+    <a href="prov_report_week/prov_report_October_weekly/evri_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/evri_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/evri_August_weekly.html">8月周报表</a> 
+  </div>  
+  <div class="item-sub" onclick="toggleMenu('menuEvriMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <div class="submenu level4" id="menuEvriMonthly">
+    <a href="prov_report_month/prov_report_September/evri_September.html">9月报表</a>
+    <a href="prov_report_month/prov_report_August/evri_August.html">8月报表</a>
+    <a href="prov_report_month/prov_report_July/evri_July.html">7月报表</a>
+  </div>  
+ </div>
+
+  <div class="item-sub" onclick="toggleMenu('menufedex')">Fedex物流商看板 ▾</div>
+  <div class="submenu level3" id="menufedex">
+    <div class="item-sub" onclick="toggleMenu('menufedexWeekly')">📅 周报表 ▾</div>
+    <div class="submenu level4" id="menufedexWeekly">
+    <a href="prov_report_week/prov_report_October_weekly/fedex_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/fedex_September_weekly.html">9月周报表</a> 
+    <a href="prov_report_week/prov_report_August_weekly/fedex_August_weekly.html">8月周报表</a>
+  </div>  
+  <div class="item-sub" onclick="toggleMenu('menufedexMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <div class="submenu level4" id="menufedexMonthly">
+    <a href="prov_report_month/prov_report_September/fedex_September.html">9月报表</a>
+    <a href="prov_report_month/prov_report_August/fedex_August.html">8月报表</a>
+    <a href="prov_report_month/prov_report_July/fedex_July.html">7月报表</a>
+  </div>  
+ </div>
+
+  <div class="item-sub" onclick="toggleMenu('menuRoyalmail')">Royalmail(菜鸟)物流商看板 ▾</div>
+  <div class="submenu level3" id="menuRoyalmail">
+    <div class="item-sub" onclick="toggleMenu('menuRoyalmailWeekly')">📅 周报表 ▾</div>
+    <div class="submenu level4" id="menuRoyalmailWeekly">
+    <a href="prov_report_week/prov_report_October_weekly/royalmail(菜鸟)_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/royalmail(菜鸟)_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/royalmail(菜鸟)_August_weekly.html">8月周报表</a>
+  </div>  
+  <div class="item-sub" onclick="toggleMenu('menuRoyalmailMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <div class="submenu level4" id="menuRoyalmailMonthly">
+    <a href="prov_report_month/prov_report_September/royalmail(菜鸟)_September.html">9月报表</a>
+    <a href="prov_report_month/prov_report_August/royalmail(菜鸟)_August.html">8月报表</a>
+    <a href="prov_report_month/prov_report_July/royalmail(菜鸟)_July.html">7月报表</a>
+  </div>  
+ </div>
+
+  <div class="item-sub" onclick="toggleMenu('menuYodel')">yodel(菜鸟)物流商看板 ▾</div>
+  <div class="submenu level3" id="menuYodel">
+    <div class="item-sub" onclick="toggleMenu('menuYodelWeekly')">📅 周报表 ▾</div>
+    <div class="submenu level4" id="menuYodelWeekly">
+    <a href="prov_report_week/prov_report_October_weekly/yodel(菜鸟)_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/yodel(菜鸟)_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/yodel(菜鸟)_August_weekly.html">8月周报表</a>
+  </div>  
+  <div class="item-sub" onclick="toggleMenu('menuYodelMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <div class="submenu level4" id="menuYodelMonthly">
+    <a href="prov_report_month/prov_report_September/yodel(菜鸟)_September.html">9月报表</a>
+    <a href="prov_report_month/prov_report_August/yodel(菜鸟)_August.html">8月报表</a>
+    <a href="prov_report_month/prov_report_July/yodel(菜鸟)_July.html">7月报表</a>
+  </div>  
+ </div>  
+
+  <div class="item-sub" onclick="toggleMenu('menuextra_large_parcel_courier')">Extra Large Parcel Courier物流商看板 ▾</div>
+  <div class="submenu level3" id="menuextra_large_parcel_courier">
+    <div class="item-sub" onclick="toggleMenu('menuextra_large_parcel_courierWeekly')">📅 周报表 ▾</div>
+    <div class="submenu level4" id="menuextra_large_parcel_courierWeekly">
+    <a href="prov_report_week/prov_report_October_weekly/extra_large_parcel_courier_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/extra_large_parcel_courier_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/extra_large_parcel_courier_August_weekly.html">8月周报表</a>
+  </div>  
+  <div class="item-sub" onclick="toggleMenu('menuextra_large_parcel_courierMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <div class="submenu level4" id="menuextra_large_parcel_courierMonthly">
+    <a href="prov_report_month/prov_report_September/extra_large_parcel_courier_September.html">9月报表</a>
+    <a href="prov_report_month/prov_report_August/extra_large_parcel_courier_August.html">8月报表</a>
+    <a href="prov_report_month/prov_report_July/extra_large_parcel_courier_July.html">7月报表</a>
+  </div>  
+ </div>   
+
+<div class="item-sub" onclick="toggleMenu('menueda_dpd')">EDA DPD物流商看板 ▾</div>
+  <div class="submenu level3" id="menueda_dpd">
+    <div class="item-sub" onclick="toggleMenu('menueda_dpdWeekly')">📅 周报表 ▾</div>
+    <div class="submenu level4" id="menueda_dpdWeekly">
+    <a href="prov_report_week/prov_report_August_weekly/eda_dpd_August_weekly.html">8月周报表</a>
+  </div>   
+  <div class="item-sub" onclick="toggleMenu('menueda_dpdMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <div class="submenu level4" id="menueda_dpdMonthly">
+    <a href="prov_report_month/prov_report_July/eda_dpd_July.html">7月报表</a>
+  </div>  
+ </div>   
+  
+</div>  <!-- 在这里才关闭menuproviders！！ -->
+  
+<script>
+// 获取 url 上的年份，默认 2026
+const urlParams = new URLSearchParams(location.search);
+const currentYear = urlParams.get("year") || "2026";
+
+// 未来新增年份的数据放这里
+const YEAR_EXT = {
+  "2027": {
+    weekList: [],
+    monthList: []
+  }
+};
+
+if (currentYear !== "2026") {
+  const wEl = document.getElementById("menuWeek");
+  const mEl = document.getElementById("menuMonth");
+  const cfg = YEAR_EXT[currentYear] ?? { weekList: [], monthList: [] };
+
+  // 清空静态内容
+  wEl.innerHTML = "";
+  mEl.innerHTML = "";
+
+  if (cfg.weekList.length > 0) {
+    cfg.weekList.forEach(item => {
+      const a = document.createElement("a");
+      const sep = item.href.includes("?") ? "&" : "?";
+      a.href = item.href + sep + "year=" + currentYear;
+      a.innerText = item.label;
+      wEl.appendChild(a);
+    });
+  } else {
+    wEl.innerHTML = `<span style="padding:8px 12px;color:#666;">暂无该年份周报表</span>`;
+  }
+
+  if (cfg.monthList.length > 0) {
+    cfg.monthList.forEach(item => {
+      const a = document.createElement("a");
+      const sep = item.href.includes("?") ? "&" : "?";
+      a.href = item.href + sep + "year=" + currentYear;
+      a.innerText = item.label;
+      mEl.appendChild(a);
+    });
+  } else {
+    mEl.innerHTML = `<span style="padding:8px 12px;color:#666;">暂无该年份月报表</span>`;
+  }
+}
+  
+
+// 年份按钮高亮：选中项变蓝色
+document.querySelectorAll(".year-btn").forEach(btn => {
+  if (btn.dataset.year === currentYear) {
+    btn.style.background = "#3b82f6";
+    btn.style.color = "#ffffff";
+  }
+});
+
+
+function toggleMenu(menuId){
+  const menu = document.getElementById(menuId);
+  if(menu.style.display === "block"){
+    menu.style.display = "none";
+  }else{
+    menu.style.display = "block";
+  }
+}
+ 
+</script>
+</body>
+</html>
