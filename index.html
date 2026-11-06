@@ -309,53 +309,6 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>  <!-- 在这里才关闭menuproviders！！ -->
   
 <script>
-// 获取 url 上的年份，默认 2026
-const urlParams = new URLSearchParams(location.search);
-const currentYear = urlParams.get("year") || "2026";
-
-// 未来新增年份的数据放这里
-const YEAR_EXT = {
-  "2027": {
-    weekList: [],
-    monthList: []
-  }
-};
-
-if (currentYear !== "2026") {
-  const wEl = document.getElementById("menuWeek");
-  const mEl = document.getElementById("menuMonth");
-  const cfg = YEAR_EXT[currentYear] ?? { weekList: [], monthList: [] };
-
-  // 清空静态内容
-  wEl.innerHTML = "";
-  mEl.innerHTML = "";
-
-  if (cfg.weekList.length > 0) {
-    cfg.weekList.forEach(item => {
-      const a = document.createElement("a");
-      const sep = item.href.includes("?") ? "&" : "?";
-      a.href = item.href + sep + "year=" + currentYear;
-      a.innerText = item.label;
-      wEl.appendChild(a);
-    });
-  } else {
-    wEl.innerHTML = `<span style="padding:8px 12px;color:#666;">暂无该年份周报表</span>`;
-  }
-
-  if (cfg.monthList.length > 0) {
-    cfg.monthList.forEach(item => {
-      const a = document.createElement("a");
-      const sep = item.href.includes("?") ? "&" : "?";
-      a.href = item.href + sep + "year=" + currentYear;
-      a.innerText = item.label;
-      mEl.appendChild(a);
-    });
-  } else {
-    mEl.innerHTML = `<span style="padding:8px 12px;color:#666;">暂无该年份月报表</span>`;
-  }
-}
-  
-
 // 年份按钮高亮：选中项变蓝色
 document.querySelectorAll(".year-btn").forEach(btn => {
   if (btn.dataset.year === currentYear) {
