@@ -68,14 +68,13 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 </head>
 <body>
 <h1>📦 物流数据看板入口</h1>
-<div style="display:flex;gap:16px;justify-content:center;margin-bottom:24px;">
-  <a class="year-btn" href="?year=2026" data-year="2026" style="width:360px;padding:14px;background:#6b7280;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
-    2026 年度看板
-  </a>
-  <a class="year-btn" href="?year=2027" data-year="2027" style="width:360px;padding:14px;background:#6b7280;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
-    2027 年度看板
-  </a>
-</div>
+<a class="year-btn" href="menu_warehouse.html?year=2026" data-year="2026" style="width:360px;padding:14px;background:#6b7280;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 8px #00000014;">
+  2026 年度看板
+</a>
+<a class="year-btn" href="menu_warehouse_2027.html?year=2027" data-year="2027" style="width:360px;padding:14px;background:#6b7280;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 8px #00000014;">
+  2027 年度看板
+</a>
+
 
 
 <div class="item" onclick="toggleMenu('menuWeek')">📅 周报表 report_weekly</div>
@@ -313,6 +312,48 @@ document.addEventListener('DOMContentLoaded', function(){
 const urlParams = new URLSearchParams(location.search);
 const currentYear = urlParams.get("year") || "2026";
 
+// 未来新增年份的数据放这里
+const YEAR_EXT = {
+  "2027": {
+    weekList: [],
+    monthList: []
+  }
+};
+
+if (currentYear !== "2026") {
+  const wEl = document.getElementById("menuWeek");
+  const mEl = document.getElementById("menuMonth");
+  const cfg = YEAR_EXT[currentYear] ?? { weekList: [], monthList: [] };
+
+  // 清空静态内容
+  wEl.innerHTML = "";
+  mEl.innerHTML = "";
+
+  if (cfg.weekList.length > 0) {
+    cfg.weekList.forEach(item => {
+      const a = document.createElement("a");
+      const sep = item.href.includes("?") ? "&" : "?";
+      a.href = item.href + sep + "year=" + currentYear;
+      a.innerText = item.label;
+      wEl.appendChild(a);
+    });
+  } else {
+    wEl.innerHTML = `<span style="padding:8px 12px;color:#666;">暂无该年份周报表</span>`;
+  }
+
+  if (cfg.monthList.length > 0) {
+    cfg.monthList.forEach(item => {
+      const a = document.createElement("a");
+      const sep = item.href.includes("?") ? "&" : "?";
+      a.href = item.href + sep + "year=" + currentYear;
+      a.innerText = item.label;
+      mEl.appendChild(a);
+    });
+  } else {
+    mEl.innerHTML = `<span style="padding:8px 12px;color:#666;">暂无该年份月报表</span>`;
+  }
+}
+  
 // 给所有跳转报表的链接自动追加 ?year=xxxx
 document.querySelectorAll("a").forEach(a => {
   const href = a.getAttribute("href");
