@@ -68,6 +68,15 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 </head>
 <body>
 <h1>📦 物流数据看板入口</h1>
+<div style="display:flex;gap:16px;justify-content:center;margin-bottom:24px;">
+  <a href="?year=2026" style="width:360px;padding:14px;background:#2563eb;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
+    📅 2026 年度看板
+  </a>
+  <a href="?year=2027" style="width:360px;padding:14px;background:#2563eb;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
+    📅 2027 年度看板
+  </a>
+</div>
+
 <div class="item" onclick="toggleMenu('menuWeek')">📅 周报表 report_weekly</div>
 <div class="submenu" id="menuWeek">
   <a href="weekly_report/October_report_weekly.html">10月周报表</a>
@@ -299,6 +308,20 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>  <!-- 在这里才关闭menuproviders！！ -->
   
 <script>
+// 获取 url 上的年份，默认 2026
+const urlParams = new URLSearchParams(location.search);
+const currentYear = urlParams.get("year") || "2026";
+
+// 给所有跳转报表的链接自动追加 ?year=xxxx
+document.querySelectorAll("a").forEach(a => {
+  const href = a.getAttribute("href");
+  if (!href || href.startsWith("?")) return;
+  if (href.includes(".html")) {
+    const sep = href.includes("?") ? "&" : "?";
+    a.setAttribute("href", href + sep + "year=" + currentYear);
+  }
+});
+
 function toggleMenu(menuId){
   const menu = document.getElementById(menuId);
   if(menu.style.display === "block"){
@@ -307,9 +330,7 @@ function toggleMenu(menuId){
     menu.style.display = "block";
   }
 }
-
-
-  
+ 
 </script>
 </body>
 </html>
