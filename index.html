@@ -309,6 +309,13 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>  <!-- 在这里才关闭menuproviders！！ -->
   
 <script>
+
+let currentYear;
+if (location.pathname.includes("/2027/")) {
+  currentYear = "2027";
+} else {
+  currentYear = "2026";
+}
 // 年份按钮高亮：选中项变蓝色
 document.querySelectorAll(".year-btn").forEach(btn => {
   if (btn.dataset.year === currentYear) {
