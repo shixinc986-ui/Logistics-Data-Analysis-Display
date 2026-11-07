@@ -78,13 +78,13 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 </div>
 
 
-<div class="item" onclick="toggleMenu('menuWeek')">📅 周报表 report_weekly</div>
+<div class="item" onclick="togglePrimaryMenu('menuWeek')">📅 周报表 report_weekly</div>
 <div class="submenu" id="menuWeek">
   <a href="weekly_report/October_report_weekly.html">10月周报表</a>
   <a href="weekly_report/Septemper_report_weekly.html">9月周报表</a>
   <a href="weekly_report/August_report_weekly.html">8月周报表</a>  
 </div>
-<div class="item" onclick="toggleMenu('menuMonth')">📊 月报表 report_monthly</div>
+<div class="item" onclick="togglePrimaryMenu('menuMonth')">📊 月报表 report_monthly</div>
 <div class="submenu" id="menuMonth">
   <a href="cross_month_comparison.html">跨月横向对比</a>
   <a href="monthly_report/monthly_9.html">9.1-9.30月报表</a>
@@ -123,7 +123,7 @@ const monthList = [
 
 function renderWarehouseMenu(){
   let html = "";
-  html += `<div class="item" onclick="toggleMenu('menuwarehouse')">🏭 各英仓报表 British_warehouses_report</div>`;
+  html += `<div class="item" onclick="togglePrimaryMenu('menuwarehouse')">🏭 各英仓报表 British_warehouses_report</div>`;
   html += `<div class="submenu" id="menuwarehouse">`;
 
   // ========== 新增：【仓库-物流-周对比看板】放在最上方，和5个仓库平齐 ==========
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
-<div class="item" onclick="toggleMenu('menuproviders')">🚚 各物流商报表 All_providers_report</div>
+<div class="item" onclick="togglePrimaryMenu('menuproviders')">🚚 各物流商报表 All_providers_report</div>
 <!--↑需要单独的按钮都在上面写，放到所有 `.submenu` 的外面 -->
 <!-- ========== 所有物流商全部放在这个menuproviders容器里面 ========== -->
 <div class="submenu" id="menuproviders">
@@ -324,17 +324,35 @@ document.querySelectorAll(".year-btn").forEach(btn => {
   }
 });
 // 按钮之间相互排斥
-function toggleMenu(menuId) {
+// 专门给【一级主菜单】用：互斥
+function togglePrimaryMenu(menuId) {
   const target = document.getElementById(menuId);
   if (!target) return;
   const isOpen = target.style.display === "block";
-  document.querySelectorAll(".submenu").forEach(el => {
-    el.style.display = "none";
+
+  // 只把所有一级子菜单收起来
+  const primaryIds = ["menuWeek", "menuMonth", "menuproviders"];
+  primaryIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = "none";
   });
+
   if (!isOpen) {
     target.style.display = "block";
   }
 }
+
+// 二级、三级、四级子菜单，只用这个：只管自己，不清理别人
+function toggleMenu(menuId) {
+  const menu = document.getElementById(menuId);
+  if (!menu) return;
+  if (menu.style.display === "block") {
+    menu.style.display = "none";
+  } else {
+    menu.style.display = "block";
+  }
+}
+
   
 /*
 function toggleMenu(menuId){
