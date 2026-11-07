@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 <div class="item" onclick="toggleMenu('menuproviders')">🚚 各物流商报表 All_providers_report</div>
-/* ↑需要单独的按钮都在上面写，放到所有 `.submenu` 的外面 */
+<!--↑需要单独的按钮都在上面写，放到所有 `.submenu` 的外面 -->
 <!-- ========== 所有物流商全部放在这个menuproviders容器里面 ========== -->
 <div class="submenu" id="menuproviders">
   <div class="item-sub" onclick="location.href='providers_compare_monthly.html'">📊 物流商+月份 双条件横向对比</div>
@@ -323,8 +323,19 @@ document.querySelectorAll(".year-btn").forEach(btn => {
     btn.style.color = "#ffffff";
   }
 });
-
-
+// 按钮之间相互排斥
+function toggleMenu(menuId) {
+  const target = document.getElementById(menuId);
+  if (!target) return;
+  const isOpen = target.style.display === "block";
+  document.querySelectorAll(".submenu").forEach(el => {
+    el.style.display = "none";
+  });
+  if (!isOpen) {
+    target.style.display = "block";
+  }
+}
+/*
 function toggleMenu(menuId){
   const menu = document.getElementById(menuId);
   if(menu.style.display === "block"){
@@ -333,6 +344,7 @@ function toggleMenu(menuId){
     menu.style.display = "block";
   }
 }
+/*
  
 </script>
 </body>
