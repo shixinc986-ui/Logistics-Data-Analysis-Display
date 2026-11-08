@@ -331,7 +331,7 @@ function togglePrimaryMenu(menuId) {
   const isOpen = target.style.display === "block";
 
   // 只把所有一级子菜单收起来
-  const primaryIds = ["menuWeek", "menuMonth", "menuproviders"];
+  const primaryIds = ["menuWeek", "menuMonth", "menuproviders","menuwarehouse"];
   primaryIds.forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = "none";
