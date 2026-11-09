@@ -310,19 +310,6 @@ document.addEventListener('DOMContentLoaded', function(){
 <div class="item" onclick="location.href='Weekly_Pickup&Delivery_Anomaly_Trend_Monitoring.html'">📈 周度揽件 & 签收异常趋势监控</div>
 <script>
 
-let currentYear;
-if (location.pathname.includes("/2027/")) {
-  currentYear = "2027";
-} else {
-  currentYear = "2026";
-}
-// 年份按钮高亮：选中项变蓝色
-document.querySelectorAll(".year-btn").forEach(btn => {
-  if (btn.dataset.year === currentYear) {
-    btn.style.background = "#3b82f6";
-    btn.style.color = "#ffffff";
-  }
-});
 // 按钮之间相互排斥
 // 专门给【一级主菜单】用：互斥
 function togglePrimaryMenu(menuId) {
@@ -375,10 +362,19 @@ function toggleWareMonthMenu(monthMenuId, wareMenuId) {
 }
 
 
-  // 切换当前月份
-  const target = document.getElementById(monthMenuId);
-  target.style.display = target.style.display === "block" ? "none" : "block";
+let currentYear;
+if (location.pathname.includes("/2027/")) {
+  currentYear = "2027";
+} else {
+  currentYear = "2026";
 }
+// 年份按钮高亮：选中项变蓝色
+document.querySelectorAll(".year-btn").forEach(btn => {
+  if (btn.dataset.year === currentYear) {
+    btn.style.background = "#3b82f6";
+    btn.style.color = "#ffffff";
+  }
+});
 
 
   
