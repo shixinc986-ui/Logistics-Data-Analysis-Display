@@ -132,7 +132,7 @@ function renderWarehouseMenu(){
   // 原有5个仓库循环不变
   warehouseList.forEach(ware=>{
     const wareMenuId = `menu_${ware.id}`;
-    html += `<div class="item-sub" onclick="toggleMenu('${wareMenuId}')">🏬 ${ware.displayName}</div>`;
+    html += `<div class="item-sub" onclick="toggleWarehouseMenu('${wareMenuId}')">🏬 ${ware.displayName}</div>`;
     html += `<div class="submenu" id="${wareMenuId}">`;
 
     monthList.forEach(m=>{
@@ -353,18 +353,27 @@ function toggleMenu(menuId) {
   }
 }
   
-function toggleWareMonthMenu(monthMenuId, parentWareId) {
-  // 拿到这个仓库下所有月份子菜单
-  const parentWareMenu = document.getElementById(parentWareId);
-  if (!parentWareMenu) return;
-
-  // 在当前仓库容器里面，把全部月份 submenu 收起来
-  const monthMenus = parentWareMenu.querySelectorAll(":scope > .submenu");
-  monthMenus.forEach(mm => {
-    if (mm.id !== monthMenuId) {
-      mm.style.display = "none";
-    }
+// 仓库层互斥：同一时间只展开一个仓库
+function toggleWarehouseMenu(wareMenuId) {
+  const allWareMenus = document.querySelectorAll("#menuwarehouse > .submenu");
+  allWareMenus.forEach(w => {
+    w.style.display = "none";
   });
+  const target = document.getElementById(wareMenuId);
+  target.style.display = target.style.display === "block" ? "none" : "block";
+}
+
+// 月份层互斥：同一仓库内只展开一个月份
+function toggleWareMonthMenu(monthMenuId, wareMenuId) {
+  const wareMenu = document.getElementById(wareMenuId);
+  const allMonthMenus = wareMenu.querySelectorAll(":scope > .submenu");
+  allMonthMenus.forEach(m => {
+    if (m.id !== monthMenuId) m.style.display = "none";
+  });
+  const target = document.getElementById(monthMenuId);
+  target.style.display = target.style.display === "block" ? "none" : "block";
+}
+
 
   // 切换当前月份
   const target = document.getElementById(monthMenuId);
