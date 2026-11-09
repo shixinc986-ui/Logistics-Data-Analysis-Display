@@ -137,7 +137,7 @@ function renderWarehouseMenu(){
 
     monthList.forEach(m=>{
       const monthMenuId = `menu_${ware.id}_${m.folder}`;
-      html += `<div class="item-sub" onclick="toggleWareMonthMenu('${monthMenuId}')">📅 ${m.name}</div>`;
+      html += `<div class="item-sub" onclick="toggleWareMonthMenu('${monthMenuId}', '${wareMenuId}')">📅 ${m.name}</div>`;
       html += `<div class="submenu" id="${monthMenuId}">`;
 
       logisticsList.forEach(logi=>{
@@ -353,19 +353,24 @@ function toggleMenu(menuId) {
   }
 }
   
-// 专门给英仓里面的月份报表：同组互斥
-function toggleWareMonthMenu(menuId) {
-  // 把英仓下面所有月份子菜单全部收起来
-  const allWareMonMenus = document.querySelectorAll("#menuwarehouse .submenu");
-  allWareMonMenus.forEach(m => {
-    if(m.id !== menuId) {
-      m.style.display = "none";
+function toggleWareMonthMenu(monthMenuId, parentWareId) {
+  // 拿到这个仓库下所有月份子菜单
+  const parentWareMenu = document.getElementById(parentWareId);
+  if (!parentWareMenu) return;
+
+  // 在当前仓库容器里面，把全部月份 submenu 收起来
+  const monthMenus = parentWareMenu.querySelectorAll(":scope > .submenu");
+  monthMenus.forEach(mm => {
+    if (mm.id !== monthMenuId) {
+      mm.style.display = "none";
     }
   });
-  // 再切换当前这一个
-  const menu = document.getElementById(menuId);
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
+
+  // 切换当前月份
+  const target = document.getElementById(monthMenuId);
+  target.style.display = target.style.display === "block" ? "none" : "block";
 }
+
 
   
 /*
