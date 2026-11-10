@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function(){
 <!-- ========== 所有物流商全部放在这个menuproviders容器里面 ========== -->
 <div class="submenu" id="menuproviders">
   <div class="item-sub" onclick="location.href='providers_compare_monthly.html'">🔍 物流商+月份 双条件横向对比</div>
-  <div class="item-sub" onclick="toggleMenu('menuDHL')">DHL物流商看板 ▾</div>
+  <div class="item-sub" onclick="toggleProviderMenu('menuDHL')">DHL物流商看板 ▾</div>
   <div class="submenu level3" id="menuDHL">
     <div class="item-sub" onclick="toggleMenu('menuDHLWeekly')">📅 周报表 ▾</div>
     <div class="submenu level4" id="menuDHLWeekly">
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>  
 </div>
 
-  <div class="item-sub" onclick="toggleMenu('menuDX')">DX物流商看板 ▾</div>
+  <div class="item-sub" onclick="toggleProviderMenu('menuDX')">DX物流商看板 ▾</div>
   <div class="submenu level3" id="menuDX">
     <div class="item-sub" onclick="toggleMenu('menuDXWeekly')">📅 周报表 ▾</div>
     <div class="submenu level4" id="menuDXWeekly">
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>  
 </div>
   
-  <div class="item-sub" onclick="toggleMenu('menuSD')">SD物流商看板 ▾</div>
+  <div class="item-sub" onclick="toggleProviderMenu('menuSD')">SD物流商看板 ▾</div>
   <div class="submenu level3" id="menuSD">
     <div class="item-sub" onclick="toggleMenu('menuSDWeekly')">📅 周报表 ▾</div>
     <div class="submenu level4" id="menuSDWeekly">
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>  
  </div>
 
-  <div class="item-sub" onclick="toggleMenu('menuEvri')">Evri物流商看板 ▾</div>
+  <div class="item-sub" onclick="toggleProviderMenu('menuEvri')">Evri物流商看板 ▾</div>
   <div class="submenu level3" id="menuEvri">
     <div class="item-sub" onclick="toggleMenu('menuEvriWeekly')">📅 周报表 ▾</div>
     <div class="submenu level4" id="menuEvriWeekly">
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>  
  </div>
 
-  <div class="item-sub" onclick="toggleMenu('menufedex')">Fedex物流商看板 ▾</div>
+  <div class="item-sub" onclick="toggleProviderMenu('menufedex')">Fedex物流商看板 ▾</div>
   <div class="submenu level3" id="menufedex">
     <div class="item-sub" onclick="toggleMenu('menufedexWeekly')">📅 周报表 ▾</div>
     <div class="submenu level4" id="menufedexWeekly">
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>  
  </div>
 
-  <div class="item-sub" onclick="toggleMenu('menuRoyalmail')">Royalmail(菜鸟)物流商看板 ▾</div>
+  <div class="item-sub" onclick="toggleProviderMenu('menuRoyalmail')">Royalmail(菜鸟)物流商看板 ▾</div>
   <div class="submenu level3" id="menuRoyalmail">
     <div class="item-sub" onclick="toggleMenu('menuRoyalmailWeekly')">📅 周报表 ▾</div>
     <div class="submenu level4" id="menuRoyalmailWeekly">
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>  
  </div>
 
-  <div class="item-sub" onclick="toggleMenu('menuYodel')">yodel(菜鸟)物流商看板 ▾</div>
+  <div class="item-sub" onclick="toggleProviderMenu('menuYodel')">yodel(菜鸟)物流商看板 ▾</div>
   <div class="submenu level3" id="menuYodel">
     <div class="item-sub" onclick="toggleMenu('menuYodelWeekly')">📅 周报表 ▾</div>
     <div class="submenu level4" id="menuYodelWeekly">
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>  
  </div>  
 
-  <div class="item-sub" onclick="toggleMenu('menuextra_large_parcel_courier')">Extra Large Parcel Courier物流商看板 ▾</div>
+  <div class="item-sub" onclick="toggleProviderMenu('menuextra_large_parcel_courier')">Extra Large Parcel Courier物流商看板 ▾</div>
   <div class="submenu level3" id="menuextra_large_parcel_courier">
     <div class="item-sub" onclick="toggleMenu('menuextra_large_parcel_courierWeekly')">📅 周报表 ▾</div>
     <div class="submenu level4" id="menuextra_large_parcel_courierWeekly">
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>  
  </div>   
 
-<div class="item-sub" onclick="toggleMenu('menueda_dpd')">EDA DPD物流商看板 ▾</div>
+<div class="item-sub" onclick="toggleProviderMenu('menueda_dpd')">EDA DPD物流商看板 ▾</div>
 <div class="submenu level3" id="menueda_dpd">
   <div class="item-sub" onclick="toggleMenu('menueda_dpdWeekly')">📅 周报表 ▾</div>
   <div class="submenu level4" id="menueda_dpdWeekly">
@@ -370,6 +370,24 @@ function toggleWareMonthMenu(monthMenuId, wareMenuId) {
   target.style.display = target.style.display === "block" ? "none" : "block";
 }
 
+// 物流商层互斥：同一时间只展开一个物流商看板
+function toggleProviderMenu(providerMenuId) {
+  const allProviderMenus = document.querySelectorAll("#menuproviders > .submenu");
+  allProviderMenus.forEach(p => { p.style.display = "none"; });
+  const target = document.getElementById(providerMenuId);
+  target.style.display = target.style.display === "block" ? "none" : "block";
+}
+
+// 周/月报表层互斥：同一物流商内，只展开周报表或月报表
+function toggleProviderTypeMenu(typeMenuId, parentProviderId) {
+  const parentMenu = document.getElementById(parentProviderId);
+  const allTypeMenus = parentMenu.querySelectorAll(":scope > .submenu");
+  allTypeMenus.forEach(t => {
+    if (t.id !== typeMenuId) t.style.display = "none";
+  });
+  const target = document.getElementById(typeMenuId);
+  target.style.display = target.style.display === "block" ? "none" : "block";
+}
 
 let currentYear;
 if (location.pathname.includes("/2027/")) {
