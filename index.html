@@ -40,6 +40,15 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
   background: #dbeafe;
   border-color: #bfdbfe;
 }
+/* 三个对比按钮统一用蓝色细线框包住 */
+.item-sub.compare-btn{
+  border:1px solid #3b82f6;
+  border-radius:8px;
+  padding:6px 8px;
+  background:#fff;
+  color:#2563eb;
+}
+
 /* 三级子菜单（每个物流商点开后的周/月报表链接） */
 .submenu.level3 a{
   display:block;
@@ -162,7 +171,9 @@ function renderWarehouseMenu(){
   html += `<div class="submenu" id="menuwarehouse">`;
 
   // ========== 新增：【仓库-物流-周对比看板】放在最上方，和5个仓库平齐 ==========
-  html += `<div class="item-sub" style="text-align:center;" onclick="location.href='warehouses_week_compare.html'">🔍 仓库+物流+周 多条件横向对比</div>`;
+  html += `<div class="item-sub compare-btn" style="text-align:center;" onclick="location.href='warehouses_week_compare.html'">仓库+物流商 | 跨周对比
+    <span class="tip-mark" data-tip="选择仓库、物流商、周后，对比两个仓库各物流不同周的物流时效">?</span>
+  </div>`;
 
   // 原有5个仓库循环不变
   warehouseList.forEach(ware=>{
@@ -202,7 +213,9 @@ document.addEventListener('DOMContentLoaded', function(){
 <!--↑需要单独的按钮都在上面写，放到所有 `.submenu` 的外面 -->
 <!-- ========== 所有物流商全部放在这个menuproviders容器里面 ========== -->
 <div class="submenu" id="menuproviders">
-  <div class="item-sub" onclick="location.href='providers_compare_monthly.html'">🔍 物流商+月份 双条件横向对比</div>
+  <div class="item-sub compare-btn" onclick="location.href='providers_compare_monthly.html'">物流商 | 跨月对比
+    <span class="tip-mark" data-tip="选择物流商、月份，对比两个两个物流两个月份的物流时效">?</span>
+  </div>
   <div class="item-sub" onclick="toggleProviderMenu('menuDHL')">DHL物流商看板 ▾</div>
   <div class="submenu level3" id="menuDHL">
     <div class="item-sub" onclick="toggleMenu('menuDHLWeekly')">📅 周报表 ▾</div>
@@ -353,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>  <!-- 在这里才关闭menuproviders！！ -->
 
 <div class="item" onclick="location.href='Weekly_Pickup&Delivery_Anomaly_Trend_Monitoring.html'">📈 周度揽件 & 签收异常趋势监控
-  <span class="tip-mark" data-tip="用图表按周展示各物流商/各仓库/早间单/午间单的揽件及签收情况">?</span>
+  <span class="tip-mark" data-tip="用图表按周进行展示各物流商/各仓库/早间单/午间单的揽件及签收情况">?</span>
 </div>
   
 <script>
