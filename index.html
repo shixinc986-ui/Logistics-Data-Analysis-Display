@@ -107,14 +107,16 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 
 
 <div class="item" onclick="togglePrimaryMenu('menuWeek')">📅 周报表 report_weekly
-  <span class="tip-mark" data-tip="可查看单个月份各周的时效数据">?</span>
+  <span class="tip-mark" data-tip="汇总当月全部物流数据，查看不同周的时效情况">?</span>
 </div>
 <div class="submenu" id="menuWeek">
   <a href="weekly_report/October_report_weekly.html">10月周报表</a>
   <a href="weekly_report/Septemper_report_weekly.html">9月周报表</a>
   <a href="weekly_report/August_report_weekly.html">8月周报表</a>  
 </div>
-<div class="item" onclick="togglePrimaryMenu('menuMonth')">📊 月报表 report_monthly</div>
+<div class="item" onclick="togglePrimaryMenu('menuMonth')">📊 月报表 report_monthly
+  <span class="tip-mark" data-tip="汇总当月全部物流数据，查看整月的总体时效情况">?</span>
+</div>
 <div class="submenu" id="menuMonth">
   <a href="cross_month_comparison.html">跨月横向对比</a>
   <a href="monthly_report/monthly_9.html">10.1-10.31月报表</a>
@@ -154,7 +156,9 @@ const monthList = [
 
 function renderWarehouseMenu(){
   let html = "";
-  html += `<div class="item" onclick="togglePrimaryMenu('menuwarehouse')">🏭 各英仓报表 British_warehouses_report</div>`;
+  html += `<div class="item" onclick="togglePrimaryMenu('menuwarehouse')">🏭 各英仓报表 British_warehouses_report
+      <span class="tip-mark" data-tip="按 A/B/F/M/O 仓库拆分，分别查看各仓库不同周早间单、午间单的物流时效">?</span>
+  </div>`;
   html += `<div class="submenu" id="menuwarehouse">`;
 
   // ========== 新增：【仓库-物流-周对比看板】放在最上方，和5个仓库平齐 ==========
@@ -192,7 +196,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
-<div class="item" onclick="togglePrimaryMenu('menuproviders')">🚚 各物流商报表 All_providers_report</div>
+<div class="item" onclick="togglePrimaryMenu('menuproviders')">🚚 各物流商报表 All_providers_report
+  <span class="tip-mark" data-tip="按物流服务商拆分，分别查看不同物流商各周的时效情况">?</span>
+</div>
 <!--↑需要单独的按钮都在上面写，放到所有 `.submenu` 的外面 -->
 <!-- ========== 所有物流商全部放在这个menuproviders容器里面 ========== -->
 <div class="submenu" id="menuproviders">
@@ -347,6 +353,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>  <!-- 在这里才关闭menuproviders！！ -->
 
 <div class="item" onclick="location.href='Weekly_Pickup&Delivery_Anomaly_Trend_Monitoring.html'">📈 周度揽件 & 签收异常趋势监控</div>
+  <span class="tip-mark" data-tip="用图表展示物流商/仓库各周的揽件及签收情况">?</span>
 <script>
 
 // 按钮之间相互排斥
