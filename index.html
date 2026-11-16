@@ -64,6 +64,34 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
   cursor:pointer;
 }
   
+.tip-mark {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #94a3b8;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  line-height: 18px;
+  margin-left: 8px;
+  cursor: help;
+  position: relative;
+}
+.tip-mark:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 26px;
+  top: 0;
+  white-space: nowrap;
+  background: #1e293b;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  z-index: 999;
+}
+
 </style>
 </head>
 <body>
