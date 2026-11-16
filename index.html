@@ -44,10 +44,10 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 .item-sub.compare-btn{
   border:1px solid #3b82f6;
   border-radius:8px;
-  padding:6px 8px;
   background:#fff;
   color:#2563eb;
 }
+
 
 /* 三级子菜单（每个物流商点开后的周/月报表链接） */
 .submenu.level3 a{
@@ -116,7 +116,7 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 
 
 <div class="item" onclick="togglePrimaryMenu('menuWeek')">📅 周报表 report_weekly
-  <span class="tip-mark" data-tip="汇总当月全部物流数据，查看不同周的时效情况">?</span>
+  <span class="tip-mark" data-tip="汇总当月全部物流数据，查看不同月份下各周的时效情况">?</span>
 </div>
 <div class="submenu" id="menuWeek">
   <a href="weekly_report/October_report_weekly.html">10月周报表</a>
@@ -124,7 +124,7 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
   <a href="weekly_report/August_report_weekly.html">8月周报表</a>  
 </div>
 <div class="item" onclick="togglePrimaryMenu('menuMonth')">📊 月报表 report_monthly
-  <span class="tip-mark" data-tip="汇总当月全部物流数据，查看整月的总体时效情况">?</span>
+  <span class="tip-mark" data-tip="汇总当月全部物流数据，查看不同月份的总体时效情况">?</span>
 </div>
 <div class="submenu" id="menuMonth">
   <a href="cross_month_comparison.html">跨月横向对比</a>
@@ -166,7 +166,7 @@ const monthList = [
 function renderWarehouseMenu(){
   let html = "";
   html += `<div class="item" onclick="togglePrimaryMenu('menuwarehouse')">🏭 各英仓报表 British_warehouses_report
-      <span class="tip-mark" data-tip="按 A/B/F/M/O 仓库拆分，分别查看各仓库不同周早间单、午间单的物流时效">?</span>
+      <span class="tip-mark" data-tip="按 A/B/F/M/O 仓库拆分，分别查看各仓库不同周早间单、午间单的物流时效（黄色条纹：午间单；蓝色条纹：早间单）">?</span>
   </div>`;
   html += `<div class="submenu" id="menuwarehouse">`;
 
