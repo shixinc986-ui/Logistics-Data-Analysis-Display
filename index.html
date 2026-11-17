@@ -102,23 +102,28 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 }
 
 /* 说明文档按钮 */
-.page-wrap {
-  display: flex;
-  transition: all 0.3s ease;
-}
+/* 抽屉固定贴浏览器最左边 */
 .drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
   width: 0;
   overflow: hidden;
   border-right: 1px solid #e2e8f0;
   background: #ffffff;
-  flex-shrink:0;
+  z-index: 99;
+  transition: 0.3s ease;
 }
 .drawer.open {
   width: 500px;
 }
-.main-wrap {
-  flex: 1;
-  transition: all 0.3s ease;
+/* 居中看板卡片，打开抽屉的时候整体往右平移 */
+.center-card {
+  transition: transform 0.3s ease;
+}
+.center-card.shift-right {
+  transform: translateX(500px);
 }
 /* 说明文档按钮 */
   
@@ -129,13 +134,14 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 
 <div class="page-wrap">
   <!-- 【左边抽屉，固定在最左侧】 -->
-  <div id="docDrawer" class="drawer">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid #e5e7eb;">
-      <h3 style="margin:0;">📄 物流看板说明文档</h3>
-      <span id="closeDocBtn" style="cursor:pointer;font-size:20px;">✕</span>
-    </div>
-    <iframe src="help.html" style="width:100%;height:calc(100vh - 60px);border:none;"></iframe>
+<!-- 抽屉放到最外层，独立固定在浏览器左侧，不受居中卡片约束 -->
+<div id="docDrawer" class="drawer">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid #e5e7eb;">
+    <h3 style="margin:0;">📄 看板操作手册</h3>
+    <span id="closeDocBtn" style="cursor:pointer;font-size:20px;">✕</span>
   </div>
+  <iframe src="help.html" style="width:100%;height:calc(100vh - 60px);border:none;"></iframe>
+</div>
 
   <!-- 【右侧主区域：所有内容都在这里，会整体右移】 -->
   <div class="main-wrap">
@@ -496,14 +502,17 @@ document.querySelectorAll(".year-btn").forEach(btn => {
 const drawer = document.getElementById('docDrawer');
 const openBtn = document.getElementById('openDocBtn');
 const closeBtn = document.getElementById('closeDocBtn');
+const centerCard = document.querySelector('.center-card');
 
 openBtn.onclick = ()=>{
   drawer.classList.toggle('open');
-  openBtn.innerText = drawer.classList.contains('open') ? "📖 关闭说明文档" : "📖 物流看板说明文档";
+  centerCard.classList.toggle('shift-right');
+  openBtn.innerText = drawer.classList.contains('open') ? "📖 关闭说明文档" : "📖 操作说明文档";
 }
 closeBtn.onclick = ()=>{
   drawer.classList.remove('open');
-  openBtn.innerText = "📖 物流看板说明文档";
+  centerCard.classList.remove('shift-right');
+  openBtn.innerText = "📖 操作说明文档";
 }
 
  
