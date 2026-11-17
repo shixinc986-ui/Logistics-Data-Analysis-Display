@@ -102,21 +102,24 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 }
 
 /* 说明文档按钮 */
-/* 抽屉固定贴浏览器最左边 */
-.drawer {
-  position: fixed; top: 0; left: 0; height: 100vh;
-  width: 0; overflow: hidden;
-  border-right: 1px solid #e2e8f0;
-  background: #fff; z-index: 99;
-  transition: width 0.3s ease;
+.page-wrap {
+  display: flex;
+  transition: all 0.3s ease;
 }
-.drawer.open { width: 500px; }
-.center-card { transition: transform 0.3s ease; }
-.center-card.shift-right { transform: translateX(500px); }
-
-#reportArea { flex: 1; height: calc(100vh - 140px); }
-#reportFrame { width: 100%; height: 100%; border: none; }
-
+.drawer {
+  width: 0;
+  overflow: hidden;
+  border-right: 1px solid #e2e8f0;
+  background: #ffffff;
+  flex-shrink:0;
+}
+.drawer.open {
+  width: 500px;
+}
+.main-wrap {
+  flex: 1;
+  transition: all 0.3s ease;
+}
 /* 说明文档按钮 */
   
 </style>
@@ -126,28 +129,18 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
 
 <div class="page-wrap">
   <!-- 【左边抽屉，固定在最左侧】 -->
-<!-- 抽屉放到最外层，独立固定在浏览器左侧，不受居中卡片约束 -->
-<div id="docDrawer" class="drawer">
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid #e5e7eb;">
-    <h3 style="margin:0;">📄 看板操作手册</h3>
-    <span id="closeDocBtn" style="cursor:pointer;font-size:20px;">✕</span>
-  </div>
-  <iframe src="help.html" style="width:100%;height:calc(100vh - 60px);border:none;"></iframe>
-</div>
-
-<!-- 右侧主区 -->
-<div class="center-card" id="centerCard">
-  <div class="main-wrap">
-    <button id="openDocBtn" style="...;">📖 操作说明文档</button>
-
-    <!-- 你原来的菜单、年份按钮全部保留 -->
-
-    <!-- 新增：右侧报表展示区 -->
-    <div id="reportArea">
-      <iframe id="reportFrame" src="about:blank"></iframe>
+  <div id="docDrawer" class="drawer">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid #e5e7eb;">
+      <h3 style="margin:0;">📄 物流看板说明文档</h3>
+      <span id="closeDocBtn" style="cursor:pointer;font-size:20px;">✕</span>
     </div>
+    <iframe src="help.html" style="width:100%;height:calc(100vh - 60px);border:none;"></iframe>
   </div>
-</div>
+
+  <!-- 【右侧主区域：所有内容都在这里，会整体右移】 -->
+  <div class="main-wrap">
+    <!-- ========== 👉 就是这里！放你的按钮 ========== -->
+    <button id="openDocBtn" style="margin-bottom:16px;padding:8px 14px;border:1px solid #3b82f6;border-radius:8px;background:#fff;color:#2563eb;cursor:pointer;">📖 物流看板说明文档</button>
   
 <div style="display:flex;gap:16px;justify-content:center;margin-bottom:24px;">
   <a class="year-btn" href="/Logistics-Data-Analysis-Display/index.html" data-year="2026" style="width:360px;padding:14px;background:#6b7280;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
@@ -163,19 +156,19 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
   <span class="tip-mark" data-tip="汇总当月全部物流数据，查看不同月份下各周的时效情况">?</span>
 </div>
 <div class="submenu" id="menuWeek">
-  <a class="report-link" href="weekly_report/October_report_weekly.html">10月周报表</a>
-  <a class="report-link" href="weekly_report/Septemper_report_weekly.html">9月周报表</a>
-  <a class="report-link" href="weekly_report/August_report_weekly.html">8月周报表</a>  
+  <a href="weekly_report/October_report_weekly.html">10月周报表</a>
+  <a href="weekly_report/Septemper_report_weekly.html">9月周报表</a>
+  <a href="weekly_report/August_report_weekly.html">8月周报表</a>  
 </div>
 <div class="item" onclick="togglePrimaryMenu('menuMonth')">📊 月报表 report_monthly
   <span class="tip-mark" data-tip="汇总当月全部物流数据，查看不同月份的总体时效情况">?</span>
 </div>
 <div class="submenu" id="menuMonth">
-  <a class="report-link" href="cross_month_comparison.html">跨月横向对比</a>
-  <a class="report-link" href="monthly_report/monthly_9.html">10.1-10.31月报表</a>
-  <a class="report-link" href="monthly_report/monthly_9.html">9.1-9.30月报表</a>
-  <a class="report-link" href="monthly_report/monthly_8.html">8.1-8.31月报表</a>
-  <a class="report-link" href="monthly_report/monthly_7.html">7.1-7.31月报表</a>
+  <a href="cross_month_comparison.html">跨月横向对比</a>
+  <a href="monthly_report/monthly_9.html">10.1-10.31月报表</a>
+  <a href="monthly_report/monthly_9.html">9.1-9.30月报表</a>
+  <a href="monthly_report/monthly_8.html">8.1-8.31月报表</a>
+  <a href="monthly_report/monthly_7.html">7.1-7.31月报表</a>
 </div>
    
 
@@ -412,8 +405,7 @@ document.addEventListener('DOMContentLoaded', function(){
 <div class="item" onclick="location.href='Weekly_Pickup&Delivery_Anomaly_Trend_Monitoring.html'">📈 周度揽件 & 签收异常趋势监控
   <span class="tip-mark" data-tip="用图表按周进行展示各物流商/各仓库/早间单/午间单的揽件及签收情况">?</span>
 </div>
-
-
+  
 <script>
 
 // 按钮之间相互排斥
@@ -501,47 +493,19 @@ document.querySelectorAll(".year-btn").forEach(btn => {
 });
 
 
-// ===== 抽屉：点开/关闭自由切换，不会锁死 =====
 const drawer = document.getElementById('docDrawer');
 const openBtn = document.getElementById('openDocBtn');
 const closeBtn = document.getElementById('closeDocBtn');
-const centerCard = document.getElementById('centerCard');
 
-function toggleDoc(force) {
-  const open = force !== undefined ? force : !drawer.classList.contains('open');
-  drawer.classList.toggle('open', open);
-  centerCard.classList.toggle('shift-right', open);
-  openBtn.innerText = open ? "📖 关闭说明文档" : "📖 操作说明文档";
+openBtn.onclick = ()=>{
+  drawer.classList.toggle('open');
+  openBtn.innerText = drawer.classList.contains('open') ? "📖 关闭说明文档" : "📖 物流看板说明文档";
 }
-openBtn.onclick = () => toggleDoc();      // 顶部按钮：再点一次即关闭
-closeBtn.onclick = () => toggleDoc(false); // 右上角 ✕：关闭
+closeBtn.onclick = ()=>{
+  drawer.classList.remove('open');
+  openBtn.innerText = "📖 物流看板说明文档";
+}
 
-// ===== 报表在右侧 iframe 内打开，不整页跳转 =====
-const reportFrame = document.getElementById('reportFrame');
-function openReport(url) { reportFrame.src = url; }
-
-// <a> 形式的报表链接：点击不跳走，写入右侧 iframe
-document.addEventListener('click', e => {
-  const link = e.target.closest('a.report-link');
-  if (!link) return;
-  e.preventDefault();
-  reportFrame.src = link.href;
-});
-
-<!-- 报表加载区域，放在全部菜单结束之后 -->
-<div id="reportArea" style="margin-top:24px;">
-  <iframe id="reportFrame" src="about:blank" style="width:100%;height:720px;border:1px solid #e5e7eb;border-radius:8px;"></iframe>
-</div>
-
-const reportFrame = document.getElementById('reportFrame');
-// 拦截 .report-link 的点击，阻止页面跳转，在iframe里面加载
-document.addEventListener('click', function(e){
-  const targetLink = e.target.closest('.report-link');
-  if(targetLink){
-    e.preventDefault();
-    reportFrame.src = targetLink.href;
-  }
-})
  
 </script>
 </body>
