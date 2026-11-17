@@ -101,10 +101,47 @@ h1{text-align:center;color:#1e293b;margin-bottom:32px;font-size:26px;font-weight
   z-index: 999;
 }
 
+/* 说明文档按钮 */
+.page-wrap {
+  display: flex;
+  transition: all 0.3s ease;
+}
+.drawer {
+  width: 0;
+  overflow: hidden;
+  border-right: 1px solid #e2e8f0;
+  background: #ffffff;
+  flex-shrink:0;
+}
+.drawer.open {
+  width: 340px;
+}
+.main-wrap {
+  flex: 1;
+  transition: all 0.3s ease;
+}
+/* 说明文档按钮 */
+  
 </style>
 </head>
 <body>
 <h1>📦 物流数据看板入口</h1>
+
+<div class="page-wrap">
+  <!-- 【左边抽屉，固定在最左侧】 -->
+  <div id="docDrawer" class="drawer">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid #e5e7eb;">
+      <h3 style="margin:0;">📄 物流看板说明文档</h3>
+      <span id="closeDocBtn" style="cursor:pointer;font-size:20px;">✕</span>
+    </div>
+    <iframe src="help.html" style="width:100%;height:calc(100vh - 60px);border:none;"></iframe>
+  </div>
+
+  <!-- 【右侧主区域：所有内容都在这里，会整体右移】 -->
+  <div class="main-wrap">
+    <!-- ========== 👉 就是这里！放你的按钮 ========== -->
+    <button id="openDocBtn" style="margin-bottom:16px;padding:8px 14px;border:1px solid #3b82f6;border-radius:8px;background:#fff;color:#2563eb;cursor:pointer;">📖 物流看板说明文档</button>
+  
 <div style="display:flex;gap:16px;justify-content:center;margin-bottom:24px;">
   <a class="year-btn" href="/Logistics-Data-Analysis-Display/index.html" data-year="2026" style="width:360px;padding:14px;background:#6b7280;color:#fff;text-align:center;border-radius:10px;text-decoration:none;font-size:16px;box-shadow:0 2px 6px #00000014;">
       📅 2026 年度看板
@@ -456,17 +493,19 @@ document.querySelectorAll(".year-btn").forEach(btn => {
 });
 
 
-  
-/*
-function toggleMenu(menuId){
-  const menu = document.getElementById(menuId);
-  if(menu.style.display === "block"){
-    menu.style.display = "none";
-  }else{
-    menu.style.display = "block";
-  }
+const drawer = document.getElementById('docDrawer');
+const openBtn = document.getElementById('openDocBtn');
+const closeBtn = document.getElementById('closeDocBtn');
+
+openBtn.onclick = ()=>{
+  drawer.classList.toggle('open');
+  openBtn.innerText = drawer.classList.contains('open') ? "📖 关闭说明文档" : "📖 物流看板说明文档";
 }
-*/
+closeBtn.onclick = ()=>{
+  drawer.classList.remove('open');
+  openBtn.innerText = "📖 物流看板说明文档";
+}
+
  
 </script>
 </body>
