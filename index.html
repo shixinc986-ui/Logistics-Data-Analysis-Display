@@ -228,7 +228,7 @@ function renderWarehouseMenu(){
 
     monthList.forEach(m=>{
       const monthMenuId = `menu_${ware.id}_${m.folder}`;
-      html += `<div class="item-sub" onclick="toggleWareMonthMenu('${monthMenuId}', '${wareMenuId}')"> ${m.name}</div>`;
+      html += `<div class="submenu level4" onclick="toggleWareMonthMenu('${monthMenuId}', '${wareMenuId}')"> ${m.name}</div>`;
       html += `<div class="submenu" id="${monthMenuId}">`;
 
       logisticsList.forEach(logi=>{
