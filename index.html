@@ -223,7 +223,7 @@ function renderWarehouseMenu(){
   // 原有5个仓库循环不变
   warehouseList.forEach(ware=>{
     const wareMenuId = `menu_${ware.id}`;
-    html += `<div class="item-sub" onclick="toggleWarehouseMenu('${wareMenuId}')">🏬 ${ware.displayName}</div>`;
+    html += `<div class="item-sub" style="font-weight:bold; onclick="toggleWarehouseMenu('${wareMenuId}')">🏬 ${ware.displayName}</div>`;
     html += `<div class="submenu" id="${wareMenuId}">`;
 
     monthList.forEach(m=>{
