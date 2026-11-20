@@ -7802,30 +7802,27 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<style>
+.table th, .table td {
+    padding:6px 10px;
+    text-align:left !important;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+}
+</style>
+</div>
+</div>
+<div class="jp-OutputArea-child">
 <div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
 <h3 id="%F0%9F%93%8B-%E4%B8%80%E3%80%81%E5%90%84%E7%89%A9%E6%B5%81%E5%95%86%E7%89%A9%E6%B5%81%E6%97%B6%E6%95%88%E5%88%A4%E5%AE%9A%E5%8F%82%E8%80%83%E8%A1%A8">📋 一、各物流商物流时效判定参考表<a class="anchor-link" href="#%F0%9F%93%8B-%E4%B8%80%E3%80%81%E5%90%84%E7%89%A9%E6%B5%81%E5%95%86%E7%89%A9%E6%B5%81%E6%97%B6%E6%95%88%E5%88%A4%E5%AE%9A%E5%8F%82%E8%80%83%E8%A1%A8">¶</a></h3>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<table border="1" class="dataframe table">
 <thead>
 <tr style="text-align: right;">
-<th></th>
 <th>物流服务</th>
 <th>ASCAN参考值(天)</th>
 <th>DSCAN参考值(天)</th>
@@ -7834,71 +7831,61 @@ a.anchor-link {
 </thead>
 <tbody>
 <tr>
-<th>0</th>
 <td>YODEL</td>
 <td>1</td>
+<td>2</td>
 <td>3</td>
-<td>4</td>
 </tr>
 <tr>
-<th>1</th>
 <td>EVRI</td>
 <td>1</td>
+<td>2</td>
 <td>3</td>
-<td>4</td>
 </tr>
 <tr>
-<th>2</th>
 <td>RM</td>
 <td>1</td>
+<td>2</td>
 <td>3</td>
-<td>4</td>
 </tr>
 <tr>
-<th>3</th>
 <td>SD</td>
 <td>1</td>
+<td>2</td>
 <td>3</td>
-<td>4</td>
 </tr>
 <tr>
-<th>4</th>
 <td>FEDEX</td>
 <td>1</td>
+<td>2</td>
 <td>3</td>
-<td>4</td>
 </tr>
 <tr>
-<th>5</th>
 <td>DHL</td>
 <td>1</td>
+<td>2</td>
 <td>3</td>
-<td>4</td>
 </tr>
 <tr>
-<th>6</th>
 <td>XDP</td>
 <td>1</td>
-<td>4</td>
-<td>5</td>
+<td>2</td>
+<td>3</td>
 </tr>
 <tr>
-<th>7</th>
 <td>DX</td>
 <td>1</td>
+<td>2</td>
 <td>3</td>
-<td>4</td>
 </tr>
 <tr>
-<th>8</th>
 <td>DPD</td>
 <td>1</td>
+<td>2</td>
 <td>3</td>
-<td>4</td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -7908,26 +7895,6 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div style="width:100%;">
-<style>
-.table th, .table td {
-    padding:6px 10px;
-    text-align:left;
-}
-.table td:nth-child(1), .table th:nth-child(1) {
-    white-space:pre-wrap;
-    word-wrap:break-word;
-    text-align:left;}
-.table td:nth-child(2), .table th:nth-child(2) {
-    white-space:pre-wrap;
-    word-wrap:break-word;
-    text-align:left;}
-.table td:nth-child(3), .table th:nth-child(3) {
-    white-space:pre-wrap;
-    word-wrap:break-word;
-    text-align:left;
-}
-</style>
 <table border="1" class="dataframe table">
 <thead>
 <tr style="text-align: right;">
@@ -7945,12 +7912,12 @@ a.anchor-link {
 <tr>
 <td>DSCAN（送达时效）</td>
 <td>实际送达时长</td>
-<td>XDP 服务商：Dscan &gt; 4 天 → 送达超时；Dscan ≤ 4 天 → 达标；其他服务商：Dscan &gt; 3 天 → 送达超时；Dscan ≤ 3 天 → 达标</td>
+<td>Dscan &gt; 2 天 → 送达超时；Dscan ≤ 2 天 → 达标</td>
 </tr>
 <tr>
 <td>Total（总时效）</td>
 <td>Ascan+Dscan</td>
-<td>XDP 服务商：Total &gt; 5 天 → 总时效超时；Total ≤ 5 天 → 总时效达标；其他服务商：Total ＞ 4 天 → 总时效超时；Total ≤ 4 天 → 总时效达标</td>
+<td>Total ＞ 3 天 → 总时效超时；Total ≤ 3 天 → 总时效达标</td>
 </tr>
 <tr>
 <td>包裹时效状态</td>
@@ -7964,7 +7931,6 @@ a.anchor-link {
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -8032,66 +7998,67 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
-<h5 id="%E6%B3%A8%EF%BC%9A%E5%BC%82%E5%B8%B8%E5%8C%85%E8%A3%B9%E9%87%8F%E6%8C%87%E7%9A%84%E6%98%AF%E5%8C%85%E8%A3%B9%E6%97%B6%E6%95%88%E7%8A%B6%E6%80%81%E4%B8%BA%E2%80%9C%E6%8F%BD%E4%BB%B6%E5%90%8E%E5%81%9C%E6%BB%9E%E5%BC%82%E5%B8%B8%E2%80%9D%E5%92%8C%E2%80%9C%E6%8F%BD%E4%BB%B6%E5%90%8E%E5%81%9C%E6%BB%9E%E3%80%90%E5%85%A8%E3%80%91%E5%BC%82%E5%B8%B8%E2%80%9D%E8%BF%99%E4%B8%A4%E7%B1%BB%E5%8C%85%E8%A3%B9%E7%9A%84%E6%80%BB%E6%95%B0">注：异常包裹量指的是包裹时效状态为“揽件后停滞异常”和“揽件后停滞【全】异常”这两类包裹的总数<a class="anchor-link" href="#%E6%B3%A8%EF%BC%9A%E5%BC%82%E5%B8%B8%E5%8C%85%E8%A3%B9%E9%87%8F%E6%8C%87%E7%9A%84%E6%98%AF%E5%8C%85%E8%A3%B9%E6%97%B6%E6%95%88%E7%8A%B6%E6%80%81%E4%B8%BA%E2%80%9C%E6%8F%BD%E4%BB%B6%E5%90%8E%E5%81%9C%E6%BB%9E%E5%BC%82%E5%B8%B8%E2%80%9D%E5%92%8C%E2%80%9C%E6%8F%BD%E4%BB%B6%E5%90%8E%E5%81%9C%E6%BB%9E%E3%80%90%E5%85%A8%E3%80%91%E5%BC%82%E5%B8%B8%E2%80%9D%E8%BF%99%E4%B8%A4%E7%B1%BB%E5%8C%85%E8%A3%B9%E7%9A%84%E6%80%BB%E6%95%B0">¶</a></h5>
+<h5 id="%E6%B3%A8%EF%BC%9A%E5%BC%82%E5%B8%B8%E5%8C%85%E8%A3%B9%E9%87%8F%E6%8C%87%E7%9A%84%E6%98%AF%E5%8C%85%E8%A3%B9%E6%97%B6%E6%95%88%E7%8A%B6%E6%80%81%E4%B8%BA%E2%80%9C%E6%8F%BD%E4%BB%B6%E5%90%8E%E5%81%9C%E6%BB%9E%E5%BC%82%E5%B8%B8%E2%80%9D%E5%92%8C%E2%80%9C%E6%8F%BD%E4%BB%B6%E5%90%8E%E5%81%9C%E6%BB%9E%E3%80%90%E5%85%A8%E3%80%91%E5%BC%82%E5%B8%B8%E2%80%9D%E8%BF%99%E4%B8%A4%E7%B1%BB%E5%8C%85%E8%A3%B9%E7%9A%84%E6%80%BB%E6%95%B0%EF%BC%9B%E5%BC%82%E5%B8%B8%E5%8C%85%E8%A3%B9%E7%8E%87=%E5%BC%82%E5%B8%B8%E5%8C%85%E8%A3%B9%E9%87%8F/%E5%8F%91%E8%B4%A7%E5%8C%85%E8%A3%B9%E9%87%8F">注：异常包裹量指的是包裹时效状态为“揽件后停滞异常”和“揽件后停滞【全】异常”这两类包裹的总数；异常包裹率=异常包裹量/发货包裹量<a class="anchor-link" href="#%E6%B3%A8%EF%BC%9A%E5%BC%82%E5%B8%B8%E5%8C%85%E8%A3%B9%E9%87%8F%E6%8C%87%E7%9A%84%E6%98%AF%E5%8C%85%E8%A3%B9%E6%97%B6%E6%95%88%E7%8A%B6%E6%80%81%E4%B8%BA%E2%80%9C%E6%8F%BD%E4%BB%B6%E5%90%8E%E5%81%9C%E6%BB%9E%E5%BC%82%E5%B8%B8%E2%80%9D%E5%92%8C%E2%80%9C%E6%8F%BD%E4%BB%B6%E5%90%8E%E5%81%9C%E6%BB%9E%E3%80%90%E5%85%A8%E3%80%91%E5%BC%82%E5%B8%B8%E2%80%9D%E8%BF%99%E4%B8%A4%E7%B1%BB%E5%8C%85%E8%A3%B9%E7%9A%84%E6%80%BB%E6%95%B0%EF%BC%9B%E5%BC%82%E5%B8%B8%E5%8C%85%E8%A3%B9%E7%8E%87=%E5%BC%82%E5%B8%B8%E5%8C%85%E8%A3%B9%E9%87%8F/%E5%8F%91%E8%B4%A7%E5%8C%85%E8%A3%B9%E9%87%8F">¶</a></h5>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
-<h5 id="%E6%B3%A8%EF%BC%9A%E5%87%86%E6%97%B6%E7%AD%BE%E6%94%B6%E7%8E%87%E6%8C%89%E5%8C%85%E8%A3%B9%E5%87%86%E6%97%B6%E9%80%81%E8%BE%BE%E6%97%B6%E6%95%88(Total)%E6%9D%A5%E8%AE%A1%E7%AE%97,%E9%99%A4XDP%E2%89%A45%E5%A4%A9%E5%A4%96%E5%85%B6%E4%BD%99%E7%89%A9%E6%B5%81%E5%9D%87%E2%89%A44%E5%A4%A9">注：准时签收率按包裹准时送达时效(Total)来计算,除XDP≤5天外其余物流均≤4天<a class="anchor-link" href="#%E6%B3%A8%EF%BC%9A%E5%87%86%E6%97%B6%E7%AD%BE%E6%94%B6%E7%8E%87%E6%8C%89%E5%8C%85%E8%A3%B9%E5%87%86%E6%97%B6%E9%80%81%E8%BE%BE%E6%97%B6%E6%95%88(Total)%E6%9D%A5%E8%AE%A1%E7%AE%97,%E9%99%A4XDP%E2%89%A45%E5%A4%A9%E5%A4%96%E5%85%B6%E4%BD%99%E7%89%A9%E6%B5%81%E5%9D%87%E2%89%A44%E5%A4%A9">¶</a></h5>
+<h5 id="%E6%B3%A8%EF%BC%9A24%E5%B0%8F%E6%97%B6%E6%8F%BD%E4%BB%B6%E7%8E%87%E6%8C%89%E5%8C%85%E8%A3%B9%E6%8F%BD%E4%BB%B6%E6%97%B6%E6%95%88(Ascan)%E6%9D%A5%E8%AE%A1%E7%AE%97,Ascan-%E2%89%A41-%E5%A4%A9%E5%8D%B3%E4%B8%BA24%E5%B0%8F%E6%97%B6%E6%8F%BD%E4%BB%B6">注：24小时揽件率按包裹揽件时效(Ascan)来计算,Ascan ≤1 天即为24小时揽件<a class="anchor-link" href="#%E6%B3%A8%EF%BC%9A24%E5%B0%8F%E6%97%B6%E6%8F%BD%E4%BB%B6%E7%8E%87%E6%8C%89%E5%8C%85%E8%A3%B9%E6%8F%BD%E4%BB%B6%E6%97%B6%E6%95%88(Ascan)%E6%9D%A5%E8%AE%A1%E7%AE%97,Ascan-%E2%89%A41-%E5%A4%A9%E5%8D%B3%E4%B8%BA24%E5%B0%8F%E6%97%B6%E6%8F%BD%E4%BB%B6">¶</a></h5>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
-<h5 id="%E6%B3%A8%EF%BC%9A%E5%87%86%E6%97%B6%E7%AD%BE%E6%94%B6%E7%8E%87%EF%BC%881%EF%BC%8C2%EF%BC%89%E7%BA%B3%E5%85%A5%E8%AE%A1%E7%AE%97%E7%9A%84%E6%98%AF%E5%B8%B8%E8%A7%84%E5%92%8C%E8%B6%85%E6%97%B6%E5%8C%85%E8%A3%B9%EF%BC%9B%E5%87%86%E6%97%B6%E7%AD%BE%E6%94%B6%E7%8E%87%EF%BC%881%EF%BC%8C2%EF%BC%8C3%EF%BC%8C4%EF%BC%89%E7%BA%B3%E5%85%A5%E8%AE%A1%E7%AE%97%E7%9A%84%E6%98%AF%E5%B8%B8%E8%A7%84%E3%80%81%E8%B6%85%E6%97%B6%E3%80%81%E5%BC%82%E5%B8%B8%E3%80%81%E6%97%A0%E8%BD%A8%E8%BF%B9%E5%BC%82%E5%B8%B8%E5%8C%85%E8%A3%B9">注：准时签收率（1，2）纳入计算的是常规和超时包裹；准时签收率（1，2，3，4）纳入计算的是常规、超时、异常、无轨迹异常包裹<a class="anchor-link" href="#%E6%B3%A8%EF%BC%9A%E5%87%86%E6%97%B6%E7%AD%BE%E6%94%B6%E7%8E%87%EF%BC%881%EF%BC%8C2%EF%BC%89%E7%BA%B3%E5%85%A5%E8%AE%A1%E7%AE%97%E7%9A%84%E6%98%AF%E5%B8%B8%E8%A7%84%E5%92%8C%E8%B6%85%E6%97%B6%E5%8C%85%E8%A3%B9%EF%BC%9B%E5%87%86%E6%97%B6%E7%AD%BE%E6%94%B6%E7%8E%87%EF%BC%881%EF%BC%8C2%EF%BC%8C3%EF%BC%8C4%EF%BC%89%E7%BA%B3%E5%85%A5%E8%AE%A1%E7%AE%97%E7%9A%84%E6%98%AF%E5%B8%B8%E8%A7%84%E3%80%81%E8%B6%85%E6%97%B6%E3%80%81%E5%BC%82%E5%B8%B8%E3%80%81%E6%97%A0%E8%BD%A8%E8%BF%B9%E5%BC%82%E5%B8%B8%E5%8C%85%E8%A3%B9">¶</a></h5>
+<h5 id="%E6%B3%A8%EF%BC%9A%E5%87%86%E6%97%B6%E7%AD%BE%E6%94%B6%E7%8E%87%E6%8C%89%E5%8C%85%E8%A3%B9%E5%87%86%E6%97%B6%E9%80%81%E8%BE%BE%E6%97%B6%E6%95%88(Total)%E6%9D%A5%E8%AE%A1%E7%AE%97,Total-%E2%89%A43-%E5%A4%A9%E5%8D%B3%E4%B8%BA%E5%87%86%E6%97%B6%E9%80%81%E8%BE%BE">注：准时签收率按包裹准时送达时效(Total)来计算,Total ≤3 天即为准时送达<a class="anchor-link" href="#%E6%B3%A8%EF%BC%9A%E5%87%86%E6%97%B6%E7%AD%BE%E6%94%B6%E7%8E%87%E6%8C%89%E5%8C%85%E8%A3%B9%E5%87%86%E6%97%B6%E9%80%81%E8%BE%BE%E6%97%B6%E6%95%88(Total)%E6%9D%A5%E8%AE%A1%E7%AE%97,Total-%E2%89%A43-%E5%A4%A9%E5%8D%B3%E4%B8%BA%E5%87%86%E6%97%B6%E9%80%81%E8%BE%BE">¶</a></h5>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=4f4c3484-aa69-4181-94b5-501683afc1af">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=ec612ab8-c3ea-4a6b-8317-30c75406c170">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=55678c0b-81cd-4b4f-a6a4-1ec886c8a011">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=0f8a0790-8475-4770-b3d6-eb1528919e8c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=7cab20d8-d38b-4071-a915-5a6decdf4f35">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=153fec04-6953-4dfb-bc27-597f08fc9115">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=23686add-deac-40ab-b1c4-2decb3c21671">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=3867a435-dcbf-441f-9424-6c2d849e170e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=bd588b86-3fb9-4e09-9e8a-13d7885f321c">
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
-<hr/>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
-<h5 id="%E6%B3%A8%EF%BC%9A%E5%A6%82%E5%AF%B9%E6%95%B0%E6%8D%AE%E6%9C%89%E7%96%91%E9%97%AE%EF%BC%8C%E5%8F%AF%E6%9F%A5%E7%9C%8B%E5%8E%9F%E5%A7%8B%E6%8C%89%E6%9C%88/%E5%91%A8%E5%AF%BC%E5%87%BA%E7%9A%84%E7%89%A9%E6%B5%81%E6%95%B0%E6%8D%AE">注：如对数据有疑问，可查看原始按月/周导出的物流数据<a class="anchor-link" href="#%E6%B3%A8%EF%BC%9A%E5%A6%82%E5%AF%B9%E6%95%B0%E6%8D%AE%E6%9C%89%E7%96%91%E9%97%AE%EF%BC%8C%E5%8F%AF%E6%9F%A5%E7%9C%8B%E5%8E%9F%E5%A7%8B%E6%8C%89%E6%9C%88/%E5%91%A8%E5%AF%BC%E5%87%BA%E7%9A%84%E7%89%A9%E6%B5%81%E6%95%B0%E6%8D%AE">¶</a></h5>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
-<h3 id="%F0%9F%93%8A-%E5%9B%9B%E3%80%81-%E5%9F%BA%E7%A1%80%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB">📊 四、 基础指标汇总<a class="anchor-link" href="#%F0%9F%93%8A-%E5%9B%9B%E3%80%81-%E5%9F%BA%E7%A1%80%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB">¶</a></h3>
-</div>
-</div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<style>
+table {
+    border-collapse: collapse;
+    width: auto;
+    margin: 8px 0;
+}
+th, td {
+    border: none;
+    padding:6px 10px;
+    text-align:left !important;
+    font-size:14px;
+}
+th {
+    background: transparent;
+    color: #000000;
+    font-weight:600;
+    border-bottom:1px solid #999999;
+}
 </style>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
+<h3 id="%F0%9F%93%8A-%E5%9B%9B%E3%80%81%E5%9F%BA%E7%A1%80%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB">📊 四、基础指标汇总<a class="anchor-link" href="#%F0%9F%93%8A-%E5%9B%9B%E3%80%81%E5%9F%BA%E7%A1%80%E6%8C%87%E6%A0%87%E6%B1%87%E6%80%BB">¶</a></h3>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div style="display:flex; gap:15px; align-items:flex-start; overflow-x:auto;">
+<div style="margin:0; min-width:620px; flex-shrink:0;">
+<h4>8月整月(8.01-8.31)</h4>
 <table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
-<th></th>
-<th>月份</th>
-<th>分类</th>
+<th>包裹分类</th>
 <th>数量</th>
 <th>占比</th>
 <th>指标</th>
@@ -8100,49 +8067,53 @@ a.anchor-link {
 </thead>
 <tbody>
 <tr>
-<th>0</th>
-<td>8.1-8.31</td>
 <td>1.常规</td>
-<td>343049</td>
-<td>61.93%</td>
+<td>290990</td>
+<td>52.53%</td>
 <td>发货包裹量</td>
 <td>553950</td>
 </tr>
 <tr>
-<th>1</th>
-<td>8.1-8.31</td>
-<td>2.常规+超时</td>
-<td>546930</td>
-<td>98.73%</td>
+<td>2.揽件时效超时</td>
+<td>161657</td>
+<td>29.18%</td>
 <td>异常包裹量</td>
 <td>5792</td>
 </tr>
 <tr>
-<th>2</th>
-<td>8.1-8.31</td>
-<td>3.常规+超时+异常</td>
-<td>552722</td>
-<td>99.78%</td>
+<td>3.送达时效超时</td>
+<td>77091</td>
+<td>13.92%</td>
 <td>异常包裹率</td>
 <td>1.05%</td>
 </tr>
 <tr>
-<th>3</th>
-<td>8.1-8.31</td>
-<td>4.常规+超时+异常+无轨迹异常</td>
-<td>553950</td>
-<td>100.0%</td>
-<td>准时签收率(1,2)</td>
-<td>94.39%</td>
+<td>4.揽件和送达均超时</td>
+<td>17192</td>
+<td>3.1%</td>
+<td>24小时揽件率</td>
+<td>66.45%</td>
 </tr>
 <tr>
-<th>4</th>
-<td>8.1-8.31</td>
-<td>5.异常+无轨迹异常</td>
-<td>7020</td>
-<td>1.27%</td>
-<td>准时签收率(1,2,3,4)</td>
-<td>93.20%</td>
+<td>5.揽件后停滞异常</td>
+<td>4006</td>
+<td>0.72%</td>
+<td>准时签收率</td>
+<td>82.13%</td>
+</tr>
+<tr>
+<td>6.揽件后停滞【全】异常</td>
+<td>1786</td>
+<td>0.32%</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>7.无轨迹异常</td>
+<td>1228</td>
+<td>0.22%</td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -8150,24 +8121,16 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=addb6499-cbe9-4190-bc08-e329ca39ca79">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=ae614f44-0be3-4ea5-bdb4-d847d1bc3e50">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=754dfb19-bed3-4b74-91fe-be14957a84aa">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=70edaa3b-b221-4bd1-b045-c927e756e924">
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
-<h3 id="%F0%9F%93%8A-A%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6)-&amp;-B%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6+%E5%BC%82%E5%B8%B8+%E6%97%A0%E8%BD%A8%E8%BF%B9%E5%BC%82%E5%B8%B8)">📊 A版(常规+超时) &amp; B版(常规+超时+异常+无轨迹异常)<a class="anchor-link" href="#%F0%9F%93%8A-A%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6)-&amp;-B%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6+%E5%BC%82%E5%B8%B8+%E6%97%A0%E8%BD%A8%E8%BF%B9%E5%BC%82%E5%B8%B8)">¶</a></h3>
-</div>
-</div>
 <div class="jp-OutputArea-child">
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div style="display:flex;gap:0px;align-items:flex-start;">
-<div><table border="1" class="dataframe">
+<div style="display:flex; gap:20px; align-items:flex-start; overflow-x:auto;">
+<div style="margin:0; min-width:1200px; flex-shrink:0;">
+<h4>8月整月(8.01-8.31)</h4>
+<!-- 第1组：原版，独立标题 -->
+<div style="margin-bottom:20px;">
+<p style="font-size:20px;">📊 A版(常规+超时) &amp; B版(常规+超时+异常+无轨迹异常)</p>
+<div style="display:flex; gap:12px;">
+<table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
 <th>指标</th>
@@ -8197,25 +8160,19 @@ a.anchor-link {
 </tr>
 <tr>
 <td>24小时揽收率</td>
-<td>67.29%</td>
+<td>67.30%</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>准时签收率</td>
-<td>94.39%</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>订单总数</td>
-<td>546930</td>
+<td>83.19%</td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
-</table></div>
-<div><table border="1" class="dataframe">
+</table>
+<table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
 <th>指标</th>
@@ -8239,49 +8196,31 @@ a.anchor-link {
 </tr>
 <tr>
 <td>平均值</td>
-<td>0.86</td>
+<td>1.16</td>
 <td>1.87</td>
-<td>2.73</td>
+<td>3.04</td>
 </tr>
 <tr>
 <td>24小时揽收率</td>
-<td>67.31%</td>
+<td>66.45%</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>准时签收率</td>
-<td>93.20%</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>订单总数</td>
-<td>553950</td>
+<td>82.13%</td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=bb053011-bb22-4187-bffa-6e3a5fcffde2">
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
-<h3 id="%F0%9F%93%8A%E5%89%94%E9%99%A4%E8%B4%9F%E6%95%B0%EF%BD%9CA%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6)-&amp;-B%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6+%E5%BC%82%E5%B8%B8+%E6%97%A0%E8%BD%A8%E8%BF%B9%E5%BC%82%E5%B8%B8)">📊剔除负数｜A版(常规+超时) &amp; B版(常规+超时+异常+无轨迹异常)<a class="anchor-link" href="#%F0%9F%93%8A%E5%89%94%E9%99%A4%E8%B4%9F%E6%95%B0%EF%BD%9CA%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6)-&amp;-B%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6+%E5%BC%82%E5%B8%B8+%E6%97%A0%E8%BD%A8%E8%BF%B9%E5%BC%82%E5%B8%B8)">¶</a></h3>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div style="display:flex;gap:0px;align-items:flex-start;">
-<div><table border="1" class="dataframe">
+<!-- 第2组：剔除负数，独立标题 -->
+<div style="margin-bottom:20px;">
+<p style="font-size:20px;">📊 剔除负数｜A版(常规+超时) &amp; B版(常规+超时+异常+无轨迹异常)</p>
+<div style="display:flex; gap:12px;">
+<table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
 <th>指标</th>
@@ -8316,26 +8255,20 @@ a.anchor-link {
 <td>0.03%</td>
 </tr>
 <tr>
-<td>有效订单数</td>
-<td>484669</td>
-<td>546929</td>
-<td>546747</td>
-</tr>
-<tr>
 <td>24小时揽收率</td>
-<td>63.07%</td>
+<td>63.10%</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>准时签收率</td>
-<td>94.39%</td>
+<td>83.19%</td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
-</table></div>
-<div><table border="1" class="dataframe">
+</table>
+<table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
 <th>指标</th>
@@ -8359,55 +8292,37 @@ a.anchor-link {
 </tr>
 <tr>
 <td>平均值</td>
-<td>0.99</td>
+<td>1.33</td>
 <td>1.87</td>
-<td>2.73</td>
+<td>3.04</td>
 </tr>
 <tr>
 <td>负数占比</td>
-<td>11.52%</td>
+<td>11.24%</td>
 <td>0.00%</td>
 <td>0.03%</td>
 </tr>
 <tr>
-<td>有效订单数</td>
-<td>490133</td>
-<td>553949</td>
-<td>553766</td>
-</tr>
-<tr>
 <td>24小时揽收率</td>
-<td>63.03%</td>
+<td>62.20%</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>准时签收率</td>
-<td>93.20%</td>
+<td>82.13%</td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=72690395-cc46-43bf-aad8-374f96c2229a">
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-OutputArea-output" data-mime-type="text/markdown" tabindex="0">
-<h3 id="%F0%9F%93%8A%E5%89%94%E9%99%A4%E8%B4%9F%E6%95%B0%E3%80%81%E6%97%A0%E8%BD%A8%E8%BF%B9%E5%BC%82%E5%B8%B8%EF%BD%9CA%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6)-&amp;-B%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6+%E5%BC%82%E5%B8%B8)">📊剔除负数、无轨迹异常｜A版(常规+超时) &amp; B版(常规+超时+异常)<a class="anchor-link" href="#%F0%9F%93%8A%E5%89%94%E9%99%A4%E8%B4%9F%E6%95%B0%E3%80%81%E6%97%A0%E8%BD%A8%E8%BF%B9%E5%BC%82%E5%B8%B8%EF%BD%9CA%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6)-&amp;-B%E7%89%88(%E5%B8%B8%E8%A7%84+%E8%B6%85%E6%97%B6+%E5%BC%82%E5%B8%B8)">¶</a></h3>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div style="display:flex;gap:0px;align-items:flex-start;">
-<div><table border="1" class="dataframe">
+<!-- 第3组：剔除负数、无轨迹异常，独立标题 -->
+<div>
+<p style="font-size:20px;">📊 剔除负数、无轨迹异常｜A版(常规+超时) &amp; B版(常规+超时+异常)</p>
+<div style="display:flex; gap:12px;">
+<table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
 <th>指标</th>
@@ -8442,26 +8357,20 @@ a.anchor-link {
 <td>0.03%</td>
 </tr>
 <tr>
-<td>有效订单数</td>
-<td>484669</td>
-<td>546929</td>
-<td>546747</td>
-</tr>
-<tr>
 <td>24小时揽收率</td>
-<td>63.07%</td>
+<td>63.10%</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>准时签收率</td>
-<td>94.39%</td>
+<td>83.19%</td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
-</table></div>
-<div><table border="1" class="dataframe">
+</table>
+<table border="1" class="dataframe">
 <thead>
 <tr style="text-align: right;">
 <th>指标</th>
@@ -8473,9 +8382,9 @@ a.anchor-link {
 <tbody>
 <tr>
 <td>最大值</td>
-<td>22.13</td>
 <td>30.0</td>
-<td>52.13</td>
+<td>30.0</td>
+<td>60.0</td>
 </tr>
 <tr>
 <td>最小值</td>
@@ -8485,61 +8394,39 @@ a.anchor-link {
 </tr>
 <tr>
 <td>平均值</td>
-<td>0.91</td>
+<td>1.25</td>
 <td>1.81</td>
-<td>2.6</td>
+<td>2.91</td>
 </tr>
 <tr>
 <td>负数占比</td>
-<td>11.55%</td>
+<td>11.26%</td>
 <td>0.00%</td>
 <td>0.03%</td>
 </tr>
 <tr>
-<td>有效订单数</td>
-<td>488905</td>
-<td>552721</td>
-<td>552538</td>
-</tr>
-<tr>
 <td>24小时揽收率</td>
-<td>63.03%</td>
+<td>62.35%</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
 <td>准时签收率</td>
-<td>93.41%</td>
+<td>82.32%</td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=106726c4-cdd4-4749-822c-1ab4d8cca616">
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>html文件长度： 278124
-文件开头片段： &lt;!DOCTYPE html&gt;
-
-&lt;html lang="en"&gt;
-&lt;head&gt;&lt;meta charset="utf-8"/&gt;
-&lt;meta content="width=device-width, initial-scale=1.0" name="viewport"/&gt;
-&lt;title&gt;8.1-8.31物流数据分析&lt;/title&gt;&lt;script src="https://cdnjs.cloudfla
-</pre>
 </div>
 </div>
 </div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=b07d4e6e-a702-4e8d-baa5-e3559f9205e5">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=abfe6dea-a100-4a79-994b-782f4dc5861a">
 </div>
 </main>
 </body>
