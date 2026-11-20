@@ -53,56 +53,56 @@ tbody tr:nth-child(even) {
     <tr>
       <td>YODEL</td>
       <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>4</td>
     </tr>
     <tr>
       <td>EVRI</td>
       <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>4</td>
     </tr>
     <tr>
       <td>RM</td>
       <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>4</td>
     </tr>
     <tr>
       <td>SD</td>
       <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>4</td>
     </tr>
     <tr>
       <td>FEDEX</td>
       <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>4</td>
     </tr>
     <tr>
       <td>DHL</td>
       <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>4</td>
     </tr>
     <tr>
       <td>XDP</td>
       <td>1</td>
-      <td>4</td>
-      <td>5</td>
+      <td>2</td>
+      <td>3</td>
     </tr>
     <tr>
       <td>DX</td>
       <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>4</td>
     </tr>
     <tr>
       <td>DPD</td>
       <td>1</td>
+      <td>2</td>
       <td>3</td>
-      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -149,12 +149,12 @@ tbody tr:nth-child(even) {
     <tr>
       <td>DSCAN（送达时效）</td>
       <td>实际送达时长</td>
-      <td>XDP 服务商：Dscan > 4 天 → 送达超时；Dscan ≤ 4 天 → 达标；其他服务商：Dscan > 3 天 → 送达超时；Dscan ≤ 3 天 → 达标</td>
+      <td>Dscan > 2 天 → 送达超时；Dscan ≤ 2 天 → 达标</td>
     </tr>
     <tr>
       <td>Total（总时效）</td>
       <td>Ascan+Dscan</td>
-      <td>XDP 服务商：Total > 5 天 → 总时效超时；Total ≤ 5 天 → 总时效达标；其他服务商：Total ＞ 4 天 → 总时效超时；Total ≤ 4 天 → 总时效达标</td>
+      <td>Total ＞ 3 天 → 总时效超时；Total ≤ 3 天 → 总时效达标</td>
     </tr>
     <tr>
       <td>包裹时效状态</td>
@@ -237,7 +237,7 @@ tbody tr:nth-child(even) {
 
 <br>
 <p> 注：异常包裹量指的是包裹时效状态为“揽件后停滞异常”和“揽件后停滞【全】异常”这两类包裹的总数</p>
-<p> 注：准时签收率按包裹准时送达时效(Total)来计算,除XDP≤5天外其余物流均≤4天</p>
+<p> 注：准时签收率按包裹准时送达时效(Total)来计算,Total ≤3 天即为准时送达</p>
 <hr>
 <h2>🚚 物流服务商：INPOST(菜鸟)（11月多周横向对比看板）</h2><p style="color:#333;">注: 若报表中缺少某周,代表该物流商在对应周期无订单数据</p><p style="color:#333;">注：最大值、最小值、平均值显示NaN：无对应的有效数据；24h揽收率、准时签收率显示nan%：分母（订单数）为0，无法算出比率</p><p style="color:#333;">注：如对数据有疑问，可查看原始按月/周导出的物流数据</p><h3 style='font-weight:normal;'>📊 基础指标汇总</h3>
     <div style="display:flex; gap:20px; overflow-x:auto; align-items:flex-start; padding:10px 0;">
@@ -257,29 +257,29 @@ tbody tr:nth-child(even) {
   <tbody>
     <tr>
       <td>1.常规</td>
-      <td>21944</td>
-      <td>57.48%</td>
+      <td>20060</td>
+      <td>52.54%</td>
       <td>发货包裹量</td>
       <td>38179</td>
     </tr>
     <tr>
       <td>2.揽件时效超时</td>
-      <td>13691</td>
-      <td>35.86%</td>
+      <td>12159</td>
+      <td>31.85%</td>
       <td>异常包裹量</td>
       <td>1204</td>
     </tr>
     <tr>
       <td>3.送达时效超时</td>
-      <td>920</td>
-      <td>2.41%</td>
+      <td>2804</td>
+      <td>7.34%</td>
       <td>异常包裹率</td>
       <td>3.15%</td>
     </tr>
     <tr>
       <td>4.揽件和送达均超时</td>
-      <td>403</td>
-      <td>1.06%</td>
+      <td>1935</td>
+      <td>5.07%</td>
       <td>24小时揽件率</td>
       <td>62.67%</td>
     </tr>
@@ -288,7 +288,7 @@ tbody tr:nth-child(even) {
       <td>1061</td>
       <td>2.78%</td>
       <td>准时签收率</td>
-      <td>92.32%</td>
+      <td>83.80%</td>
     </tr>
     <tr>
       <td>6.揽件后停滞【全】异常</td>
@@ -351,7 +351,7 @@ tbody tr:nth-child(even) {
     </tr>
     <tr>
       <td>准时签收率</td>
-      <td>95.37%</td>
+      <td>86.57%</td>
       <td></td>
       <td></td>
     </tr>
@@ -396,7 +396,7 @@ tbody tr:nth-child(even) {
     </tr>
     <tr>
       <td>准时签收率</td>
-      <td>92.32%</td>
+      <td>83.80%</td>
       <td></td>
       <td></td>
     </tr>
@@ -455,7 +455,7 @@ tbody tr:nth-child(even) {
     </tr>
     <tr>
       <td>准时签收率</td>
-      <td>95.37%</td>
+      <td>86.57%</td>
       <td></td>
       <td></td>
     </tr>
@@ -506,7 +506,7 @@ tbody tr:nth-child(even) {
     </tr>
     <tr>
       <td>准时签收率</td>
-      <td>92.32%</td>
+      <td>83.80%</td>
       <td></td>
       <td></td>
     </tr>
@@ -565,7 +565,7 @@ tbody tr:nth-child(even) {
     </tr>
     <tr>
       <td>准时签收率</td>
-      <td>95.37%</td>
+      <td>86.57%</td>
       <td></td>
       <td></td>
     </tr>
@@ -616,7 +616,7 @@ tbody tr:nth-child(even) {
     </tr>
     <tr>
       <td>准时签收率</td>
-      <td>92.36%</td>
+      <td>83.83%</td>
       <td></td>
       <td></td>
     </tr>
