@@ -445,8 +445,8 @@ function togglePrimaryMenu(menuId) {
   if (!target) return;
   const isOpen = target.style.display === "block";
 
-  // 只把所有一级子菜单收起来
-  const primaryIds = ["menuWeek", "menuMonth", "menuproviders","menuwarehouse"];
+  // 只把所有一级子菜单收起来（旧的 menuproviders 已拆成两个新一级菜单）
+  const primaryIds = ["menuWeek", "menuMonth", "menuwarehouse", "menuProvidersWeekly", "menuProvidersMonthly"];
   primaryIds.forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = "none";
@@ -491,9 +491,17 @@ function toggleWareMonthMenu(monthMenuId, wareMenuId) {
 
 // 物流商层互斥：同一时间只展开一个物流商看板
 function toggleProviderMenu(providerMenuId) {
-  const allProviderMenus = document.querySelectorAll("#menuproviders > .submenu");
-  allProviderMenus.forEach(p => { p.style.display = "none"; });
   const target = document.getElementById(providerMenuId);
+  if (!target) return;
+
+  // 自动找目标菜单的父级一级容器（周报表容器 / 月报表容器），不再写死 #menuproviders
+  const parent = target.parentElement;
+  if (parent) {
+    parent.querySelectorAll(":scope > .submenu").forEach(p => {
+      if (p.id !== providerMenuId) p.style.display = "none";
+    });
+  }
+
   target.style.display = target.style.display === "block" ? "none" : "block";
 }
 
