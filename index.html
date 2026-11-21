@@ -249,174 +249,185 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 </script>
 
-
-
-
-<div class="item" onclick="togglePrimaryMenu('menuproviders')">🚚 各物流商报表 All_providers_report
-  <span class="tip-mark" data-tip="按物流服务商拆分，分别查看不同物流商各周/各月的时效情况">?</span>
+<!-- ========== 一级按钮：🚚 各物流商月报表（不再保留“各物流商报表”总入口） ========== -->
+<div class="item" onclick="togglePrimaryMenu('menuProvidersMonthly')">🚚 各物流商月报表 Providers_monthly_report
+  <span class="tip-mark" data-tip="按物流服务商拆分，查看不同物流商各月的时效情况">?</span>
 </div>
-<!--↑需要单独的按钮都在上面写，放到所有 `.submenu` 的外面 -->
-<!-- ========== 所有物流商全部放在这个menuproviders容器里面 ========== -->
-<div class="submenu" id="menuproviders">
+<div class="submenu" id="menuProvidersMonthly">
+
   <div class="item-sub compare-btn" onclick="location.href='providers_compare_monthly.html'">物流商 | 跨月对比
     <span class="tip-mark" data-tip="选择物流商、月份，对比不同物流商不同月份的物流时效">?</span>
   </div>
-  <div class="item-sub" onclick="toggleProviderMenu('menuDHL')">DHL物流商看板 ▾</div>
-  <div class="submenu level3" id="menuDHL">
-    <div class="item-sub" onclick="toggleMenu('menuDHLWeekly')">📅 周报表 ▾</div>
-    <div class="submenu level4" id="menuDHLWeekly">
-    <a href="prov_report_week/prov_report_November_weekly/dhl_November_weekly.html">11月周报表</a>
-    <a href="prov_report_week/prov_report_October_weekly/dhl_October_weekly.html">10月周报表</a>
-    <a href="prov_report_week/prov_report_September_weekly/dhl_September_weekly.html">9月周报表</a>
-    <a href="prov_report_week/prov_report_August_weekly/dhl_August_weekly.html">8月周报表</a>
-  </div>      
-  <div class="item-sub" onclick="toggleMenu('menuDHLMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+
+  <!-- DHL 月报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuDHLMonthly')">DHL物流商看板 ▾</div>
   <div class="submenu level4" id="menuDHLMonthly">
     <a href="prov_report_month/prov_report_October/dhl_October.html">10月报表</a>
     <a href="prov_report_month/prov_report_September/dhl_September.html">9月报表</a>
     <a href="prov_report_month/prov_report_August/dhl_August.html">8月报表</a>
     <a href="prov_report_month/prov_report_July/dhl_July.html">7月报表</a>
-  </div>  
-</div>
+  </div>
 
-  <div class="item-sub" onclick="toggleProviderMenu('menuDX')">DX物流商看板 ▾</div>
-  <div class="submenu level3" id="menuDX">
-    <div class="item-sub" onclick="toggleMenu('menuDXWeekly')">📅 周报表 ▾</div>
-    <div class="submenu level4" id="menuDXWeekly">
-    <a href="prov_report_week/prov_report_November_weekly/dx_November_weekly.html">11月周报表</a>
-    <a href="prov_report_week/prov_report_October_weekly/dx_October_weekly.html">10月周报表</a>
-    <a href="prov_report_week/prov_report_September_weekly/dx_September_weekly.html">9月周报表</a>
-    <a href="prov_report_week/prov_report_August_weekly/dx_August_weekly.html">8月周报表</a>
-  </div>  
-  <div class="item-sub" onclick="toggleMenu('menuDXMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <!-- DX 月报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuDXMonthly')">DX物流商看板 ▾</div>
   <div class="submenu level4" id="menuDXMonthly">
     <a href="prov_report_month/prov_report_October/dx_October.html">10月报表</a>
     <a href="prov_report_month/prov_report_September/dx_September.html">9月报表</a>
     <a href="prov_report_month/prov_report_August/dx_August.html">8月报表</a>
     <a href="prov_report_month/prov_report_July/dx_July.html">7月报表</a>
-  </div>  
-</div>
-  
-  <div class="item-sub" onclick="toggleProviderMenu('menuSD')">SD物流商看板 ▾</div>
-  <div class="submenu level3" id="menuSD">
-    <div class="item-sub" onclick="toggleMenu('menuSDWeekly')">📅 周报表 ▾</div>
-    <div class="submenu level4" id="menuSDWeekly">
-    <a href="prov_report_week/prov_report_November_weekly/dhl_November_weekly.html">11月周报表</a>
-    <a href="prov_report_week/prov_report_October_weekly/sd_October_weekly.html">10月周报表</a>
-    <a href="prov_report_week/prov_report_September_weekly/sd_September_weekly.html">9月周报表</a>
-    <a href="prov_report_week/prov_report_August_weekly/sd_August_weekly.html">8月周报表</a> 
- </div>  
-  <div class="item-sub" onclick="toggleMenu('menuSDMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  </div>
+
+  <!-- SD 月报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuSDMonthly')">SD物流商看板 ▾</div>
   <div class="submenu level4" id="menuSDMonthly">
     <a href="prov_report_month/prov_report_October/sd_October.html">10月报表</a>
     <a href="prov_report_month/prov_report_September/sd_September.html">9月报表</a>
     <a href="prov_report_month/prov_report_August/sd_August.html">8月报表</a>
     <a href="prov_report_month/prov_report_July/sd_July.html">7月报表</a>
-  </div>  
- </div>
+  </div>
 
-  <div class="item-sub" onclick="toggleProviderMenu('menuEvri')">Evri物流商看板 ▾</div>
-  <div class="submenu level3" id="menuEvri">
-    <div class="item-sub" onclick="toggleMenu('menuEvriWeekly')">📅 周报表 ▾</div>
-    <div class="submenu level4" id="menuEvriWeekly">
-    <a href="prov_report_week/prov_report_November_weekly/evri_November_weekly.html">11月周报表</a>
-    <a href="prov_report_week/prov_report_October_weekly/evri_October_weekly.html">10月周报表</a>
-    <a href="prov_report_week/prov_report_September_weekly/evri_September_weekly.html">9月周报表</a>
-    <a href="prov_report_week/prov_report_August_weekly/evri_August_weekly.html">8月周报表</a> 
-  </div>  
-  <div class="item-sub" onclick="toggleMenu('menuEvriMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <!-- Evri 月报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuEvriMonthly')">Evri物流商看板 ▾</div>
   <div class="submenu level4" id="menuEvriMonthly">
     <a href="prov_report_month/prov_report_October/evri_October.html">10月报表</a>
     <a href="prov_report_month/prov_report_September/evri_September.html">9月报表</a>
     <a href="prov_report_month/prov_report_August/evri_August.html">8月报表</a>
     <a href="prov_report_month/prov_report_July/evri_July.html">7月报表</a>
-  </div>  
- </div>
+  </div>
 
-  <div class="item-sub" onclick="toggleProviderMenu('menufedex')">Fedex物流商看板 ▾</div>
-  <div class="submenu level3" id="menufedex">
-    <div class="item-sub" onclick="toggleMenu('menufedexWeekly')">📅 周报表 ▾</div>
-    <div class="submenu level4" id="menufedexWeekly">
-    <a href="prov_report_week/prov_report_November_weekly/fedex_November_weekly.html">11月周报表</a>
-    <a href="prov_report_week/prov_report_October_weekly/fedex_October_weekly.html">10月周报表</a>
-    <a href="prov_report_week/prov_report_September_weekly/fedex_September_weekly.html">9月周报表</a> 
-    <a href="prov_report_week/prov_report_August_weekly/fedex_August_weekly.html">8月周报表</a>
-  </div>  
-  <div class="item-sub" onclick="toggleMenu('menufedexMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <!-- Fedex 月报表 -->
+  <div class="item-sub" onclick="toggleMenu('menufedexMonthly')">Fedex物流商看板 ▾</div>
   <div class="submenu level4" id="menufedexMonthly">
     <a href="prov_report_month/prov_report_October/fedex_October.html">10月报表</a>
     <a href="prov_report_month/prov_report_September/fedex_September.html">9月报表</a>
     <a href="prov_report_month/prov_report_August/fedex_August.html">8月报表</a>
     <a href="prov_report_month/prov_report_July/fedex_July.html">7月报表</a>
-  </div>  
- </div>
+  </div>
 
-  <div class="item-sub" onclick="toggleProviderMenu('menuRoyalmail')">Royalmail(菜鸟)物流商看板 ▾</div>
-  <div class="submenu level3" id="menuRoyalmail">
-    <div class="item-sub" onclick="toggleMenu('menuRoyalmailWeekly')">📅 周报表 ▾</div>
-    <div class="submenu level4" id="menuRoyalmailWeekly">
-    <a href="prov_report_week/prov_report_November_weekly/royalmail(菜鸟)_November_weekly.html">11月周报表</a>
-    <a href="prov_report_week/prov_report_October_weekly/royalmail(菜鸟)_October_weekly.html">10月周报表</a>
-    <a href="prov_report_week/prov_report_September_weekly/royalmail(菜鸟)_September_weekly.html">9月周报表</a>
-    <a href="prov_report_week/prov_report_August_weekly/royalmail(菜鸟)_August_weekly.html">8月周报表</a>
-  </div>  
-  <div class="item-sub" onclick="toggleMenu('menuRoyalmailMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <!-- Royalmail(菜鸟) 月报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuRoyalmailMonthly')">Royalmail(菜鸟)物流商看板 ▾</div>
   <div class="submenu level4" id="menuRoyalmailMonthly">
     <a href="prov_report_month/prov_report_October/royalmail(菜鸟)_October.html">10月报表</a>
     <a href="prov_report_month/prov_report_September/royalmail(菜鸟)_September.html">9月报表</a>
     <a href="prov_report_month/prov_report_August/royalmail(菜鸟)_August.html">8月报表</a>
     <a href="prov_report_month/prov_report_July/royalmail(菜鸟)_July.html">7月报表</a>
-  </div>  
- </div>
+  </div>
 
-  <div class="item-sub" onclick="toggleProviderMenu('menuYodel')">yodel(菜鸟)物流商看板 ▾</div>
-  <div class="submenu level3" id="menuYodel">
-    <div class="item-sub" onclick="toggleMenu('menuYodelWeekly')">📅 周报表 ▾</div>
-    <div class="submenu level4" id="menuYodelWeekly">
-    <a href="prov_report_week/prov_report_November_weekly/yodel(菜鸟)_November_weekly.html">11月周报表</a>
-    <a href="prov_report_week/prov_report_October_weekly/yodel(菜鸟)_October_weekly.html">10月周报表</a>
-    <a href="prov_report_week/prov_report_September_weekly/yodel(菜鸟)_September_weekly.html">9月周报表</a>
-    <a href="prov_report_week/prov_report_August_weekly/yodel(菜鸟)_August_weekly.html">8月周报表</a>
-  </div>  
-  <div class="item-sub" onclick="toggleMenu('menuYodelMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <!-- yodel(菜鸟) 月报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuYodelMonthly')">yodel(菜鸟)物流商看板 ▾</div>
   <div class="submenu level4" id="menuYodelMonthly">
     <a href="prov_report_month/prov_report_October/yodel(菜鸟)_October.html">10月报表</a>
     <a href="prov_report_month/prov_report_September/yodel(菜鸟)_September.html">9月报表</a>
     <a href="prov_report_month/prov_report_August/yodel(菜鸟)_August.html">8月报表</a>
     <a href="prov_report_month/prov_report_July/yodel(菜鸟)_July.html">7月报表</a>
-  </div>  
- </div>  
+  </div>
 
-  <div class="item-sub" onclick="toggleProviderMenu('menuextra_large_parcel_courier')">Extra Large Parcel Courier物流商看板 ▾</div>
-  <div class="submenu level3" id="menuextra_large_parcel_courier">
-    <div class="item-sub" onclick="toggleMenu('menuextra_large_parcel_courierWeekly')">📅 周报表 ▾</div>
-    <div class="submenu level4" id="menuextra_large_parcel_courierWeekly">
-    <a href="prov_report_week/prov_report_November_weekly/extra_large_parcel_courier_November_weekly.html">11月周报表</a>
-    <a href="prov_report_week/prov_report_October_weekly/extra_large_parcel_courier_October_weekly.html">10月周报表</a>
-    <a href="prov_report_week/prov_report_September_weekly/extra_large_parcel_courier_September_weekly.html">9月周报表</a>
-    <a href="prov_report_week/prov_report_August_weekly/extra_large_parcel_courier_August_weekly.html">8月周报表</a>
-  </div>  
-  <div class="item-sub" onclick="toggleMenu('menuextra_large_parcel_courierMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
+  <!-- Extra Large Parcel Courier 月报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuextra_large_parcel_courierMonthly')">Extra Large Parcel Courier物流商看板 ▾</div>
   <div class="submenu level4" id="menuextra_large_parcel_courierMonthly">
     <a href="prov_report_month/prov_report_October/extra_large_parcel_courier_October.html">10月报表</a>
     <a href="prov_report_month/prov_report_September/extra_large_parcel_courier_September.html">9月报表</a>
     <a href="prov_report_month/prov_report_August/extra_large_parcel_courier_August.html">8月报表</a>
     <a href="prov_report_month/prov_report_July/extra_large_parcel_courier_July.html">7月报表</a>
-  </div>  
- </div>   
+  </div>
 
-<div class="item-sub" onclick="toggleProviderMenu('menueda_dpd')">EDA DPD物流商看板 ▾</div>
-<div class="submenu level3" id="menueda_dpd">
-  <div class="item-sub" onclick="toggleMenu('menueda_dpdWeekly')">📅 周报表 ▾</div>
+  <!-- EDA DPD 月报表 -->
+  <div class="item-sub" onclick="toggleMenu('menueda_dpdMonthly')">EDA DPD物流商看板 ▾</div>
+  <div class="submenu level4" id="menueda_dpdMonthly">
+    <a href="prov_report_month/prov_report_July/eda_dpd_July.html">7月报表</a>
+  </div>
+
+</div>
+
+
+<!-- ========== 一级按钮：🚚 各物流商周报表（不再保留“各物流商报表”总入口） ========== -->
+<div class="item" onclick="togglePrimaryMenu('menuProvidersWeekly')">📅 各物流商周报表 Providers_weekly_report
+  <span class="tip-mark" data-tip="按物流服务商拆分，查看不同物流商各周的时效情况">?</span>
+</div>
+<div class="submenu" id="menuProvidersWeekly">
+
+  <!-- DHL 周报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuDHLWeekly')">DHL物流商看板 ▾</div>
+  <div class="submenu level4" id="menuDHLWeekly">
+    <a href="prov_report_week/prov_report_November_weekly/dhl_November_weekly.html">11月周报表</a>
+    <a href="prov_report_week/prov_report_October_weekly/dhl_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/dhl_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/dhl_August_weekly.html">8月周报表</a>
+  </div>
+
+  <!-- DX 周报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuDXWeekly')">DX物流商看板 ▾</div>
+  <div class="submenu level4" id="menuDXWeekly">
+    <a href="prov_report_week/prov_report_November_weekly/dx_November_weekly.html">11月周报表</a>
+    <a href="prov_report_week/prov_report_October_weekly/dx_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/dx_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/dx_August_weekly.html">8月周报表</a>
+  </div>
+
+  <!-- SD 周报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuSDWeekly')">SD物流商看板 ▾</div>
+  <div class="submenu level4" id="menuSDWeekly">
+    <a href="prov_report_week/prov_report_November_weekly/sd_November_weekly.html">11月周报表</a>
+    <a href="prov_report_week/prov_report_October_weekly/sd_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/sd_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/sd_August_weekly.html">8月周报表</a>
+  </div>
+
+  <!-- Evri 周报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuEvriWeekly')">Evri物流商看板 ▾</div>
+  <div class="submenu level4" id="menuEvriWeekly">
+    <a href="prov_report_week/prov_report_November_weekly/evri_November_weekly.html">11月周报表</a>
+    <a href="prov_report_week/prov_report_October_weekly/evri_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/evri_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/evri_August_weekly.html">8月周报表</a>
+  </div>
+
+  <!-- Fedex 周报表 -->
+  <div class="item-sub" onclick="toggleMenu('menufedexWeekly')">Fedex物流商看板 ▾</div>
+  <div class="submenu level4" id="menufedexWeekly">
+    <a href="prov_report_week/prov_report_November_weekly/fedex_November_weekly.html">11月周报表</a>
+    <a href="prov_report_week/prov_report_October_weekly/fedex_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/fedex_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/fedex_August_weekly.html">8月周报表</a>
+  </div>
+
+  <!-- Royalmail(菜鸟) 周报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuRoyalmailWeekly')">Royalmail(菜鸟)物流商看板 ▾</div>
+  <div class="submenu level4" id="menuRoyalmailWeekly">
+    <a href="prov_report_week/prov_report_November_weekly/royalmail(菜鸟)_November_weekly.html">11月周报表</a>
+    <a href="prov_report_week/prov_report_October_weekly/royalmail(菜鸟)_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/royalmail(菜鸟)_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/royalmail(菜鸟)_August_weekly.html">8月周报表</a>
+  </div>
+
+  <!-- yodel(菜鸟) 周报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuYodelWeekly')">yodel(菜鸟)物流商看板 ▾</div>
+  <div class="submenu level4" id="menuYodelWeekly">
+    <a href="prov_report_week/prov_report_November_weekly/yodel(菜鸟)_November_weekly.html">11月周报表</a>
+    <a href="prov_report_week/prov_report_October_weekly/yodel(菜鸟)_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/yodel(菜鸟)_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/yodel(菜鸟)_August_weekly.html">8月周报表</a>
+  </div>
+
+  <!-- Extra Large Parcel Courier 周报表 -->
+  <div class="item-sub" onclick="toggleMenu('menuextra_large_parcel_courierWeekly')">Extra Large Parcel Courier物流商看板 ▾</div>
+  <div class="submenu level4" id="menuextra_large_parcel_courierWeekly">
+    <a href="prov_report_week/prov_report_November_weekly/extra_large_parcel_courier_November_weekly.html">11月周报表</a>
+    <a href="prov_report_week/prov_report_October_weekly/extra_large_parcel_courier_October_weekly.html">10月周报表</a>
+    <a href="prov_report_week/prov_report_September_weekly/extra_large_parcel_courier_September_weekly.html">9月周报表</a>
+    <a href="prov_report_week/prov_report_August_weekly/extra_large_parcel_courier_August_weekly.html">8月周报表</a>
+  </div>
+
+  <!-- EDA DPD 周报表 -->
+  <div class="item-sub" onclick="toggleMenu('menueda_dpdWeekly')">EDA DPD物流商看板 ▾</div>
   <div class="submenu level4" id="menueda_dpdWeekly">
     <a href="prov_report_week/prov_report_November_weekly/eda_dpd_November_weekly.html">11月周报表</a>
     <a href="prov_report_week/prov_report_August_weekly/eda_dpd_August_weekly.html">8月周报表</a>
-  </div>   
-  <div class="item-sub" onclick="toggleMenu('menueda_dpdMonthly')">📊 月报表 ▾</div>    <!-- 月报表（和周报表平级，新建独立id） -->
-  <div class="submenu level4" id="menueda_dpdMonthly">
-    <a href="prov_report_month/prov_report_July/eda_dpd_July.html">7月报表</a>
-  </div>  
- </div>   
+  </div>
+
+</div>
+
+
 </div>  <!-- 在这里才关闭menuproviders！！ -->
 
 <div class="item" onclick="location.href='Weekly_Pickup&Delivery_Anomaly_Trend_Monitoring.html'">📈 周度揽件 & 签收异常趋势监控
