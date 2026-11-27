@@ -82,7 +82,7 @@
 /* ================= 常量（按现有 JSON 取值） ================= */
 const DATA_URL = "warehouse_data_2026.json";
 
-const WAREHOUSE_NAME = { A:"A总仓", B:"B总仓", F:"F总仓", M:"M总仓", O:"O总仓" };
+const WAREHOUSE_NAME = { A:"A总仓", B:"B总仓", F:"F总仓", M:"M总仓", O:"O总仓", "3rd":"第三方仓" };
 const SHIFT_NAME = { morning:"早间单", noon:"午间单" };
 // 周标签不再硬编码，由 JSON 的 week_label/week_range 动态生成，避免周次错位
 let WEEK_MAP = {};
@@ -308,7 +308,7 @@ function render(){
 /* ================= 初始化 ================= */
 async function init(){
   try{
-    const resp = await fetch(DATA_URL);
+    const resp = await fetch(DATA_URL + "?t=" + Date.now());
     if(!resp.ok) throw new Error("JSON 加载失败：" + resp.status);
     ALL_ROWS = await resp.json();
   }catch(err){
