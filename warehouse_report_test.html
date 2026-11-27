@@ -87,14 +87,14 @@ const SHIFT_NAME = { morning:"早间单", noon:"午间单" };
 // 周标签不再硬编码，由 JSON 的 week_label/week_range 动态生成，避免周次错位
 let WEEK_MAP = {};
 
-/* 六版本 → 三套口径前缀：ver1/2=raw，ver3/4=non_neg，ver5/6=valid */
+/* 六版本 → 三套口径(raw/non_neg/valid) × 两套样本(a:常规+超时 / b:常规+超时+异常+无轨迹) */
 const VER_GROUPS = [
-  { key:"ver1", prefix:"raw",      title:"ver1 · A版（常规+超时）原始" },
-  { key:"ver2", prefix:"raw",      title:"ver2 · B版（常规+超时+异常+无轨迹）原始" },
-  { key:"ver3", prefix:"non_neg",  title:"ver3 · 剔除负数 A版" },
-  { key:"ver4", prefix:"non_neg",  title:"ver4 · 剔除负数 B版" },
-  { key:"ver5", prefix:"valid",     title:"ver5 · 剔除负数、无轨迹异常 A版" },
-  { key:"ver6", prefix:"valid",     title:"ver6 · 剔除负数、无轨迹异常 B版" }
+  { key:"ver1", prefix:"raw",     sample:"a", title:"ver1 · A版（常规+超时）原始" },
+  { key:"ver2", prefix:"raw",     sample:"b", title:"ver2 · B版（常规+超时+异常+无轨迹）原始" },
+  { key:"ver3", prefix:"non_neg", sample:"a", title:"ver3 · 剔除负数 A版" },
+  { key:"ver4", prefix:"non_neg", sample:"b", title:"ver4 · 剔除负数 B版" },
+  { key:"ver5", prefix:"valid",   sample:"a", title:"ver5 · 剔除负数、无轨迹异常 A版" },
+  { key:"ver6", prefix:"valid",   sample:"b", title:"ver6 · 剔除负数、无轨迹异常 B版" }
 ];
 
 let ALL_ROWS = [];
@@ -151,11 +151,11 @@ function aggregate(rows){
     raw_total: 0,
     normal: 0, pick_overtime: 0, deliver_overtime: 0, both_overtime: 0,
     pick_stagnant: 0, pick_stagnant_full: 0, no_track: 0,
-
-    raw:      makeBucket(),
-    non_neg:  makeBucket(),
-    valid:    makeBucket()
+    buckets: {}
   };
+  VER_GROUPS.forEach(g => {
+    stat.buckets[g.prefix + "_" + g.sample] = makeBucket();
+  });
 
   rows.forEach(r => {
     stat.raw_total += num(r.raw_total);
@@ -167,8 +167,8 @@ function aggregate(rows){
     stat.pick_stagnant_full+= num(r.cnt_pick_stagnant_full);
     stat.no_track          += num(r.cnt_no_track);
 
-    [["raw","raw"],["non_neg","non_neg"],["valid","valid"]].forEach(([, p]) => {
-      collect(stat[p], r, p);
+    VER_GROUPS.forEach(g => {
+      collect(stat.buckets[g.prefix + "_" + g.sample], r, g.prefix + "_" + g.sample);
     });
   });
   return stat;
@@ -293,7 +293,10 @@ function render(){
   }
 
   const stat = aggregate(rows);
-  const views = { raw:buildView(stat.raw), non_neg:buildView(stat.non_neg), valid:buildView(stat.valid) };
+  const views = {};
+  VER_GROUPS.forEach(g => {
+    views[g.key] = buildView(stat.buckets[g.prefix + "_" + g.sample]);
+  });
 
   result.innerHTML = `
     <div class="card">
@@ -301,7 +304,7 @@ function render(){
       ${baseTableHTML(stat)}
     </div>
     <div class="ver-grid">
-      ${VER_GROUPS.map(g => verTableHTML(views[g.prefix], g)).join("")}
+      ${VER_GROUPS.map(g => verTableHTML(views[g.key], g)).join("")}
     </div>`;
 }
 
