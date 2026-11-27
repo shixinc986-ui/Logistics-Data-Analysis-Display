@@ -81,17 +81,11 @@
 <script>
 /* ================= 常量（按现有 JSON 取值） ================= */
 const DATA_URL = "warehouse_data_2026.json";
-const DEFAULT_WEEK = "2026-W44";
 
 const WAREHOUSE_NAME = { A:"A总仓", B:"B总仓", F:"F总仓", M:"M总仓", O:"O总仓" };
 const SHIFT_NAME = { morning:"早间单", noon:"午间单" };
-const WEEK_LABELS = {
-  "2026-W40": "2026-W40（10.06-10.12）",
-  "2026-W41": "2026-W41（10.13-10.19）",
-  "2026-W42": "2026-W42（10.20-10.26）",
-  "2026-W43": "2026-W43（10.27-11.02）",
-  "2026-W44": "2026-W44（11.02-11.08）"
-};
+// 周标签不再硬编码，由 JSON 的 week_label/week_range 动态生成，避免周次错位
+let WEEK_MAP = {};
 
 /* 六版本 → 三套口径前缀：ver1/2=raw，ver3/4=non_neg，ver5/6=valid */
 const VER_GROUPS = [
@@ -190,20 +184,30 @@ function makeBucket(){
 }
 
 function collect(b, r, p){
-  b.cnt_Ascan  += num(r[p+"_cnt_Ascan"]);
-  b.sum_Ascan  += num(r[p+"_sum_Ascan_leadtime"]);
-  b.max_Ascan  = Math.max(b.max_Ascan,  num(r[p+"_max_Ascan"]));
-  b.min_Ascan  = Math.min(b.min_Ascan,  num(r[p+"_min_Ascan"]));
-
-  b.cnt_Dscan  += num(r[p+"_cnt_Dscan"]);
-  b.sum_Dscan  += num(r[p+"_sum_Dscan_leadtime"]);
-  b.max_Dscan  = Math.max(b.max_Dscan,  num(r[p+"_max_Dscan"]));
-  b.min_Dscan  = Math.min(b.min_Dscan,  num(r[p+"_min_Dscan"]));
-
-  b.cnt_Total  += num(r[p+"_cnt_Total"]);
-  b.sum_Total  += num(r[p+"_sum_Total_leadtime"]);
-  b.max_Total  = Math.max(b.max_Total,  num(r[p+"_max_Total"]));
-  b.min_Total  = Math.min(b.min_Total,  num(r[p+"_min_Total"]));
+  // Ascan
+  const cA = num(r[p+"_cnt_Ascan"]);
+  b.cnt_Ascan += cA;
+  b.sum_Ascan += num(r[p+"_sum_Ascan_leadtime"]);
+  if(cA > 0){
+    b.max_Ascan = Math.max(b.max_Ascan, num(r[p+"_max_Ascan"]));
+    b.min_Ascan = Math.min(b.min_Ascan, num(r[p+"_min_Ascan"]));
+  }
+  // Dscan
+  const cD = num(r[p+"_cnt_Dscan"]);
+  b.cnt_Dscan += cD;
+  b.sum_Dscan += num(r[p+"_sum_Dscan_leadtime"]);
+  if(cD > 0){
+    b.max_Dscan = Math.max(b.max_Dscan, num(r[p+"_max_Dscan"]));
+    b.min_Dscan = Math.min(b.min_Dscan, num(r[p+"_min_Dscan"]));
+  }
+  // Total
+  const cT = num(r[p+"_cnt_Total"]);
+  b.cnt_Total += cT;
+  b.sum_Total += num(r[p+"_sum_Total_leadtime"]);
+  if(cT > 0){
+    b.max_Total = Math.max(b.max_Total, num(r[p+"_max_Total"]));
+    b.min_Total = Math.min(b.min_Total, num(r[p+"_min_Total"]));
+  }
 
   b.picked_24h_cnt += num(r[p+"_picked_24h_cnt"]);
   b.ontime_cnt      += num(r[p+"_ontime_cnt"]);
@@ -277,7 +281,7 @@ function render(){
   const meta = document.getElementById("meta");
 
   const labels = [];
-  if(f.week) labels.push(`周：${WEEK_LABELS[f.week] || f.week}`);
+  if(f.week) labels.push(`周：${WEEK_MAP[f.week] || f.week}`);
   if(f.provider) labels.push(`物流商：${f.provider}`);
   if(f.warehouse) labels.push(`仓库：${WAREHOUSE_NAME[f.warehouse] || f.warehouse}`);
   if(f.shift) labels.push(`班次：${SHIFT_NAME[f.shift] || f.shift}`);
@@ -313,15 +317,21 @@ async function init(){
     return;
   }
 
+  // 由数据动态建立 周id → 周标签 映射（标签优先取 week_label，兜底 week_range）
+  WEEK_MAP = {};
+  ALL_ROWS.forEach(r => {
+    if(r.week_id != null && WEEK_MAP[r.week_id] == null){
+      WEEK_MAP[r.week_id] = r.week_label || r.week_range || r.week_id;
+    }
+  });
+
   fillSelect(document.getElementById("selWeek"), uniqueSorted(ALL_ROWS,"week_id"),
-    v => WEEK_LABELS[v] || v, "全部周");
+    v => WEEK_MAP[v] || v, "全部周");
   fillSelect(document.getElementById("selProvider"), uniqueSorted(ALL_ROWS,"provider"), v => v, "全部物流商");
   fillSelect(document.getElementById("selWarehouse"), uniqueSorted(ALL_ROWS,"warehouse"),
     v => WAREHOUSE_NAME[v] || v, "全部仓库");
   fillSelect(document.getElementById("selShift"), uniqueSorted(ALL_ROWS,"shift"),
     v => SHIFT_NAME[v] || v, "全部班次");
-
-  document.getElementById("selWeek").value = DEFAULT_WEEK;
 
   ["selWeek","selProvider","selWarehouse","selShift"].forEach(id =>
     document.getElementById(id).addEventListener("change", render));
