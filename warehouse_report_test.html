@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>参数化英仓报表（测试）</title>
+<title>筛选条件（测试）</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Microsoft YaHei,sans-serif;}
   body{background:#f5f7fa;padding:24px 20px;color:#1e293b;}
@@ -50,7 +50,7 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>筛选测试页......）</h1>
+  <h1>筛选测试页</h1>
 
   <!-- ===== 筛选条：周 → 物流商 → 仓库 → 班次；重置 + 查询 ===== -->
   <div class="filter-bar">
@@ -71,7 +71,6 @@
       <select id="selShift"></select>
     </div>
     <button class="btn-reset" id="btnReset">重置</button>
-    <button class="btn-query" id="btnQuery">查询</button>
   </div>
 
   <div class="meta" id="meta"></div>
@@ -89,12 +88,12 @@ let WEEK_MAP = {};
 
 /* 六版本 → 三套口径(raw/non_neg/valid) × 两套样本(a:常规+超时 / b:常规+超时+异常+无轨迹) */
 const VER_GROUPS = [
-  { key:"ver1", prefix:"raw",     sample:"a", title:"ver1 · A版（常规+超时）原始" },
-  { key:"ver2", prefix:"raw",     sample:"b", title:"ver2 · B版（常规+超时+异常+无轨迹）原始" },
-  { key:"ver3", prefix:"non_neg", sample:"a", title:"ver3 · 剔除负数 A版" },
-  { key:"ver4", prefix:"non_neg", sample:"b", title:"ver4 · 剔除负数 B版" },
-  { key:"ver5", prefix:"valid",   sample:"a", title:"ver5 · 剔除负数、无轨迹异常 A版" },
-  { key:"ver6", prefix:"valid",   sample:"b", title:"ver6 · 剔除负数、无轨迹异常 B版" }
+  { key:"ver1", prefix:"raw",     sample:"a", title:"ver1 · A版（常规+超时）" },
+  { key:"ver2", prefix:"raw",     sample:"b", title:"ver2 · B版（常规+超时+异常+无轨迹）" },
+  { key:"ver3", prefix:"non_neg", sample:"a", title:"ver3 · 剔除负数 A版（常规+超时）" },
+  { key:"ver4", prefix:"non_neg", sample:"b", title:"ver4 · 剔除负数 B版（常规+超时+异常+无轨迹）" },
+  { key:"ver5", prefix:"valid",   sample:"a", title:"ver5 · 剔除负数、无轨迹异常 A版（常规+超时）" },
+  { key:"ver6", prefix:"valid",   sample:"b", title:"ver6 · 剔除负数、无轨迹异常 B版（常规+超时+异常）" }
 ];
 
 let ALL_ROWS = [];
